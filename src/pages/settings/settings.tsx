@@ -7,7 +7,7 @@ import ImagePicker from '../../components/forms/image-picker/image-picker';
 import CurrencySelect from '../../components/forms/currency-select/currency-select';
 import NumberInput from '../../components/forms/number-input/number-input';
 import './settings.css';
-import { useTheme } from '../../context/theme-context';
+import { useTheme } from '../../common/states/contexts/theme-mode-context';
 
 const Settings = () => {
   const { t, i18n } = useTranslation();
