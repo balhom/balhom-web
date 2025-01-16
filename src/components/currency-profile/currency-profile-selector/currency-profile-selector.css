@@ -1,0 +1,37 @@
+.profile-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.profile-selector:hover {
+  background-color: #f1f5f9;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.profile-image {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-weight: 500;
+  color: #334155;
+  font-size: 0.875rem;
+}
+
+.profile-amount {
+  color: #64748b;
+  font-size: 0.75rem;
+}

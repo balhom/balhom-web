@@ -1,0 +1,25 @@
+.verify-email .verification-message {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-top: 1rem;
+  word-break: break-word;
+}
+
+.verify-email .verification-instructions {
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.verify-email .verification-instructions p {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.verify-email .spam-notice {
+  margin-top: 0.75rem;
+  color: #666;
+  font-style: italic;
+}

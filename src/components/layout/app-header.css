@@ -1,0 +1,138 @@
+.app-header {
+  height: var(--header-height);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 1.5rem;
+}
+
+.app-header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.app-header-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-bal { color: #d61c2a; }
+.logo-hom { color: #1da53f; }
+
+.app-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  color: #64748b;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  background-color: #f1f5f9;
+  color: #1da53f;
+}
+
+.nav-link.active {
+  color: #1da53f;
+  background-color: #dcfce7;
+}
+
+.nav-link-text {
+  font-weight: 500;
+}
+
+.profile-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.profile-selector:hover {
+  background-color: #f1f5f9;
+}
+
+.profile-image {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-weight: 500;
+  color: #334155;
+}
+
+.mobile-menu-button {
+  display: none;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 1rem;
+  }
+
+  .app-header-nav {
+    display: none;
+  }
+
+  .profile-selector {
+    margin-left: auto;
+  }
+
+  .profile-name {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .mobile-menu .nav-link {
+    padding: 0.75rem;
+  }
+}

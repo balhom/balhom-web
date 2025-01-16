@@ -1,0 +1,150 @@
+:root {
+  /* Light Theme Variables */
+  --primary-color: #4CAF50;
+  --secondary-color: #FF5252;
+  --background-color: #f5f5f5;
+  --text-color: #333333;
+  --header-height: 64px;
+
+  /* Light Theme Colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #f1f5f9;
+  --color-text-primary: #1a2027;
+  --color-text-secondary: #64748b;
+  --color-border: #e2e8f0;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-hover: #f0fdf4;
+  --color-success: #4CAF50;
+  --color-error: #ef4444;
+}
+
+/* Dark Theme Variables */
+:root.dark {
+  --background-color: #111827;
+  --text-color: #e5e7eb;
+
+  --color-bg-primary: #1f2937;
+  --color-bg-secondary: #374151;
+  --color-bg-tertiary: #4b5563;
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #9ca3af;
+  --color-border: #374151;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-hover: #065f46;
+  --color-success: #059669;
+  --color-error: #dc2626;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Common Components Dark Mode */
+.auth-card,
+.profile-dialog,
+.income-card,
+.chart,
+.settings-section {
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-border);
+}
+
+.form-group input,
+.form-group select,
+.filter-input,
+.settings-item-value {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.filter-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.settings-item {
+  background-color: var(--color-bg-secondary);
+}
+
+.nav-link {
+  color: var(--color-text-secondary);
+}
+
+.nav-link:hover {
+  background-color: var(--color-hover);
+}
+
+/* Dark mode specific overrides */
+:root.dark {
+  .app-header {
+    background-color: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .chart {
+    background-color: var(--color-bg-primary);
+  }
+
+  .recharts-cartesian-grid line {
+    stroke: var(--color-border);
+  }
+
+  .recharts-text {
+    fill: var(--color-text-secondary);
+  }
+
+  .chart-tooltip {
+    background-color: var(--color-bg-primary);
+    border-color: var(--color-border);
+  }
+
+  .profile-item:hover,
+  .nav-link:hover {
+    background-color: var(--color-bg-tertiary);
+  }
+
+  .close-button:hover {
+    background-color: var(--color-bg-tertiary);
+  }
+
+  .filter-dialog,
+  .date-picker-dialog {
+    background-color: var(--color-bg-primary);
+  }
+
+  .react-datepicker {
+    background-color: var(--color-bg-primary) !important;
+    border-color: var(--color-border) !important;
+  }
+
+  .react-datepicker__header {
+    background-color: var(--color-bg-secondary) !important;
+    border-color: var(--color-border) !important;
+  }
+
+  .react-datepicker__day {
+    color: var(--color-text-primary) !important;
+  }
+
+  .react-datepicker__day:hover {
+    background-color: var(--color-bg-tertiary) !important;
+  }
+
+  .react-datepicker__day--selected {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+  }
+}

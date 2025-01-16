@@ -1,0 +1,70 @@
+.incomes-page {
+  padding: 1.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.incomes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.add-income-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 9999px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 50;
+}
+
+.add-income-button:hover {
+  background: #43a047;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.date-selectors {
+  display: flex;
+  gap: 1rem;
+}
+
+.incomes-content {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 2fr;
+}
+
+@media (max-width: 768px) {
+  .incomes-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .income-chart-section {
+    display: none;
+  }
+
+  .add-income-button {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}

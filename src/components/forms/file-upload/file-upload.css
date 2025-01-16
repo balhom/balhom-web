@@ -1,0 +1,97 @@
+.file-upload {
+  width: 100%;
+}
+
+.dropzone {
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.dropzone.dragging {
+  border-color: #4CAF50;
+  background: #f0fdf4;
+}
+
+.dropzone:hover {
+  border-color: #4CAF50;
+  background: #f0fdf4;
+}
+
+.dropzone-icon {
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.dropzone-text {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.file-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.file-item:hover {
+  background: #f1f5f9;
+}
+
+.file-icon {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-size {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.file-remove {
+  padding: 0.5rem;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.file-remove:hover {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+.file-error {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}

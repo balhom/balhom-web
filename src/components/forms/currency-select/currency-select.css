@@ -1,0 +1,36 @@
+.currency-select {
+  position: relative;
+  width: 100%;
+}
+
+.currency-select select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  appearance: none;
+  background-color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding-right: 2.5rem;
+}
+
+.currency-select select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.currency-select::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #666;
+  pointer-events: none;
+}

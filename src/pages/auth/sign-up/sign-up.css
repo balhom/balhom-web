@@ -1,0 +1,9 @@
+.sign-up .auth-form {
+  margin-bottom: 1rem;
+}
+
+.sign-up .password-requirements {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
