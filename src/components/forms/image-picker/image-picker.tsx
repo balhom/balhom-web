@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import ImageIcon from '../../icons/image-icon';
-import './image-picker.css';
+import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import "./image-picker.css";
+import { ImagePlusIcon } from "lucide-react";
 
 interface ImagePickerProps {
   value: string;
@@ -15,7 +15,7 @@ const ImagePicker = ({ value, onChange }: ImagePickerProps) => {
 
   const handleImageError = () => {
     setError(true);
-    onChange('');
+    onChange("");
   };
 
   const handleImageLoad = () => {
@@ -35,30 +35,30 @@ const ImagePicker = ({ value, onChange }: ImagePickerProps) => {
 
   return (
     <div className="form-group">
-      <label>{t('auth.profileImage')}</label>
+      <label>{t("auth.profileImage")}</label>
       <div className="image-picker">
-        <div 
+        <div
           className="image-preview"
           onClick={() => fileInputRef.current?.click()}
         >
           {value && !error ? (
             <>
-              <img 
-                src={value} 
-                alt={t('auth.profileImage')}
+              <img
+                src={value}
+                alt={t("auth.profileImage")}
                 onError={handleImageError}
                 onLoad={handleImageLoad}
               />
               <div className="image-preview-overlay">
                 <span className="image-preview-text">
-                  {t('auth.changeImage')}
+                  {t("auth.changeImage")}
                 </span>
               </div>
             </>
           ) : (
             <div className="image-preview-placeholder">
-              <ImageIcon />
-              <div>{t('auth.selectImage')}</div>
+              <ImagePlusIcon />
+              <div>{t("auth.selectImage")}</div>
             </div>
           )}
           <input
@@ -67,7 +67,7 @@ const ImagePicker = ({ value, onChange }: ImagePickerProps) => {
             className="image-input"
             accept="image/*"
             onChange={handleFileChange}
-            aria-label={t('auth.selectImage')}
+            aria-label={t("auth.selectImage")}
           />
         </div>
       </div>
