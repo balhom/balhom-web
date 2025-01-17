@@ -1,5 +1,6 @@
 import { Route } from "react-router-dom";
 import LoginPage from "./pages/login-page/login-page";
+import RegisterPage from "./pages/register-page/register-page";
 
 export const LOGIN_ROUTE_PATH = "/login";
 export const REGISTER_ROUTE_PATH = "/register";
@@ -10,7 +11,7 @@ export const authRoutes = () => {
   return (
     <>
       <Route path={LOGIN_ROUTE_PATH} element={<LoginPage />} />
-      {/* TODO Add <Route path={REGISTER_ROUTE_PATH} element={<RegisterPage />} /> */}
+      <Route path={REGISTER_ROUTE_PATH} element={<RegisterPage />} />
     </>
   );
 };

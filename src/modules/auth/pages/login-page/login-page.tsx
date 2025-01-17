@@ -72,6 +72,7 @@ const LoginPage: React.FC = () => {
       </div>
       {/* Form Part */}
       <form className="login-page-form" onSubmit={handleSubmit}>
+        {/* Email Part */}
         <div className="login-page-form-group">
           <label className="login-page-label" htmlFor="login-email">
             {t("auth.email")}
@@ -84,6 +85,8 @@ const LoginPage: React.FC = () => {
             placeholder={t("auth.emailPlaceholder")}
           />
         </div>
+
+        {/* Password Part */}
         <div className="login-page-form-group">
           <label className="login-page-label" htmlFor="login-password">
             {t("auth.password")}
@@ -100,6 +103,7 @@ const LoginPage: React.FC = () => {
           >
             {t("auth.forgotPassword")}
           </Link>
+
           <AppErrorText text={formError} />
         </div>
 
