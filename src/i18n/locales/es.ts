@@ -10,6 +10,7 @@ export default {
     delete: "Eliminar",
     goToHome: "Ir a la página principal",
     pageNotFound: "Página no encontrada",
+    genericError: "Algo fue mal",
   },
   months: {
     jan: "Enero",
@@ -51,7 +52,6 @@ export default {
     email: "Correo electrónico",
     password: "Contraseña",
     confirmPassword: "Confirmar contraseña",
-    passwordMismatch: "Las contraseñas no coinciden",
     haveAccount: "¿Ya tienes una cuenta?",
     forgotPassword: "¿Olvidaste tu contraseña?",
     enterEmail:
@@ -64,10 +64,11 @@ export default {
     noAccount: "¿No tienes una cuenta?",
     verifyEmail: "Verificar correo electrónico",
     wrongCredentialsError: "Credenciales inválidas",
-    genericLoginError: "Algo ha ido mal al iniciar sesión",
     emailRequiredError: "Dirección de correo electrónico obligatoria",
     emailInvalidError: "Correo electrónico no válido",
     passwordRequiredError: "Contraseña obligatoria",
+    passwordMatchError: "Las contraseñas no coinciden",
+    weakPasswordError: "Contraseña débil",
   },
   currencyProfile: {
     createCurrencyProfile: "Crear perfil de moneda",

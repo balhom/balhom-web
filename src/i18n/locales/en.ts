@@ -10,6 +10,7 @@ export default {
     delete: "Delete",
     goToHome: "Go to home page",
     pageNotFound: "Page not found",
+    genericError: "Something went wrong",
   },
   months: {
     jan: "January",
@@ -54,7 +55,6 @@ export default {
     haveAccount: "Already have an account?",
     createAccount: "Create your account",
     verifyEmail: "Verify Email",
-    passwordMismatch: "Passwords do not match",
     enterEmail: "Enter your email to reset your password.",
     checkEmail: "Check Your Email",
     resetInstructions:
@@ -62,10 +62,11 @@ export default {
     resetPassword: "Reset Password",
     backToSignIn: "Back to Sign In",
     wrongCredentialsError: "Wrong credentials",
-    genericLoginError: "Something went wrong with the login",
     emailRequiredError: "An email address is required",
     emailInvalidError: "Email not valid",
     passwordRequiredError: "A password is required",
+    passwordMatchError: "Passwords do not match",
+    weakPasswordError: "Weak password",
   },
   currencyProfile: {
     createCurrencyProfile: "Create Currency Profile",
