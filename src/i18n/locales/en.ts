@@ -61,7 +61,7 @@ export default {
     resetInstructions:
       "We have sent you an email with instructions to reset your password.",
     resetPassword: "Reset Password",
-    backToSignIn: "Back to Sign In",
+    backToSignInRedirect: "Back to Sign In",
     wrongCredentialsError: "Wrong credentials",
     emailRequiredError: "An email address is required",
     emailInvalidError: "Email not valid",

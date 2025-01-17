@@ -61,7 +61,7 @@ export default {
     resetInstructions:
       "Te hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña.",
     resetPassword: "Restablecer contraseña",
-    backToSignIn: "Volver a iniciar sesión",
+    backToSignInRedirect: "Volver a iniciar sesión",
     noAccount: "¿No tienes una cuenta?",
     verifyEmail: "Verificar correo electrónico",
     wrongCredentialsError: "Credenciales inválidas",
