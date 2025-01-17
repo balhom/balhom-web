@@ -86,7 +86,7 @@
 }
 
 .date-picker-button.apply {
-  background: #4CAF50;
+  background: #4caf50;
   border: none;
   color: white;
 }
@@ -135,7 +135,7 @@
 }
 
 .react-datepicker__day--selected {
-  background: #4CAF50 !important;
+  background: #4caf50 !important;
   color: white !important;
 }
 
@@ -162,6 +162,6 @@
 }
 
 .react-datepicker__time-list-item--selected {
-  background: #4CAF50 !important;
+  background: #4caf50 !important;
   color: white !important;
 }

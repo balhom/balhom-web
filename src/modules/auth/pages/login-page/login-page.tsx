@@ -18,7 +18,7 @@ import "./login-page.css";
 
 export const LOGIN_REDIRECT_QUERY_PARAM = "redirect";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
