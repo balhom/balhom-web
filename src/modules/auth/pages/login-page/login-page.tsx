@@ -53,7 +53,7 @@ const LoginPage: React.FC = () => {
           ) {
             navigate(VERIFY_EMAIL_ROUTE_PATH);
           } else {
-            setFormError(t("auth.genericLoginError"));
+            setFormError(t("common.genericError"));
           }
         },
         () => {
