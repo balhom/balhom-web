@@ -103,7 +103,7 @@ const LoginPage = () => {
           <AppErrorText text={formError} />
         </div>
 
-        <AuthFormButton text={t("auth.signIn")} />
+        <AuthFormButton text={t("auth.loginTitle")} />
       </form>
       <div className="login-page-footer">
         {t("auth.noAccount")}{" "}
