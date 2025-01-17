@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
-import { VERIFY_EMAIL_ROUTE_PATH } from "../../routes";
+import {
+  FORGOT_PASSWORD_ROUTE_PATH,
+  REGISTER_ROUTE_PATH,
+  VERIFY_EMAIL_ROUTE_PATH,
+} from "../../routes";
 import { LoginError, LoginErrorTypeEnum } from "../../data/errors/login-error";
 import AuthPasswordInput from "../../components/auth-password-input/auth-password-input";
 import SectionContainer from "../../../../common/components/section-container/section-container";
@@ -64,7 +68,7 @@ const LoginPage = () => {
     <SectionContainer>
       {/* Header Part */}
       <div className="login-page-header">
-        <h1>{t("auth.signIn")}</h1>
+        <h1>{t("auth.loginTitle")}</h1>
       </div>
       {/* Form Part */}
       <form className="login-page-form" onSubmit={handleSubmit}>
@@ -91,7 +95,7 @@ const LoginPage = () => {
             errorText={passwordError}
           />
           <Link
-            to="/forgot-password"
+            to={FORGOT_PASSWORD_ROUTE_PATH}
             className="login-page-forgot-password-link"
           >
             {t("auth.forgotPassword")}
@@ -102,7 +106,8 @@ const LoginPage = () => {
         <AuthFormButton text={t("auth.signIn")} />
       </form>
       <div className="login-page-footer">
-        {t("auth.noAccount")} <Link to="/sign-up">{t("auth.signUp")}</Link>
+        {t("auth.noAccount")}{" "}
+        <Link to={REGISTER_ROUTE_PATH}>{t("auth.registerRedirect")}</Link>
       </div>
     </SectionContainer>
   );

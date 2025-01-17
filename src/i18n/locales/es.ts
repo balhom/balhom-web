@@ -44,8 +44,9 @@ export default {
     createDescription:
       "Crea un nuevo perfil de moneda para gestionar tus ahorros.",
     createError: "Error al crear el perfil de moneda.",
-    signIn: "Iniciar sesión",
-    signUp: "Registrarse",
+    loginTitle: "Iniciar sesión",
+    registerRedirect: "Registrarse",
+    registerTitle: "Registrarse",
     createAccount: "Crea tu cuenta",
     email: "Correo electrónico",
     password: "Contraseña",
