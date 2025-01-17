@@ -1,10 +1,9 @@
-import { RouterProvider } from 'react-router-dom';
-import { router } from './routes/routes';
-import './assets/styles/global.css';
-import './i18n/config';
+import "./assets/styles/global.css";
+import "./i18n/config";
+import { AppRouter } from "./app-router";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <AppRouter />;
 }
 
 export default App;

@@ -21,7 +21,7 @@ const AppErrorPage: React.FC<Props> = ({ title, message, showHomeBtn }) => {
       {message && <p className="app-error-page-text">{message}</p>}
       {showHomeBtn && (
         <button onClick={handleGoHome} className="app-error-page-button">
-          {t("error.goToHome")}
+          {t("common.goToHome")}
         </button>
       )}
     </div>

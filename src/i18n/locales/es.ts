@@ -1,10 +1,15 @@
 export default {
+  locale: {
+    english: "Inglés",
+    spanish: "Español",
+  },
   common: {
     close: "Cerrar",
     refresh: "Actualizar",
     cancel: "Cancelar",
     delete: "Eliminar",
     goToHome: "Ir a la página principal",
+    pageNotFound: "Página no encontrada",
   },
   months: {
     jan: "Enero",
@@ -57,6 +62,11 @@ export default {
     backToSignIn: "Volver a iniciar sesión",
     noAccount: "¿No tienes una cuenta?",
     verifyEmail: "Verificar correo electrónico",
+    wrongCredentialsError: "Credenciales inválidas",
+    genericLoginError: "Algo ha ido mal al iniciar sesión",
+    emailRequiredError: "Dirección de correo electrónico obligatoria",
+    emailInvalidError: "Correo electrónico no válido",
+    passwordRequiredError: "Contraseña obligatoria",
   },
   currencyProfile: {
     createCurrencyProfile: "Crear perfil de moneda",

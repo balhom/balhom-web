@@ -1,7 +1,9 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import { Navigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { sessionInstance } from "../services/instances";
+import { LOGIN_ROUTE_PATH, VERIFY_EMAIL_ROUTE_PATH } from "../routes";
+import { LOGIN_REDIRECT_QUERY_PARAM } from "../pages/login-page/login-page";
 
 interface AuthProtectedRouteProps {
   children: JSX.Element;
@@ -10,16 +12,17 @@ interface AuthProtectedRouteProps {
 export const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
   children,
 }) => {
-  const { t } = useTranslation();
-
   const prevLocation = useLocation();
-  const navigate = useNavigate();
 
+  // TODO change
+  const isEmailVerified = true;
+
+  // If user is not logged in and current page is not login
   if (
     !sessionInstance.isLoggedIn &&
     prevLocation.pathname !== LOGIN_ROUTE_PATH
   ) {
-    if (prevLocation.pathname === ROOT_ROUTE_PATH) {
+    if (prevLocation.pathname === "/") {
       return <Navigate to={LOGIN_ROUTE_PATH} replace />;
     }
     return (
@@ -28,25 +31,10 @@ export const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
         replace
       />
     );
-  } else if (
-    sessionInstance.isLoggedIn &&
-    !firebaseAuth.currentUser?.emailVerified
-  ) {
-    return (
-      <AppConfirmationDialog
-        isOpen={true}
-        title={t("auth.loginView.emailVerificationDialogTitle")}
-        content={t("auth.loginView.emailVerificationDialogContent")}
-        onConfirm={() => {
-          sendEmailVerificationByEmail();
-          navigate(LOGIN_ROUTE_PATH);
-        }}
-        onClose={() => {
-          logout();
-          navigate(LOGIN_ROUTE_PATH);
-        }}
-      />
-    );
+  }
+  // If user is not logged in and email has not being verified
+  else if (sessionInstance.isLoggedIn && !isEmailVerified) {
+    return <Navigate to={`${VERIFY_EMAIL_ROUTE_PATH}`} replace />;
   }
 
   return children;

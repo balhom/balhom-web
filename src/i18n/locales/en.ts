@@ -1,10 +1,15 @@
 export default {
+  locale: {
+    english: "English",
+    spanish: "Spanish",
+  },
   common: {
     close: "Close",
     refresh: "Refresh",
     cancel: "Cancel",
     delete: "Delete",
     goToHome: "Go to home page",
+    pageNotFound: "Page not found",
   },
   months: {
     jan: "January",
@@ -55,6 +60,11 @@ export default {
       "We have sent you an email with instructions to reset your password.",
     resetPassword: "Reset Password",
     backToSignIn: "Back to Sign In",
+    wrongCredentialsError: "Wrong credentials",
+    genericLoginError: "Something went wrong with the login",
+    emailRequiredError: "An email address is required",
+    emailInvalidError: "Email not valid",
+    passwordRequiredError: "A password is required",
   },
   currencyProfile: {
     createCurrencyProfile: "Create Currency Profile",
