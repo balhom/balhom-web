@@ -9,7 +9,7 @@ interface Props {
   placeholder?: string;
 }
 
-const AppTextInput = ({
+const AppTextInput: React.FC<Props> = ({
   id,
   text,
   onTextChange,
