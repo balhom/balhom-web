@@ -32,7 +32,7 @@ const AppNumberInput: React.FC<Props> = ({
         onChange={handleChange}
         min={min}
         max={max}
-        step="0.01"
+        step="1"
       />
     </div>
   );
