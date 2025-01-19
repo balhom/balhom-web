@@ -4,7 +4,7 @@
 }
 
 .register-page-header h1 {
-  color: var(--text-color);
+  color: var(--color-text-primary);
   font-size: 1.75rem;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .register-page-label {
-  color: var(--text-color);
+  color: var(--color-text-primary);
   font-size: 0.875rem;
   font-weight: 500;
 }

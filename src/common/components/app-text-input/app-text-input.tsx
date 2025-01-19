@@ -1,5 +1,5 @@
-import AppErrorText from "../../../../common/components/app-error-text/app-error-text";
-import "./auth-text-input.css";
+import AppErrorText from "../app-error-text/app-error-text";
+import "./app-text-input.css";
 
 interface Props {
   id: string;
@@ -9,7 +9,7 @@ interface Props {
   placeholder?: string;
 }
 
-const AuthTextInput = ({
+const AppTextInput = ({
   id,
   text,
   onTextChange,
@@ -20,7 +20,7 @@ const AuthTextInput = ({
     <>
       <input
         id={id}
-        className="auth-text-input"
+        className="app-text-input"
         type="text"
         value={text}
         onChange={(e) => onTextChange(e.target.value)}
@@ -31,4 +31,4 @@ const AuthTextInput = ({
   );
 };
 
-export default AuthTextInput;
+export default AppTextInput;

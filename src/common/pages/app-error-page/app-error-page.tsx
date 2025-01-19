@@ -1,6 +1,7 @@
 import React from "react";
 import "./app-error-page.css";
 import { useTranslation } from "react-i18next";
+import AppButton from "../../components/app-button/app-button";
 
 interface Props {
   title: string;
@@ -20,9 +21,7 @@ const AppErrorPage: React.FC<Props> = ({ title, message, showHomeBtn }) => {
       <h2 className="app-error-page-title">{title}</h2>
       {message && <p className="app-error-page-text">{message}</p>}
       {showHomeBtn && (
-        <button onClick={handleGoHome} className="app-error-page-button">
-          {t("common.goToHome")}
-        </button>
+        <AppButton text={t("common.goToHome")} onClick={handleGoHome} />
       )}
     </div>
   );

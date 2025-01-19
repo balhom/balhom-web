@@ -1,10 +1,9 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import React from "react";
-import { AccountProvider } from "./modules/account/states/providers/account-provider";
 import AppNotFoundPage from "./common/pages/app-not-found-page/app-not-found-page";
 import { AuthRedirectRoute } from "./modules/auth/routes/auth-redirect-route";
-import { AuthProtectedRoute } from "./modules/auth/routes/auth-protected-route";
 import { authRoutes } from "./modules/auth/routes";
+import { currencyProfileRoutes } from "./modules/currency-profile/routes";
 
 export const AppRouter: React.FC = () => {
   return (
@@ -18,6 +17,10 @@ export const AppRouter: React.FC = () => {
           }
         >
           {authRoutes()}
+          {
+            // TODO Move to authenticated routes
+            currencyProfileRoutes()
+          }
         </Route>
         {/*
         <Route

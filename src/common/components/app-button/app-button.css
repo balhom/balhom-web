@@ -1,4 +1,4 @@
-.auth-form-button {
+.app-button {
   background-color: var(--primary-color);
   color: white;
   padding: 0.75rem;
@@ -11,6 +11,6 @@
   margin-top: 0.5rem;
 }
 
-.auth-form-button:hover {
+.app-button:hover {
   background-color: var(--primary-color-hover);
 }

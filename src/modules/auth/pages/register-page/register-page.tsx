@@ -10,8 +10,8 @@ import {
 import { registerWithEmail } from "../../usecases/register-with-email-usecase";
 import { LOGIN_ROUTE_PATH, VERIFY_EMAIL_ROUTE_PATH } from "../../routes";
 import SectionContainer from "../../../../common/components/section-container/section-container";
-import AuthFormButton from "../../components/auth-form-button/auth-form-button";
-import AuthTextInput from "../../components/auth-text-input/auth-text-input";
+import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
+import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import AuthPasswordInput from "../../components/auth-password-input/auth-password-input";
 import AppErrorText from "../../../../common/components/app-error-text/app-error-text";
 
@@ -72,7 +72,7 @@ const RegisterPage: React.FC = () => {
           <label className="register-page-label" htmlFor="register-email">
             {t("auth.email")}
           </label>
-          <AuthTextInput
+          <AppTextInput
             id="register-email"
             text={email}
             onTextChange={handleEmailChange}
@@ -112,7 +112,7 @@ const RegisterPage: React.FC = () => {
 
         <AppErrorText text={formError} />
 
-        <AuthFormButton text={t("auth.registerTitle")} />
+        <AppFormButton text={t("auth.registerTitle")} />
       </form>
       <div className="register-page-footer">
         {t("auth.haveAccount")}{" "}

@@ -11,9 +11,9 @@ import AuthPasswordInput from "../../components/auth-password-input/auth-passwor
 import SectionContainer from "../../../../common/components/section-container/section-container";
 import { useLoginForm } from "../../hooks/use-login-form";
 import { loginWithEmail } from "../../usecases/login-with-email-usecase";
-import AuthTextInput from "../../components/auth-text-input/auth-text-input";
+import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import AppErrorText from "../../../../common/components/app-error-text/app-error-text";
-import AuthFormButton from "../../components/auth-form-button/auth-form-button";
+import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
 import "./login-page.css";
 
 export const LOGIN_REDIRECT_QUERY_PARAM = "redirect";
@@ -77,7 +77,7 @@ const LoginPage: React.FC = () => {
           <label className="login-page-label" htmlFor="login-email">
             {t("auth.email")}
           </label>
-          <AuthTextInput
+          <AppTextInput
             id="login-email"
             text={email}
             onTextChange={handleEmailChange}
@@ -107,7 +107,7 @@ const LoginPage: React.FC = () => {
           <AppErrorText text={formError} />
         </div>
 
-        <AuthFormButton text={t("auth.loginTitle")} />
+        <AppFormButton text={t("auth.loginTitle")} />
       </form>
       <div className="login-page-footer">
         {t("auth.noAccount")}{" "}

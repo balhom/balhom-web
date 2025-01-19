@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.image-preview {
+.image-picker-preview {
   width: 100%;
   height: 200px;
   border: 2px dashed #ddd;
@@ -17,23 +17,23 @@
   position: relative;
 }
 
-.image-preview:hover {
+.image-picker-preview:hover {
   border-color: var(--primary-color);
   background-color: #f0f0f0;
 }
 
-.image-preview img {
+.image-picker-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.2s ease;
 }
 
-.image-preview:hover img {
+.image-picker-preview:hover img {
   transform: scale(1.05);
 }
 
-.image-preview-placeholder {
+.image-picker-preview-placeholder {
   color: #666;
   text-align: center;
   padding: 1rem;
@@ -43,11 +43,11 @@
   gap: 0.5rem;
 }
 
-.image-preview-placeholder svg {
+.image-picker-preview-placeholder svg {
   color: #999;
 }
 
-.image-input {
+.image-picker-input {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 
-.image-preview-overlay {
+.image-picker-preview-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -69,11 +69,11 @@
   transition: opacity 0.2s;
 }
 
-.image-preview:hover .image-preview-overlay {
+.image-picker-preview:hover .image-picker-preview-overlay {
   opacity: 1;
 }
 
-.image-preview-text {
+.image-picker-preview-text {
   color: white;
   font-size: 0.875rem;
   text-align: center;

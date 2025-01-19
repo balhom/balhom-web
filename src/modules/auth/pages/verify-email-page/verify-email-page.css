@@ -4,12 +4,12 @@
 }
 
 .verify-email-page-header h1 {
-  color: var(--text-color);
+  color: var(--color-text-primary);
   font-size: 1.75rem;
 }
 
 .verify-email-page-header p {
-  color: var(--text-color);
+  color: var(--color-text-primary);
   font-size: 1rem;
   margin-top: 1rem;
   word-break: break-word;
@@ -23,7 +23,7 @@
 }
 
 .verify-email-page-instructions p {
-  color: var(--text-color);
+  color: var(--color-text-primary);
   font-size: 0.875rem;
   line-height: 1.5;
 }

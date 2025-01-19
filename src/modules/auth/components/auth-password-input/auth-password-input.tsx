@@ -11,7 +11,12 @@ interface Props {
   errorText?: string;
 }
 
-const AuthPasswordInput = ({ id, text, onTextChange, errorText }: Props) => {
+const AuthPasswordInput: React.FC<Props> = ({
+  id,
+  text,
+  onTextChange,
+  errorText,
+}: Props) => {
   const { t } = useTranslation();
 
   const [showPassword, setShowPassword] = useState(false);

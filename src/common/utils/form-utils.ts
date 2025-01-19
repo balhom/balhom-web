@@ -6,6 +6,11 @@ export function isEmail(email: string): boolean {
   return regEmail.test(email);
 }
 
+export function isValidGenericName(name: string): boolean {
+  const regex = /^[\p{L}\p{N}\s\p{Emoji}]+$/u;
+  return regex.test(name);
+}
+
 export function localeToText(
   locale: string,
   t: TFunction<"translation", undefined>

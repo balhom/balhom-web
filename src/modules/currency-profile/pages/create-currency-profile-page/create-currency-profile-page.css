@@ -1,0 +1,33 @@
+.create-currency-profile-page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.create-currency-profile-page-header h1 {
+  color: var(--color-text-primary);
+  font-size: 1.75rem;
+}
+
+.create-currency-profile-page-header p {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.create-currency-profile-page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.create-currency-profile-page-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.create-currency-profile-page-label {
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}

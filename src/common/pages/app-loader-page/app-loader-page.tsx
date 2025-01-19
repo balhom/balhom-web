@@ -1,5 +1,6 @@
 import React from "react";
 import "./app-loader-page.css";
+import AppLoader from "../app-loader/app-loader";
 
 interface Props {
   message?: string;
@@ -8,7 +9,7 @@ interface Props {
 const AppLoaderPage: React.FC<Props> = ({ message }) => {
   return (
     <div className="app-loader-page-container">
-      <div className="app-loader-page"></div>
+      <AppLoader />
       <p className="app-loader-page-text">{message}</p>
     </div>
   );

@@ -11,6 +11,10 @@ export default {
     goToHome: "Ir a la página principal",
     pageNotFound: "Página no encontrada",
     genericError: "Algo fue mal",
+    image: "Image",
+    changeImage: "Cambiar imagen",
+    selectImage: "Seleccionar imagen",
+    imageMaxError: "El tamaño máximo de la imagen es de 700 KB",
   },
   months: {
     jan: "Enero",
@@ -29,9 +33,6 @@ export default {
   auth: {
     hidePassword: "Ocultar contraseña",
     showPassword: "Mostrar contraseña",
-    profileImage: "Imagen de perfil",
-    changeImage: "Cambiar imagen",
-    selectImage: "Seleccionar imagen",
     emailPlaceholder: "juan@ejemplo.com",
     verificationSent: "Verificación enviada",
     checkInbox: "Revisa tu bandeja de entrada para un correo de verificación.",
@@ -41,10 +42,8 @@ export default {
     monthlySavingsGoal: "Meta de ahorros mensuales",
     yearlySavingsGoal: "Meta de ahorros anuales",
     create: "Crear",
-    createCurrencyProfile: "Crear perfil de moneda",
     createDescription:
       "Crea un nuevo perfil de moneda para gestionar tus ahorros.",
-    createError: "Error al crear el perfil de moneda.",
     loginRedirect: "Iniciar sesión",
     loginTitle: "Iniciar sesión",
     registerRedirect: "Registrarse",
@@ -72,7 +71,7 @@ export default {
     weakPasswordError: "Contraseña débil",
   },
   currencyProfile: {
-    createCurrencyProfile: "Crear perfil de moneda",
+    createCurrencyProfileTitle: "Crear perfil de moneda",
     createDescription:
       "Crea un nuevo perfil de moneda para gestionar tus ahorros.",
     name: "Nombre",
@@ -80,12 +79,15 @@ export default {
     monthlySavingsGoal: "Meta de ahorros mensuales",
     yearlySavingsGoal: "Meta de ahorros anuales",
     create: "Crear",
-    createError: "Error al crear el perfil de moneda.",
     currency: "Moneda",
-    EUR: "Euro",
-    USD: "Dólar estadounidense",
-    CAD: "Dólar canadiense",
+    EUR: "EUR",
+    USD: "USD",
+    CAD: "CAD",
     selectProfile: "Seleccionar Perfil",
+    nameRequiredError: "Nombre obligatorio",
+    nameInvalidError:
+      "Nombre no valido, se permiten letras, números, emojis y espacios",
+    currencyRequiredError: "Moneda obligatoria",
   },
   dashboard: {
     savings: "Análisis de Ahorros",

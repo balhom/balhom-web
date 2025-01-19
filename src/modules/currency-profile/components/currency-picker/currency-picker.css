@@ -1,28 +1,28 @@
-.currency-select {
+.currency-picker {
   position: relative;
   width: 100%;
 }
 
-.currency-select select {
+.currency-picker select {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 6px;
   appearance: none;
-  background-color: white;
+  background-color: var(--color-bg-secondary);
   font-size: 1rem;
   cursor: pointer;
   padding-right: 2.5rem;
 }
 
-.currency-select select:focus {
+.currency-picker select:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
-.currency-select::after {
-  content: '';
+.currency-picker::after {
+  content: "";
   position: absolute;
   right: 1rem;
   top: 50%;

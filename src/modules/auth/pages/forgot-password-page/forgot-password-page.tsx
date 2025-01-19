@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import "./forgot-password-page.css";
 import SectionContainer from "../../../../common/components/section-container/section-container";
 import { LOGIN_ROUTE_PATH } from "../../routes";
-import AuthFormButton from "../../components/auth-form-button/auth-form-button";
+import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
 import { useEmailForm } from "../../hooks/use-email-form";
-import AuthTextInput from "../../components/auth-text-input/auth-text-input";
+import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 
 const ForgotPasswordPage: React.FC = () => {
   const { t } = useTranslation();
@@ -57,7 +57,7 @@ const ForgotPasswordPage: React.FC = () => {
             {t("auth.email")}
           </label>
 
-          <AuthTextInput
+          <AppTextInput
             id="forgot-password-email"
             text={email}
             onTextChange={handleEmailChange}
@@ -66,7 +66,7 @@ const ForgotPasswordPage: React.FC = () => {
           />
         </div>
 
-        <AuthFormButton text={t("auth.resetPassword")} />
+        <AppFormButton text={t("auth.resetPassword")} />
       </form>
       <div className="forgot-password-page-footer">
         <Link to={LOGIN_ROUTE_PATH}>{t("auth.backToSignInRedirect")}</Link>

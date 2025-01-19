@@ -1,16 +1,20 @@
-.auth-text-input {
+.app-number-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.app-number-input-wrapper input {
+  width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 6px;
-  border-color: var(--color-border);
   font-size: 1rem;
   transition: border-color 0.2s;
-  width: 100%;
   background-color: var(--color-bg-secondary);
-  color: var(--color-text-primary);
 }
 
-.auth-text-input:focus {
+.app-number-input-wrapper input:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);

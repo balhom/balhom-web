@@ -28,7 +28,7 @@
 .chart-subtitle {
   font-size: 1.25rem;
   font-weight: 500;
-  color: var(--text-color);
+  color: var(--color-text-primary);
   margin: 0;
 }
 
