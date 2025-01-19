@@ -8,7 +8,7 @@ import {
   RegisterErrorTypeEnum,
 } from "../../data/errors/register-error";
 import { registerWithEmail } from "../../usecases/register-with-email-usecase";
-import { LOGIN_ROUTE_PATH } from "../../routes";
+import { LOGIN_ROUTE_PATH, VERIFY_EMAIL_ROUTE_PATH } from "../../routes";
 import SectionContainer from "../../../../common/components/section-container/section-container";
 import AuthFormButton from "../../components/auth-form-button/auth-form-button";
 import AuthTextInput from "../../components/auth-text-input/auth-text-input";
@@ -52,7 +52,7 @@ const RegisterPage: React.FC = () => {
           }
         },
         () => {
-          navigate(LOGIN_ROUTE_PATH);
+          navigate(VERIFY_EMAIL_ROUTE_PATH);
         }
       );
     });

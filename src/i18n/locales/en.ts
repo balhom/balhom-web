@@ -33,7 +33,7 @@ export default {
     changeImage: "Change Image",
     selectImage: "Select Image",
     emailPlaceholder: "john@example.com",
-    verificationSent: "Verification Sent",
+    verificationSent: "Verification sent",
     checkInbox: "Check your inbox for a verification email.",
     checkSpam: "Check your spam folder if you don't see the email.",
     name: "Name",
@@ -55,7 +55,7 @@ export default {
     noAccount: "Don't have an account?",
     haveAccount: "Already have an account?",
     createAccountSubTitle: "Create your account",
-    verifyEmail: "Verify Email",
+    verifyEmailTitle: "Verify Email",
     enterEmail: "Enter your email to reset your password.",
     checkEmail: "Check Your Email",
     resetInstructions:
