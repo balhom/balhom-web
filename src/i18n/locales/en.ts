@@ -42,7 +42,6 @@ export default {
     monthlySavingsGoal: "Monthly Savings Goal",
     yearlySavingsGoal: "Yearly Savings Goal",
     create: "Create",
-    createDescription: "Create a new currency profile to manage your savings.",
     loginRedirect: "Sign In",
     loginTitle: "Sign In",
     registerRedirect: "Sign Up",
@@ -70,7 +69,7 @@ export default {
   },
   currencyProfile: {
     createCurrencyProfileTitle: "Create Currency Profile",
-    createDescription: "Create a new currency profile to manage your savings.",
+    createDescription: "Create a new currency profile to manage your savings",
     name: "Name",
     namePlaceholder: "Name Placeholder",
     monthlySavingsGoal: "Monthly Savings Goal",

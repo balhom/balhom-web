@@ -42,8 +42,6 @@ export default {
     monthlySavingsGoal: "Meta de ahorros mensuales",
     yearlySavingsGoal: "Meta de ahorros anuales",
     create: "Crear",
-    createDescription:
-      "Crea un nuevo perfil de moneda para gestionar tus ahorros.",
     loginRedirect: "Iniciar sesión",
     loginTitle: "Iniciar sesión",
     registerRedirect: "Registrarse",
@@ -73,7 +71,7 @@ export default {
   currencyProfile: {
     createCurrencyProfileTitle: "Crear perfil de moneda",
     createDescription:
-      "Crea un nuevo perfil de moneda para gestionar tus ahorros.",
+      "Crea un nuevo perfil de moneda para gestionar tus ahorros",
     name: "Nombre",
     namePlaceholder: "Nombre del perfil",
     monthlySavingsGoal: "Meta de ahorros mensuales",
