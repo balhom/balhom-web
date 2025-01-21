@@ -6,6 +6,7 @@ import { getAccount } from "../../usecases/get-account-usecase";
 import { Either } from "../../../../common/data/either";
 import { AccountContext } from "../contexts/account-context";
 import AppErrorPage from "../../../../common/pages/app-error-page/app-error-page";
+import AppLoaderPage from "../../../../common/pages/app-loader-page/app-loader-page";
 
 export const AccountProvider = ({
   children,
@@ -48,7 +49,7 @@ export const AccountProvider = ({
     );
   }
   if (account == null) {
-    return <AppLoaderView />;
+    return <AppLoaderPage />;
   }
 
   return (

@@ -4,6 +4,8 @@ import AppNotFoundPage from "./common/pages/app-not-found-page/app-not-found-pag
 import { AuthRedirectRoute } from "./modules/auth/routes/auth-redirect-route";
 import { authRoutes } from "./modules/auth/routes";
 import { currencyProfileRoutes } from "./modules/currency-profile/routes";
+import { AuthProtectedRoute } from "./modules/auth/routes/auth-protected-route";
+import { AccountProvider } from "./modules/account/states/providers/account-provider";
 
 export const AppRouter: React.FC = () => {
   return (
@@ -17,12 +19,7 @@ export const AppRouter: React.FC = () => {
           }
         >
           {authRoutes()}
-          {
-            // TODO Move to authenticated routes
-            currencyProfileRoutes()
-          }
         </Route>
-        {/*
         <Route
           element={
             <AuthProtectedRoute>
@@ -32,11 +29,8 @@ export const AppRouter: React.FC = () => {
             </AuthProtectedRoute>
           }
         >
-          {
-            // TODO REMOVE
-          }
+          {currencyProfileRoutes()}
         </Route>
-        */}
         <Route path="*" element={<AppNotFoundPage />} />
       </Routes>
     </BrowserRouter>
