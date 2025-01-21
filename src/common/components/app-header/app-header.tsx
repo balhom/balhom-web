@@ -10,12 +10,15 @@ import {
   Menu,
 } from "lucide-react";
 import CurrencyProfileSelector from "../../../components/currency-profile/currency-profile-selector/currency-profile-selector";
-import { mockCurrencyProfiles } from "../../../data/mock-currency-profiles";
+import { mockCurrencyProfiles } from "../../../mocks/mock-currency-profiles";
+import { useCurrencyProfiles } from "../../../modules/currency-profile/states/contexts/currency-profiles-context";
 
 const AppHeader: React.FC = () => {
   const { t } = useTranslation();
 
-  const { profile, setProfile } = useCurrencyProfile();
+  const { selectedCurrencyProfile, setSelectedCurrencyProfile } =
+    useCurrencyProfiles();
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const NavLinks = () => (
@@ -71,10 +74,10 @@ const AppHeader: React.FC = () => {
           <Menu size={24} />
         </button>
 
-        {profile && (
+        {selectedCurrencyProfile && (
           <CurrencyProfileSelector
-            profile={profile}
-            onProfileChange={setProfile}
+            profile={selectedCurrencyProfile}
+            onProfileChange={setSelectedCurrencyProfile}
             availableProfiles={mockCurrencyProfiles}
           />
         )}

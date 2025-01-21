@@ -72,6 +72,7 @@ export default {
     createDescription: "Create a new currency profile to manage your savings",
     name: "Name",
     namePlaceholder: "Name Placeholder",
+    initialBalance: "Initial Balance",
     monthlySavingsGoal: "Monthly Savings Goal",
     yearlySavingsGoal: "Yearly Savings Goal",
     create: "Create",

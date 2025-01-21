@@ -10,10 +10,15 @@ import CurrencyPicker from "../../components/currency-picker/currency-picker";
 import { useCurrencyProfileForm } from "../../hooks/use-currency-profile-form";
 import AppNumberInput from "../../../../common/components/app-number-input/app-number-input";
 import ImagePicker from "../../../../common/components/image-picker/image-picker";
+import { useCurrencyProfiles } from "../../states/contexts/currency-profiles-context";
+import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 
 const CreateCurrencyProfilePage: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const { currencyProfiles, setCurrencyProfiles, setSelectedCurrencyProfile } =
+    useCurrencyProfiles();
 
   // Form hooks
   const [
@@ -26,6 +31,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
     isFormValid,
   ] = useCurrencyProfileForm();
 
+  const [initialBalance, setInitialBalance] = useState<string>("0");
   const [monthlySavingsGoal, setMonthlySavingsGoal] = useState<string>("0");
   const [yearlySavingsGoal, setYearlySavingsGoal] = useState<string>("0");
   const [image, setImage] = useState<File | undefined>(undefined);
@@ -48,6 +54,20 @@ const CreateCurrencyProfilePage: React.FC = () => {
         monthlySavingsGoal,
         yearlySavingsGoal,
       });
+
+      // TODO call create usecase
+      const createdCurrencyProfile: CurrencyProfileEntity = {
+        id: "12345678",
+        name: name,
+        currency: currency!,
+        balance: Number(initialBalance),
+        monthlySavingsGoal: Number(monthlySavingsGoal),
+        yearlySavingsGoal: Number(yearlySavingsGoal),
+      };
+
+      // Update states
+      setCurrencyProfiles([...currencyProfiles, createdCurrencyProfile]);
+      setSelectedCurrencyProfile(createdCurrencyProfile);
 
       navigate("/");
     } catch (err) {
@@ -102,6 +122,22 @@ const CreateCurrencyProfilePage: React.FC = () => {
             value={currency}
             onChange={handleCurrencyChange}
             errorText={currencyError}
+          />
+        </div>
+
+        {/* Initial Balance Part */}
+        <div className="create-currency-profile-page-form-group">
+          <label
+            htmlFor="currency-profile-initial-balance"
+            className="create-currency-profile-page-label"
+          >
+            {t("currencyProfile.initialBalance")}
+          </label>
+          <AppNumberInput
+            id="currency-profile-initial-balance"
+            value={initialBalance}
+            onChange={setInitialBalance}
+            min={-1000000000}
           />
         </div>
 

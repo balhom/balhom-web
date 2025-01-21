@@ -74,6 +74,7 @@ export default {
       "Crea un nuevo perfil de moneda para gestionar tus ahorros",
     name: "Nombre",
     namePlaceholder: "Nombre del perfil",
+    initialBalance: "Balance inicial",
     monthlySavingsGoal: "Meta de ahorros mensuales",
     yearlySavingsGoal: "Meta de ahorros anuales",
     create: "Crear",
