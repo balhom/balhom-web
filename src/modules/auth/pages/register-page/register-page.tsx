@@ -9,7 +9,7 @@ import {
 } from "../../data/errors/register-error";
 import { registerWithEmail } from "../../usecases/register-with-email-usecase";
 import { LOGIN_ROUTE_PATH, VERIFY_EMAIL_ROUTE_PATH } from "../../routes";
-import SectionContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/section-container/section-container";
 import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import AuthPasswordInput from "../../components/auth-password-input/auth-password-input";
@@ -59,7 +59,7 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <SectionContainer>
+    <FormContainer>
       {/* Header Part */}
       <div className="register-page-header">
         <h1>{t("auth.registerTitle")}</h1>
@@ -118,7 +118,7 @@ const RegisterPage: React.FC = () => {
         {t("auth.haveAccount")}{" "}
         <Link to={LOGIN_ROUTE_PATH}>{t("auth.loginRedirect")}</Link>
       </div>
-    </SectionContainer>
+    </FormContainer>
   );
 };
 

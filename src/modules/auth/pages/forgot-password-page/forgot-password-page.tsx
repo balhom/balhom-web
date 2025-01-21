@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./forgot-password-page.css";
-import SectionContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/section-container/section-container";
 import { LOGIN_ROUTE_PATH } from "../../routes";
 import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
 import { useEmailForm } from "../../hooks/use-email-form";
@@ -29,7 +29,7 @@ const ForgotPasswordPage: React.FC = () => {
 
   if (submitted) {
     return (
-      <SectionContainer>
+      <FormContainer>
         {/* Header Part */}
         <div className="forgot-password-page-header">
           <h1>{t("auth.checkEmail")}</h1>
@@ -38,12 +38,12 @@ const ForgotPasswordPage: React.FC = () => {
         <div className="forgot-password-page-footer">
           <Link to={LOGIN_ROUTE_PATH}>{t("auth.backToSignInRedirect")}</Link>
         </div>
-      </SectionContainer>
+      </FormContainer>
     );
   }
 
   return (
-    <SectionContainer>
+    <FormContainer>
       <div className="forgot-password-page-header">
         <h1>{t("auth.forgotPassword")}</h1>
         <p>{t("auth.enterEmail")}</p>
@@ -71,7 +71,7 @@ const ForgotPasswordPage: React.FC = () => {
       <div className="forgot-password-page-footer">
         <Link to={LOGIN_ROUTE_PATH}>{t("auth.backToSignInRedirect")}</Link>
       </div>
-    </SectionContainer>
+    </FormContainer>
   );
 };
 

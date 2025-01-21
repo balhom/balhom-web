@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./verify-email-page.css";
-import SectionContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/section-container/section-container";
 import { LOGIN_ROUTE_PATH } from "../../routes";
 
 const VerifyEmailPage: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <SectionContainer>
+    <FormContainer>
       <div className="verify-email-page-header">
         <h1>{t("auth.verifyEmailTitle")}</h1>
         <p className="verification-message">{t("auth.verificationSent")}</p>
@@ -20,7 +20,7 @@ const VerifyEmailPage: React.FC = () => {
       <div className="verify-email-page-footer">
         <Link to={LOGIN_ROUTE_PATH}>{t("auth.backToSignInRedirect")}</Link>
       </div>
-    </SectionContainer>
+    </FormContainer>
   );
 };
 

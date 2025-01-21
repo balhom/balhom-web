@@ -8,7 +8,7 @@ import {
 } from "../../routes";
 import { LoginError, LoginErrorTypeEnum } from "../../data/errors/login-error";
 import AuthPasswordInput from "../../components/auth-password-input/auth-password-input";
-import SectionContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/section-container/section-container";
 import { useLoginForm } from "../../hooks/use-login-form";
 import { loginWithEmail } from "../../usecases/login-with-email-usecase";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
@@ -65,7 +65,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <SectionContainer>
+    <FormContainer>
       {/* Header Part */}
       <div className="login-page-header">
         <h1>{t("auth.loginTitle")}</h1>
@@ -113,7 +113,7 @@ const LoginPage: React.FC = () => {
         {t("auth.noAccount")}{" "}
         <Link to={REGISTER_ROUTE_PATH}>{t("auth.registerRedirect")}</Link>
       </div>
-    </SectionContainer>
+    </FormContainer>
   );
 };
 

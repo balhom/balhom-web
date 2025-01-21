@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./create-currency-profile-page.css";
-import SectionContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/section-container/section-container";
 import AppErrorText from "../../../../common/components/app-error-text/app-error-text";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
@@ -78,7 +78,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
   };
 
   return (
-    <SectionContainer>
+    <FormContainer>
       {/* Header Part */}
       <div className="create-currency-profile-page-header">
         <h1>{t("currencyProfile.createCurrencyProfileTitle")}</h1>
@@ -182,7 +182,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
 
         <AppFormButton text={t("currencyProfile.create")} />
       </form>
-    </SectionContainer>
+    </FormContainer>
   );
 };
 

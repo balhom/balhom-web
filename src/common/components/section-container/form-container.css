@@ -1,4 +1,4 @@
-.section-container-background {
+.form-container-background {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -7,7 +7,7 @@
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-.section-container-card {
+.form-container-card {
   background-color: var(--color-bg-primary);
   border-color: var(--color-border);
   padding: 2rem;

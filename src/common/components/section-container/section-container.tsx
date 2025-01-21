@@ -1,16 +1,16 @@
+import "./form-container.css";
 import React from "react";
-import "./section-container.css";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const SectionContainer: React.FC<Props> = ({ children }) => {
+const FormContainer: React.FC<Props> = ({ children }) => {
   return (
-    <div className="section-container-background">
-      <div className="section-container-card">{children}</div>
+    <div className="form-container-background">
+      <div className="form-container-card">{children}</div>
     </div>
   );
 };
 
-export default SectionContainer;
+export default FormContainer;
