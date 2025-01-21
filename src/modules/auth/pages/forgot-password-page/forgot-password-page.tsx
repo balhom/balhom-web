@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./forgot-password-page.css";
-import FormContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/form-container/form-container";
 import { LOGIN_ROUTE_PATH } from "../../routes";
 import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
 import { useEmailForm } from "../../hooks/use-email-form";

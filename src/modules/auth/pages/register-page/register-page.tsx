@@ -9,7 +9,7 @@ import {
 } from "../../data/errors/register-error";
 import { registerWithEmail } from "../../usecases/register-with-email-usecase";
 import { LOGIN_ROUTE_PATH, VERIFY_EMAIL_ROUTE_PATH } from "../../routes";
-import FormContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/form-container/form-container";
 import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import AuthPasswordInput from "../../components/auth-password-input/auth-password-input";

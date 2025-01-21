@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./verify-email-page.css";
-import FormContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/form-container/form-container";
 import { LOGIN_ROUTE_PATH } from "../../routes";
 
 const VerifyEmailPage: React.FC = () => {

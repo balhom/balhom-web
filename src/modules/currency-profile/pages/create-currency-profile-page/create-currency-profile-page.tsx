@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./create-currency-profile-page.css";
-import FormContainer from "../../../../common/components/section-container/section-container";
+import FormContainer from "../../../../common/components/form-container/form-container";
 import AppErrorText from "../../../../common/components/app-error-text/app-error-text";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import AppFormButton from "../../../../common/components/app-form-button/app-form-button";
