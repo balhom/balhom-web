@@ -19,7 +19,7 @@ const CurrencyPicker: React.FC<Props> = ({
   const { t } = useTranslation();
 
   return (
-    <>
+    <div>
       <div className="currency-picker">
         <select
           id={id}
@@ -36,7 +36,7 @@ const CurrencyPicker: React.FC<Props> = ({
       </div>
 
       <AppErrorText text={errorText} />
-    </>
+    </div>
   );
 };
 

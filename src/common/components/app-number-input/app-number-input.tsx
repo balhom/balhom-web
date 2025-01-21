@@ -46,15 +46,13 @@ const AppNumberInput: React.FC<Props> = ({
   const displayValue = value.toString().replace(".", ",");
 
   return (
-    <>
-      <input
-        id={id}
-        className="app-number-input"
-        type="text"
-        value={displayValue}
-        onChange={handleChange}
-      />
-    </>
+    <input
+      id={id}
+      className="app-number-input"
+      type="text"
+      value={displayValue}
+      onChange={handleChange}
+    />
   );
 };
 

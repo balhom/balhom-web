@@ -6,6 +6,7 @@ interface Props {
   text: string;
   onTextChange: (value: string) => void;
   errorText?: string;
+  maxLength?: number;
   placeholder?: string;
 }
 
@@ -14,20 +15,31 @@ const AppTextInput: React.FC<Props> = ({
   text,
   onTextChange,
   errorText,
+  maxLength,
   placeholder,
 }: Props) => {
   return (
-    <>
+    <div>
       <input
         id={id}
         className="app-text-input"
         type="text"
         value={text}
-        onChange={(e) => onTextChange(e.target.value)}
+        onChange={(e) => {
+          if (maxLength && e.target.value.length > maxLength) {
+            return;
+          }
+          onTextChange(e.target.value);
+        }}
         placeholder={placeholder}
       />
+      {maxLength && (
+        <p className="app-text-input-char-count">
+          {text.length}/{maxLength}
+        </p>
+      )}
       <AppErrorText text={errorText} />
-    </>
+    </div>
   );
 };
 

@@ -84,6 +84,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
             text={name}
             onTextChange={handleNameChange}
             errorText={nameError}
+            maxLength={15}
             placeholder={t("currencyProfile.namePlaceholder")}
           />
         </div>
