@@ -1,4 +1,4 @@
-.not-found {
+.app-not-found-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,18 +8,18 @@
   padding: 2rem;
 }
 
-.not-found h1 {
+.app-not-found-page h1 {
   font-size: 6rem;
   margin: 0;
   color: var(--primary-color);
 }
 
-.home-link {
+.app-not-found-page-home-link {
   margin-top: 2rem;
   color: var(--primary-color);
   text-decoration: none;
 }
 
-.home-link:hover {
+.app-not-found-page-home-link:hover {
   text-decoration: underline;
 }

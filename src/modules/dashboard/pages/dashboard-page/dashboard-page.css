@@ -1,14 +1,14 @@
-.dashboard {
+.dashboard-page {
   padding: 1.5rem;
   max-width: 1280px;
   margin: 0 auto;
 }
 
-.dashboard-header {
+.dashboard-page-header {
   display: flex;
   justify-content: flex-end;
 }
 
-.dashboard-section {
+.dashboard-page-section {
   margin-bottom: 2rem;
 }

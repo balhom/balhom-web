@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import RefreshButton from '../../common/refresh-button/refresh-button';
+import RefreshButton from '../../../common/components/refresh-button/refresh-button';
 import './date-selector.css';
 
 interface DateSelectorProps {
