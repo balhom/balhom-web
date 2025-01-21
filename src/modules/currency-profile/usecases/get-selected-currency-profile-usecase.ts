@@ -1,6 +1,5 @@
+import { SELECTED_CURRENCY_PROFILE_KEY } from "../data/constants/currency-profile-constants";
 import { CurrencyProfileEntity } from "../data/entities/currency-profile-entity";
-
-const SELECTED_CURRENCY_PROFILE_KEY = "selectedCurrencyProfile";
 
 export const getSelectedCurrencyProfile = (
   availableCurrencyProfiles: CurrencyProfileEntity[]

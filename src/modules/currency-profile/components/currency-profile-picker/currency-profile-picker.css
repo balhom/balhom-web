@@ -1,4 +1,4 @@
-.profile-selector {
+.currency-profile-picker {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -6,32 +6,33 @@
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
+  margin-left: auto;
 }
 
-.profile-selector:hover {
-  background-color: #f1f5f9;
+.currency-profile-picker:hover {
+  background-color: var(--color-bg-tertiary);
 }
 
-.profile-info {
+.currency-profile-picker-info {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.profile-image {
+.currency-profile-picker-image {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.profile-name {
+.currency-profile-picker-name {
   font-weight: 500;
-  color: #334155;
+  color: var(--color-text-primary);
   font-size: 0.875rem;
 }
 
-.profile-amount {
-  color: #64748b;
+.currency-profile-picker-amount {
+  color: var(--color-text-secondary);
   font-size: 0.75rem;
 }

@@ -11,7 +11,7 @@ const DashboardPage: React.FC = () => {
           }}
         />
       </div>
-
+      {/*
       <section className="dashboard-page-section">
         <TransactionCharts />
       </section>
@@ -19,6 +19,7 @@ const DashboardPage: React.FC = () => {
       <section className="dashboard-page-section">
         <SavingsCharts />
       </section>
+      */}
     </div>
   );
 };

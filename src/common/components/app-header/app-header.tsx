@@ -9,47 +9,71 @@ import {
   Settings,
   Menu,
 } from "lucide-react";
-import CurrencyProfileSelector from "../../../components/currency-profile/currency-profile-selector/currency-profile-selector";
-import { mockCurrencyProfiles } from "../../../mocks/mock-currency-profiles";
 import { useCurrencyProfiles } from "../../../modules/currency-profile/states/contexts/currency-profiles-context";
+import { DASHBOARD_ROUTE_PATH } from "../../../modules/dashboard/routes";
+import { SETTINGS_ROUTE_PATH } from "../../../modules/settings/routes";
+import {
+  EXPENSE_ROUTE_PATH,
+  INCOME_ROUTE_PATH,
+} from "../../../modules/transactions/routes";
+import CurrencyProfilePicker from "../../../modules/currency-profile/components/currency-profile-picker/currency-profile-picker";
 
 const AppHeader: React.FC = () => {
   const { t } = useTranslation();
 
-  const { selectedCurrencyProfile, setSelectedCurrencyProfile } =
-    useCurrencyProfiles();
+  const {
+    selectedCurrencyProfile,
+    currencyProfiles,
+    setSelectedCurrencyProfile,
+  } = useCurrencyProfiles();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const NavLinks = () => (
     <>
       <NavLink
-        to="/"
-        className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+        to={DASHBOARD_ROUTE_PATH}
+        className={({ isActive }) =>
+          `app-header-nav-link ${isActive ? "active" : ""}`
+        }
       >
         <LayoutDashboard size={20} />
-        <span className="nav-link-text">{t("navigation.dashboard")}</span>
+        <span className="app-header-nav-link-text">
+          {t("navigation.dashboard")}
+        </span>
       </NavLink>
       <NavLink
-        to="/income"
-        className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+        to={INCOME_ROUTE_PATH}
+        className={({ isActive }) =>
+          `app-header-nav-link ${isActive ? "active" : ""}`
+        }
       >
         <ArrowUpCircle size={20} />
-        <span className="nav-link-text">{t("navigation.income")}</span>
+        <span className="app-header-nav-link-text">
+          {t("navigation.income")}
+        </span>
       </NavLink>
       <NavLink
-        to="/expenses"
-        className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+        to={EXPENSE_ROUTE_PATH}
+        className={({ isActive }) =>
+          `app-header-nav-link ${isActive ? "active" : ""}`
+        }
       >
         <ArrowDownCircle size={20} />
-        <span className="nav-link-text">{t("navigation.expenses")}</span>
+        <span className="app-header-nav-link-text">
+          {t("navigation.expenses")}
+        </span>
       </NavLink>
       <NavLink
-        to="/settings"
-        className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+        to={SETTINGS_ROUTE_PATH}
+        className={({ isActive }) =>
+          `app-header-nav-link ${isActive ? "active" : ""}`
+        }
       >
         <Settings size={20} />
-        <span className="nav-link-text">{t("navigation.settings")}</span>
+        <span className="app-header-nav-link-text">
+          {t("navigation.settings")}
+        </span>
       </NavLink>
     </>
   );
@@ -57,33 +81,40 @@ const AppHeader: React.FC = () => {
   return (
     <header className="app-header">
       <div className="app-header-content">
-        <NavLink to="/" className="app-header-logo">
-          <span className="logo-bal">Bal</span>
-          <span className="logo-hom">Hom</span>
+        {/* Logo Part */}
+        <NavLink to={DASHBOARD_ROUTE_PATH} className="app-header-logo">
+          <span className="app-header-logo-bal">Bal</span>
+          <span className="app-header-logo-hom">Hom</span>
         </NavLink>
 
+        {/* Pages Part (only available for desktop) */}
         <nav className="app-header-nav">
           <NavLinks />
         </nav>
 
+        {/* Menu Button Part (only available for mobile) */}
         <button
-          className="mobile-menu-button"
+          className="app-header-mobile-menu-button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
           <Menu size={24} />
         </button>
 
+        {/* Menu Button Part (only available for mobile) */}
         {selectedCurrencyProfile && (
-          <CurrencyProfileSelector
-            profile={selectedCurrencyProfile}
-            onProfileChange={setSelectedCurrencyProfile}
-            availableProfiles={mockCurrencyProfiles}
+          <CurrencyProfilePicker
+            currencyProfile={selectedCurrencyProfile}
+            onCurrencyProfileChange={setSelectedCurrencyProfile}
+            availableCurrencyProfiles={currencyProfiles}
           />
         )}
       </div>
 
-      <div className={`mobile-menu ${isMobileMenuOpen ? "open" : ""}`}>
+      {/* Pages Part (only available for mobile) */}
+      <div
+        className={`app-header-mobile-menu ${isMobileMenuOpen ? "open" : ""}`}
+      >
         <NavLinks />
       </div>
     </header>

@@ -12,6 +12,7 @@ import AppNumberInput from "../../../../common/components/app-number-input/app-n
 import ImagePicker from "../../../../common/components/image-picker/image-picker";
 import { useCurrencyProfiles } from "../../states/contexts/currency-profiles-context";
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
+import { DASHBOARD_ROUTE_PATH } from "../../../dashboard/routes";
 
 const CreateCurrencyProfilePage: React.FC = () => {
   const { t } = useTranslation();
@@ -69,7 +70,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
       setCurrencyProfiles([...currencyProfiles, createdCurrencyProfile]);
       setSelectedCurrencyProfile(createdCurrencyProfile);
 
-      navigate("/");
+      navigate(DASHBOARD_ROUTE_PATH);
     } catch (err) {
       setFormError(t("common.genericError"));
       console.error("Error creating currency profile:", err);

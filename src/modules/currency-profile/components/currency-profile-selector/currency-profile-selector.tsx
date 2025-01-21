@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { CurrencyProfile } from '../../../types/currency-profile';
 import { formatCurrency } from '../../../utils/currency';
-import CurrencyProfileDialog from '../currency-profile-dialog/currency-profile-dialog';
+import CurrencyProfilePickerDialog from '../currency-profile-dialog/currency-profile-picker-dialog';
 import './currency-profile-selector.css';
 
 interface CurrencyProfileSelectorProps {
@@ -33,7 +33,7 @@ const CurrencyProfileSelector = ({
         />
       </div>
 
-      <CurrencyProfileDialog
+      <CurrencyProfilePickerDialog
         isOpen={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
         profiles={availableProfiles}

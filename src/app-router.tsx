@@ -6,6 +6,9 @@ import { authRoutes } from "./modules/auth/routes";
 import { currencyProfileRoutes } from "./modules/currency-profile/routes";
 import { AuthProtectedRoute } from "./modules/auth/routes/auth-protected-route";
 import { AccountProvider } from "./modules/account/states/providers/account-provider";
+import { CurrencyProfilesProvider } from "./modules/currency-profile/states/providers/currency-profiles-provider";
+import { dashboardRoutes } from "./modules/dashboard/routes";
+import AppMainLayout from "./common/components/app-main-layout/app-main-layout";
 
 export const AppRouter: React.FC = () => {
   return (
@@ -30,6 +33,17 @@ export const AppRouter: React.FC = () => {
           }
         >
           {currencyProfileRoutes()}
+          <Route
+            element={
+              <CurrencyProfilesProvider>
+                <AppMainLayout>
+                  <Outlet />
+                </AppMainLayout>
+              </CurrencyProfilesProvider>
+            }
+          >
+            {dashboardRoutes()}
+          </Route>
         </Route>
         <Route path="*" element={<AppNotFoundPage />} />
       </Routes>

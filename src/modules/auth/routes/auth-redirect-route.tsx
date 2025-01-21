@@ -10,6 +10,9 @@ interface Props {
 }
 
 export const AuthRedirectRoute: React.FC<Props> = ({ children }) => {
+  // TODO remove
+  return children;
+  
   const [searchParams] = useSearchParams();
 
   const [isAuthReady, setIsAuthReady] = useState<boolean>(false);

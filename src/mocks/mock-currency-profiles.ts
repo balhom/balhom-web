@@ -12,7 +12,6 @@ export const mockCurrencyProfiles: CurrencyProfileEntity[] = [
   {
     id: "2",
     name: "Travel Savings",
-    imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05",
     currency: CurrencyEnum.USD,
     balance: 2150.75,
   },
