@@ -1,4 +1,4 @@
-import "./transactions-chart.css";
+import "./savings-chart.css";
 import {
   AreaChart,
   Area,
@@ -9,32 +9,29 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useTranslation } from "react-i18next";
-import { AppDispatch, AppState } from "../../../../store";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import {
-  fetchDailyTransactionStatisticsAsync,
-  fetchMonthlyTransactionStatisticsAsync,
-} from "../../states/redux/thunks/transaction-statistics-thunks";
-import { formatCurrency } from "../../../currency-profile/utils";
-import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import { YearPicker } from "../year-picker/year-picker";
 import { formatMonth, getYearsBetweenDates } from "../../utils";
+import { fetchMonthlySavingStatisticsAsync } from "../../states/redux/thunks/saving-statistics-thunks";
+import { useEffect } from "react";
+import { AppDispatch, AppState } from "../../../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
+import { formatCurrency } from "../../../currency-profile/utils";
 
-const MonthlyTransactionsChart: React.FC = () => {
+const MonthlySavingsChart: React.FC = () => {
   const { t } = useTranslation();
 
   const { selectedCurrencyProfile } = useCurrencyProfiles();
 
-  const transactionStatisticsState = useSelector(
-    (state: AppState) => state.transactionStatistics
+  const savingStatisticsState = useSelector(
+    (state: AppState) => state.savingStatistics
   );
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      fetchMonthlyTransactionStatisticsAsync({
-        year: transactionStatisticsState.selectedYear,
+      fetchMonthlySavingStatisticsAsync({
+        year: savingStatisticsState.selectedYear,
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,19 +39,13 @@ const MonthlyTransactionsChart: React.FC = () => {
 
   const onYearChange = (newYear: number) => {
     dispatch(
-      fetchMonthlyTransactionStatisticsAsync({
-        year: newYear,
-      })
-    );
-    dispatch(
-      fetchDailyTransactionStatisticsAsync({
-        month: transactionStatisticsState.selectedMonth,
+      fetchMonthlySavingStatisticsAsync({
         year: newYear,
       })
     );
   };
 
-  let availableYears: number[] = [transactionStatisticsState.selectedYear];
+  let availableYears: number[] = [savingStatisticsState.selectedYear];
   if (selectedCurrencyProfile?.createdAt) {
     availableYears = getYearsBetweenDates(
       selectedCurrencyProfile?.createdAt,
@@ -63,22 +54,22 @@ const MonthlyTransactionsChart: React.FC = () => {
   }
 
   return (
-    <div className="transactions-chart">
-      <div className="transactions-chart-header">
-        <h3 className="transactions-chart-subtitle">
-          {t("dashboard.monthlyTransactions")}
+    <div className="savings-chart">
+      <div className="savings-chart-header">
+        <h3 className="savings-chart-subtitle">
+          {t("dashboard.monthlySavings")}
         </h3>
         <YearPicker
-          year={transactionStatisticsState.selectedYear}
+          year={savingStatisticsState.selectedYear}
           availableYears={availableYears}
           onChange={onYearChange}
         />
       </div>
-      <div className="transactions-chart-wrapper">
+      <div className="savings-chart-wrapper">
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart
-            data={transactionStatisticsState.monthlyStatistics.points}
-            margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
+            data={savingStatisticsState.monthlyStatistics.points}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
@@ -94,21 +85,21 @@ const MonthlyTransactionsChart: React.FC = () => {
             />
             <Area
               type="monotone"
-              dataKey="expenses"
-              stroke="#d61c2a"
-              fill="#d61c2a"
-              fillOpacity={0.15}
+              dataKey="goal"
+              stroke="#FFB74D"
+              fill="#FFB74D"
+              fillOpacity={0.2}
               strokeWidth={2}
-              name={t("dashboard.expenses")}
+              name={t("dashboard.expectedSavings")}
             />
             <Area
               type="monotone"
-              dataKey="income"
-              stroke="#1da53f"
-              fill="#1da53f"
-              fillOpacity={0.15}
+              dataKey="saving"
+              stroke="#9C27B0"
+              fill="#9C27B0"
+              fillOpacity={0.2}
               strokeWidth={2}
-              name={t("dashboard.income")}
+              name={t("dashboard.actualSavings")}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -117,4 +108,4 @@ const MonthlyTransactionsChart: React.FC = () => {
   );
 };
 
-export default MonthlyTransactionsChart;
+export default MonthlySavingsChart;

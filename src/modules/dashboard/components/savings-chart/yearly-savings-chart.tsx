@@ -1,0 +1,80 @@
+import "./savings-chart.css";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import { useTranslation } from "react-i18next";
+import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
+import { AppDispatch, AppState } from "../../../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchYearlySavingStatisticsAsync } from "../../states/redux/thunks/saving-statistics-thunks";
+import { formatCurrency } from "../../../currency-profile/utils";
+
+const YearlySavingsChart: React.FC = () => {
+  const { t } = useTranslation();
+
+  const { selectedCurrencyProfile } = useCurrencyProfiles();
+
+  const savingStatisticsState = useSelector(
+    (state: AppState) => state.savingStatistics
+  );
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchYearlySavingStatisticsAsync());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCurrencyProfile]);
+
+  return (
+    <div className="savings-chart">
+      <div className="savings-chart-header">
+        <h3 className="savings-chart-subtitle">
+          {t("dashboard.yearlySavings")}
+        </h3>
+      </div>
+      <div className="savings-chart-wrapper">
+        <ResponsiveContainer width="100%" height={300}>
+          <AreaChart
+            data={savingStatisticsState.yearlyStatistics.points}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="year" />
+            <YAxis />
+            <Tooltip
+              formatter={(value: number) =>
+                formatCurrency(value, selectedCurrencyProfile!.currency)
+              }
+            />
+            <Area
+              type="monotone"
+              dataKey="goal"
+              stroke="#FFB74D"
+              fill="#FFB74D"
+              fillOpacity={0.2}
+              strokeWidth={2}
+              name={t("dashboard.expectedSavings")}
+            />
+            <Area
+              type="monotone"
+              dataKey="saving"
+              stroke="#9C27B0"
+              fill="#9C27B0"
+              fillOpacity={0.2}
+              strokeWidth={2}
+              name={t("dashboard.actualSavings")}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+};
+
+export default YearlySavingsChart;

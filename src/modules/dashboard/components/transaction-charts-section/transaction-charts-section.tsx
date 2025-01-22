@@ -9,7 +9,7 @@ const TransactionChartsSection: React.FC = () => {
   return (
     <div>
       <h2 className="transaction-charts-section-title">
-        {t("dashboard.transactions")}
+        {t("dashboard.transactionsSection")}
       </h2>
       <div className="transaction-charts-section-grid">
         <div className="transaction-charts-section-daily-part">

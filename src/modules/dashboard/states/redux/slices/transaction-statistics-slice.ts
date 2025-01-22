@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchDailyTransactionStatisticsAsync,
   fetchMonthlyTransactionStatisticsAsync,
-} from "../thunks/transactions-page-thunks";
+} from "../thunks/transaction-statistics-thunks";
 import { TransactionStatisticsState } from "../../../data/states/transaction-statistics-state";
 import {
   fillDailyTransactionStatisticsPoints,

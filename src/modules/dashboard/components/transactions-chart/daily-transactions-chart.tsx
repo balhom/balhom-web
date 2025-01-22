@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchDailyTransactionStatisticsAsync } from "../../states/redux/thunks/transactions-page-thunks";
+import { fetchDailyTransactionStatisticsAsync } from "../../states/redux/thunks/transaction-statistics-thunks";
 import { MonthPicker } from "../month-picker/month-picker";
 import { formatCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";

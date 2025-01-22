@@ -97,7 +97,8 @@ export default {
   dashboard: {
     income: "Ingresos",
     expenses: "Gastos",
-    savings: "Análisis de Ahorros",
+    transactionsSection: "Resumen de Transacciones",
+    savingsSection: "Análisis de Ahorros",
     dailyTransactions: "Transacciones Diarias",
     monthlyTransactions: "Transacciones Mensuales",
     monthlySavings: "Ahorros Mensuales",

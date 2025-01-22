@@ -8,12 +8,16 @@ export const mockCurrencyProfiles: CurrencyProfileEntity[] = [
     imageUrl: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e",
     currency: CurrencyEnum.EUR,
     balance: 5420.5,
+    monthlySavingsGoal: 1000,
+    yearlySavingsGoal: 2000,
     createdAt: new Date(2010, 10, 0),
   },
   {
     id: "2",
     name: "Travel Savings",
     currency: CurrencyEnum.USD,
+    monthlySavingsGoal: 1000,
+    yearlySavingsGoal: 2000,
     balance: 2150.75,
   },
   {
@@ -21,6 +25,8 @@ export const mockCurrencyProfiles: CurrencyProfileEntity[] = [
     name: "Emergency Fund",
     imageUrl: "https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6",
     currency: CurrencyEnum.CAD,
+    monthlySavingsGoal: 1000,
+    yearlySavingsGoal: 2000,
     balance: 10000,
   },
 ];

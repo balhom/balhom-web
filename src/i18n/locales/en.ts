@@ -95,7 +95,8 @@ export default {
   dashboard: {
     income: "Income",
     expenses: "Expenses",
-    savings: "Savings Analysis",
+    transactionsSection: "Transactions Overview",
+    savingsSection: "Savings Analysis",
     dailyTransactions: "Daily Transactions",
     monthlyTransactions: "Monthly Transactions",
     monthlySavings: "Monthly Savings",
@@ -103,7 +104,6 @@ export default {
     expectedSavings: "Expected Savings",
     actualSavings: "Actual Savings",
     balance: "Income vs Expenses",
-    transactions: "Transactions Overview",
     monthlyBalance: "Monthly Balance",
     categoryDistribution: "Category Distribution",
   },

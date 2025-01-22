@@ -1,6 +1,6 @@
 import { Either } from "../../../common/data/either";
 import { AppError } from "../../../common/data/errors/app-error";
-import { mockMonthlyTransactionStatisticsPoints } from "../../../mocks/mock-statistics";
+import { mockMonthlyTransactionStatisticsPoints } from "../../../mocks/mock-transaction-statistics";
 import { MonthlyTransactionStatisticsEntity } from "../data/entities/monthly-transaction-statistics-entity";
 
 export interface MonthlyTransactionStatisticsRepository {

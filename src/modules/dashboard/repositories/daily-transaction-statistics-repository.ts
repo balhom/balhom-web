@@ -1,6 +1,6 @@
 import { Either } from "../../../common/data/either";
 import { AppError } from "../../../common/data/errors/app-error";
-import { mockDailyTransactionStatisticsPoints } from "../../../mocks/mock-statistics";
+import { mockDailyTransactionStatisticsPoints } from "../../../mocks/mock-transaction-statistics";
 import { DailyTransactionStatisticsEntity } from "../data/entities/daily-transaction-statistics-entity";
 
 export interface DailyTransactionStatisticsRepository {
