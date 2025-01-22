@@ -38,7 +38,7 @@ const MonthlyTransactionsChart: React.FC = () => {
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedCurrencyProfile]);
 
   const onYearChange = (newYear: number) => {
     dispatch(

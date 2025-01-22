@@ -35,7 +35,7 @@ const DailyTransactionsChart: React.FC = () => {
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedCurrencyProfile]);
 
   const onMonthChange = (newMonth: number) => {
     dispatch(
