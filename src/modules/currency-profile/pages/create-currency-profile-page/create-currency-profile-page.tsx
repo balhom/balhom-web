@@ -47,7 +47,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
     }
 
     try {
-      // Mock saving profile
+      // TODO Remove
       console.log("Creating currency profile:", {
         name,
         currency,

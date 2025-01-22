@@ -6,6 +6,8 @@ import { formatCurrency } from "../../utils";
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { CURRENCY_PROFILE_DEFAULT_IMAGE_CONSTANT } from "../../data/constants/currency-profile-constants";
 import { setSelectedCurrencyProfile } from "../../usecases/set-selected-currency-profile-usecase";
+import { useNavigate } from "react-router-dom";
+import { CREATE_CURRENCY_PROFILE_ROUTE_PATH } from "../../routes";
 
 interface Props {
   isOpen: boolean;
@@ -24,9 +26,10 @@ const CurrencyProfilePickerDialog: React.FC<Props> = ({
 }: Props) => {
   const { t } = useTranslation();
 
+  const navigate = useNavigate();
+
   const handleCreateCurrencyProfile = () => {
-    // Will be implemented later
-    console.log("Create new profile");
+    navigate(CREATE_CURRENCY_PROFILE_ROUTE_PATH);
   };
 
   if (!isOpen) return null;
