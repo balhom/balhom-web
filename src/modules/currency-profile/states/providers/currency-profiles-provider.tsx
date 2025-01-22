@@ -7,8 +7,9 @@ import AppLoaderPage from "../../../../common/pages/app-loader-page/app-loader-p
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { CurrencyProfilesContext } from "../contexts/currency-profiles-context";
 import { getSelectedCurrencyProfile } from "../../usecases/get-selected-currency-profile-usecase";
-import CreateCurrencyProfilePage from "../../pages/create-currency-profile-page/create-currency-profile-page";
 import { getCurrencyProfiles } from "../../usecases/get-currency-profiles-usecase";
+import { CREATE_CURRENCY_PROFILE_ROUTE_PATH } from "../../routes";
+import { Navigate } from "react-router-dom";
 
 export const CurrencyProfilesProvider = ({
   children,
@@ -62,7 +63,7 @@ export const CurrencyProfilesProvider = ({
     return <AppLoaderPage />;
   }
   if (!currencyProfiles) {
-    return <CreateCurrencyProfilePage />;
+    return <Navigate to={CREATE_CURRENCY_PROFILE_ROUTE_PATH} replace />;
   }
   return (
     <CurrencyProfilesContext.Provider

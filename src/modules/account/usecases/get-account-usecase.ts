@@ -6,5 +6,5 @@ import { accountRepositoryInstance } from "../repositories/repository-instances"
 export const getAccount = async (): Promise<
   Either<AppError, AccountEntity>
 > => {
-  return await accountRepositoryInstance.getAccount();
+  return await accountRepositoryInstance.get();
 };

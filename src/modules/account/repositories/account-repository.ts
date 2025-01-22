@@ -4,15 +4,15 @@ import { AccountEntity } from "../data/entities/account-entity";
 import { AccountUpdateProps } from "../data/props/account-update-props";
 
 export interface AccountRepository {
-  getAccount: () => Promise<Either<AppError, AccountEntity>>;
+  get: () => Promise<Either<AppError, AccountEntity>>;
 
-  updateAccount: (
+  update: (
     accountUpdate: AccountUpdateProps
   ) => Promise<Either<AppError, void>>;
 }
 
 export const accountRepository = (): AccountRepository => ({
-  getAccount: async (): Promise<Either<AppError, AccountEntity>> => {
+  get: async (): Promise<Either<AppError, AccountEntity>> => {
     // TODO remove and do api call
     return Either.right({
       id: "",
@@ -22,7 +22,7 @@ export const accountRepository = (): AccountRepository => ({
     });
   },
 
-  updateAccount: async (
+  update: async (
     accountUpdate: AccountUpdateProps
   ): Promise<Either<AppError, void>> => {
     // TODO remove and do api call

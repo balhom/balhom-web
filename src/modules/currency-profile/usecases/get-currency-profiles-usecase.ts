@@ -6,5 +6,5 @@ import { currencyProfileRepositoryInstance } from "../repositories/repository-in
 export const getCurrencyProfiles = async (): Promise<
   Either<AppError, CurrencyProfileEntity[]>
 > => {
-  return currencyProfileRepositoryInstance.listCurrencyProfiles();
+  return currencyProfileRepositoryInstance.list();
 };

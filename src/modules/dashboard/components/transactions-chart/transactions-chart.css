@@ -1,0 +1,26 @@
+.transactions-chart {
+  background: var(--color-bg-primary);
+  border-radius: 12px;
+  padding: 20px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactions-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0 10px;
+}
+
+.transactions-chart-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.transactions-chart-wrapper {
+  width: 100%;
+  height: 300px;
+}

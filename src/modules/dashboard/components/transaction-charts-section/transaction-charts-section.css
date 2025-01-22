@@ -1,0 +1,24 @@
+.transaction-charts-section-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.transaction-charts-section-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .transaction-charts-section-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .transaction-charts-section-daily-part {
+    display: none;
+  }
+}

@@ -8,4 +8,5 @@ export interface CurrencyProfileEntity {
   balance?: number;
   monthlySavingsGoal?: number;
   yearlySavingsGoal?: number;
+  createdAt?: Date;
 }
