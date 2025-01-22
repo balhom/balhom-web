@@ -22,6 +22,7 @@ const DashboardPage: React.FC = () => {
     <div className="dashboard-page">
       <div className="dashboard-page-header">
         <RefreshButton
+          isLoading={isLoading}
           onClick={
             isLoading
               ? undefined

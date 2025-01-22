@@ -1,18 +1,21 @@
-import { RefreshCw } from 'lucide-react';
-import './refresh-button.css';
+import { RefreshCw } from "lucide-react";
+import "./refresh-button.css";
+import React from "react";
 
-interface RefreshButtonProps {
+interface Props {
   onClick?: () => void;
-  'aria-label'?: string;
+  isLoading?: boolean;
+  "aria-label"?: string;
 }
 
-const RefreshButton = ({ 
-  onClick, 
-  'aria-label': ariaLabel = 'Refresh data' 
-}: RefreshButtonProps) => {
+const RefreshButton: React.FC<Props> = ({
+  onClick,
+  isLoading = false,
+  "aria-label": ariaLabel = "Refresh data",
+}: Props) => {
   return (
-    <button 
-      className="refresh-button"
+    <button
+      className={`refresh-button ${isLoading ? "refresh-button-loader" : ""}`}
       onClick={onClick}
       aria-label={ariaLabel}
     >

@@ -8,6 +8,7 @@ export const mockCurrencyProfiles: CurrencyProfileEntity[] = [
     imageUrl: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e",
     currency: CurrencyEnum.EUR,
     balance: 5420.5,
+    createdAt: new Date(2010, 10, 0),
   },
   {
     id: "2",

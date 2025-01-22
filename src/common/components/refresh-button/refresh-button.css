@@ -15,6 +15,15 @@
   border-color: var(--color-bg-tertiary);
 }
 
-.refresh-button:active {
-  transform: scale(0.98);
+.refresh-button-loader {
+  animation: refresh-button-spin 1s linear infinite;
+}
+
+@keyframes refresh-button-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

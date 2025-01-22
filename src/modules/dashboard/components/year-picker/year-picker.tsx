@@ -19,11 +19,13 @@ export const YearPicker: React.FC<Props> = ({
   const generateOptions = () => {
     const options: { value: string; label: string }[] = [];
 
-    availableYears.map((_, i) => {
-      const value = availableYears[i].toString();
-      const label = availableYears[i].toString();
-      options.push({ value, label });
-    });
+    availableYears
+      .sort((a, b) => b - a)
+      .map((_, i) => {
+        const value = availableYears[i].toString();
+        const label = availableYears[i].toString();
+        options.push({ value, label });
+      });
 
     return options;
   };

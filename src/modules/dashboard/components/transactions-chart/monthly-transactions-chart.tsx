@@ -90,6 +90,7 @@ const MonthlyTransactionsChart: React.FC = () => {
               formatter={(value: number) =>
                 formatCurrency(value, selectedCurrencyProfile!.currency)
               }
+              labelFormatter={(label) => formatMonth(label, t)}
             />
             <Area
               type="monotone"
