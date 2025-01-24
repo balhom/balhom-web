@@ -1,5 +1,5 @@
-.income-card {
-  background: white;
+.transaction-card {
+  background: var(--color-bg-primary);
   border-radius: 12px;
   padding: 1.25rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -10,24 +10,24 @@
   position: relative;
 }
 
-.income-card:hover {
+.transaction-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.category-image {
+.transaction-card-category-image {
   width: 56px;
   height: 56px;
   border-radius: 28px;
   object-fit: cover;
 }
 
-.income-content {
+.transaction-card-content {
   flex: 1;
   min-width: 0;
 }
 
-.income-title {
+.transaction-card-title {
   font-weight: 600;
   color: #1a2027;
   margin-bottom: 0.375rem;
@@ -36,19 +36,19 @@
   text-overflow: ellipsis;
 }
 
-.income-amount {
-  color: #4CAF50;
+.transaction-card-amount {
+  color: #4caf50;
   font-weight: 600;
   font-size: 1.25rem;
 }
 
-.income-date {
+.transaction-card-date {
   color: #64748b;
   font-size: 0.875rem;
   margin-top: 0.375rem;
 }
 
-.income-actions {
+.transaction-card-actions {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -56,7 +56,7 @@
   gap: 0.5rem;
 }
 
-.action-button {
+.transaction-card-action-button {
   padding: 0.5rem;
   background: none;
   border: none;
@@ -68,20 +68,20 @@
   justify-content: center;
 }
 
-.view-button {
+.transaction-card-view-button {
   color: #64748b;
 }
 
-.view-button:hover {
+.transaction-card-view-button:hover {
   background-color: #f1f5f9;
-  color: #4CAF50;
+  color: #4caf50;
 }
 
-.delete-button {
+.transaction-card-delete-button {
   color: #94a3b8;
 }
 
-.delete-button:hover {
+.transaction-card-delete-button:hover {
   background-color: #fee2e2;
   color: #ef4444;
 }

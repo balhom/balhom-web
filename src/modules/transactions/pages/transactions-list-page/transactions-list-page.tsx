@@ -2,18 +2,17 @@ import "./transactions-list-page.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import TransactionsCategoryChart from "../../components/transactions-category-chart/transaction-category-chart";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
 import TransactionsDateSection from "../../components/transactions-date-section/transactions-date-section";
+import { EXPENSE_ADD_ROUTE_PATH, INCOME_ADD_ROUTE_PATH } from "../../routes";
 
 interface Props {
   transactionType: TransactionTypeEnum;
 }
 
 const TransactionsListPage: React.FC<Props> = ({ transactionType }: Props) => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { selectedCurrencyProfile } = useCurrencyProfiles();
@@ -57,8 +56,13 @@ const TransactionsListPage: React.FC<Props> = ({ transactionType }: Props) => {
 
       <button
         className="transactions-list-page-add-income-button"
-        onClick={() => navigate("/income/add")}
-        aria-label={t("income.addIncome")}
+        onClick={() =>
+          navigate(
+            transactionType === TransactionTypeEnum.Income
+              ? INCOME_ADD_ROUTE_PATH
+              : EXPENSE_ADD_ROUTE_PATH
+          )
+        }
       >
         <Plus size={24} />
       </button>

@@ -31,7 +31,7 @@ export const transactionCategoryStatisticsRepository =
       // TODO remove and do api call
       await new Promise((resolve) => setTimeout(resolve, 3000));
       console.log(month, year);
-      if (type == TransactionTypeEnum.Income) {
+      if (type === TransactionTypeEnum.Income) {
         points = mockIncomeCategoryStatisticsPoints;
       } else {
         points = mockExpenseCategoryStatisticsPoints;

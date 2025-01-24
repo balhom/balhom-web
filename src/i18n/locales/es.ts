@@ -132,11 +132,11 @@ export default {
       other: "Otros",
     },
     monthlyDistribution: "Distribución mensual",
-    addIncome: "Añadir",
     deleteConfirmTitle: "Eliminar Ingreso",
     deleteConfirmMessage:
       '¿Estás seguro de que quieres eliminar "{title}"? Esta acción no se puede deshacer.',
-    deleteIncome: "Eliminar ingreso",
+    deleteTransaction: "Eliminar transacción",
+    viewTransaction: "Ver detalles de transacción",
   },
   settings: {
     account: "Configuración de la cuenta",
