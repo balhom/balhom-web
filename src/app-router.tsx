@@ -9,6 +9,7 @@ import { AccountProvider } from "./modules/account/states/providers/account-prov
 import { CurrencyProfilesProvider } from "./modules/currency-profile/states/providers/currency-profiles-provider";
 import { dashboardRoutes } from "./modules/dashboard/routes";
 import AppMainLayout from "./common/components/app-main-layout/app-main-layout";
+import { transactionsRoutes } from "./modules/transactions/routes";
 
 export const AppRouter: React.FC = () => {
   return (
@@ -43,6 +44,7 @@ export const AppRouter: React.FC = () => {
             }
           >
             {dashboardRoutes()}
+            {transactionsRoutes()}
           </Route>
         </Route>
         <Route path="*" element={<AppNotFoundPage />} />

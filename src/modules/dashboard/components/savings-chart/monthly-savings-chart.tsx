@@ -9,14 +9,17 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useTranslation } from "react-i18next";
-import { YearPicker } from "../year-picker/year-picker";
-import { formatMonth, getYearsBetweenDates } from "../../utils";
+import { YearPicker } from "../../../../common/components/year-picker/year-picker";
 import { fetchMonthlySavingStatisticsAsync } from "../../states/redux/thunks/saving-statistics-thunks";
 import { useEffect } from "react";
 import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import { formatCurrency } from "../../../currency-profile/utils";
+import {
+  formatMonth,
+  getYearsBetweenDates,
+} from "../../../../common/utils/date-utils";
 
 const MonthlySavingsChart: React.FC = () => {
   const { t } = useTranslation();

@@ -1,4 +1,5 @@
 # TODO
 
 - [ ] Remove form-group class
-- [ ] Refactor app header
+- [ ] Fix mobile pages picker in app header
+- [ ] Add red color for expense page

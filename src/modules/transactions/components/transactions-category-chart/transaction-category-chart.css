@@ -1,0 +1,62 @@
+.transactions-category-chart {
+  background: var(--color-bg-primary);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactions-category-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.transactions-category-chart-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.transactions-category-chart-container {
+  height: 300px;
+  margin-top: 1rem;
+}
+
+.transactions-category-chart-tooltip {
+  background: var(--color-bg-primary);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border);
+}
+
+.transactions-category-chart-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.transactions-category-chart-tooltip-image {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.transactions-category-chart-tooltip-category {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.transactions-category-chart-tooltip-amount {
+  color: #4caf50;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.transactions-category-chart-label {
+  font-size: 0.875rem;
+}

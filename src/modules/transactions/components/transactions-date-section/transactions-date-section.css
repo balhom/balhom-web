@@ -1,0 +1,17 @@
+.transactions-date-section-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.transactions-date-section {
+  display: flex;
+  gap: 1rem;
+  background: var(--color-bg-primary);
+  padding: 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}

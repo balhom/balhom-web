@@ -1,0 +1,60 @@
+.transactions-list-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.transactions-list-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.transactions-list-page-content {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 2fr;
+}
+
+.transactions-list-page-add-income-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 9999px;
+  color: var(--background-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 50;
+}
+
+.transactions-list-page-add-income-button:hover {
+  background: var(--primary-color-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px var(--color-shadow-primary),
+    0 4px 6px -2px var(--color-shadow-secondary);
+}
+
+@media (max-width: 768px) {
+  .transactions-list-page-content {
+    grid-template-columns: 1fr;
+  }
+
+  .transactions-list-page-chart-section {
+    display: none;
+  }
+
+  .transactions-list-page-add-income-button {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}

@@ -13,7 +13,7 @@ import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchDailyTransactionStatisticsAsync } from "../../states/redux/thunks/transaction-statistics-thunks";
-import { MonthPicker } from "../month-picker/month-picker";
+import { MonthPicker } from "../../../../common/components/month-picker/month-picker";
 import { formatCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 
@@ -61,7 +61,7 @@ const DailyTransactionsChart: React.FC = () => {
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart
             data={transactionStatisticsState.dailyStatistics.points}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="day" tickFormatter={(value) => `${value}`} />

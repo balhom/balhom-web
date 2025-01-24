@@ -1,6 +1,6 @@
+import { formatMonth } from "../../utils/date-utils";
 import "./month-picker.css";
 import { useTranslation } from "react-i18next";
-import { formatMonth } from "../../utils";
 
 interface Props {
   month: number;

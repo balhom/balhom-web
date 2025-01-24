@@ -3,7 +3,7 @@
   --primary-color: #4caf50;
   --primary-color-hover: #43a047;
   --secondary-color: #ff5252;
-  
+
   --background-color: #f5f5f5;
   --header-height: 64px;
 
@@ -17,8 +17,9 @@
   --color-text-tertiary: #ffffff;
 
   --color-border: #e2e8f0;
-  --color-shadow: rgba(0, 0, 0, 0.1);
-  --color-hover: #f0fdf4;
+  --color-border-hover: #f0fdf4;
+  --color-shadow-primary: rgba(0, 0, 0, 0.1);
+  --color-shadow-secondary: rgba(0, 0, 0, 0.5);
   --color-success: #4caf50;
   --color-error: #ef4444;
 }
@@ -36,8 +37,8 @@
   --color-text-tertiary: #ffffff;
 
   --color-border: #374151;
-  --color-shadow: rgba(0, 0, 0, 0.3);
-  --color-hover: #065f46;
+  --color-border-hover: #065f46;
+  --color-shadow-primary: rgba(0, 0, 0, 0.3);
   --color-success: #059669;
   --color-error: #dc2626;
 }

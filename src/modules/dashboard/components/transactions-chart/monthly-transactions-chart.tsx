@@ -18,8 +18,8 @@ import {
 } from "../../states/redux/thunks/transaction-statistics-thunks";
 import { formatCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
-import { YearPicker } from "../year-picker/year-picker";
-import { formatMonth, getYearsBetweenDates } from "../../utils";
+import { YearPicker } from "../../../../common/components/year-picker/year-picker";
+import { formatMonth, getYearsBetweenDates } from "../../../../common/utils/date-utils";
 
 const MonthlyTransactionsChart: React.FC = () => {
   const { t } = useTranslation();
