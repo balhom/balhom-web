@@ -5,7 +5,8 @@ export interface CurrencyProfileEntity {
   name: string;
   imageUrl?: string;
   currency: CurrencyEnum;
-  balance?: number;
+  balance: number;
+  initialDate: Date;
   monthlySavingsGoal?: number;
   yearlySavingsGoal?: number;
   createdAt?: Date;

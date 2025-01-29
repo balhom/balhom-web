@@ -10,6 +10,10 @@
   color: var(--color-text-primary);
 }
 
+.app-text-input:hover {
+  border-color: var(--primary-color);
+}
+
 .app-text-input:focus {
   outline: none;
   border-color: var(--primary-color);

@@ -55,9 +55,9 @@ const MonthlyTransactionsChart: React.FC = () => {
   };
 
   let availableYears: number[] = [transactionStatisticsState.selectedYear];
-  if (selectedCurrencyProfile?.createdAt) {
+  if (selectedCurrencyProfile?.initialDate) {
     availableYears = getYearsBetweenDates(
-      selectedCurrencyProfile?.createdAt,
+      selectedCurrencyProfile?.initialDate,
       new Date()
     );
   }
@@ -95,8 +95,8 @@ const MonthlyTransactionsChart: React.FC = () => {
             <Area
               type="monotone"
               dataKey="expenses"
-              stroke="#d61c2a"
-              fill="#d61c2a"
+              stroke="var(--color-expense)"
+              fill="var(--color-expense)"
               fillOpacity={0.15}
               strokeWidth={2}
               name={t("dashboard.expenses")}
@@ -104,8 +104,8 @@ const MonthlyTransactionsChart: React.FC = () => {
             <Area
               type="monotone"
               dataKey="income"
-              stroke="#1da53f"
-              fill="#1da53f"
+              stroke="var(--color-income)"
+              fill="var(--color-income)"
               fillOpacity={0.15}
               strokeWidth={2}
               name={t("dashboard.income")}

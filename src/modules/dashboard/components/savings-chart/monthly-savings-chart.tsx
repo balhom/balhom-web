@@ -49,9 +49,9 @@ const MonthlySavingsChart: React.FC = () => {
   };
 
   let availableYears: number[] = [savingStatisticsState.selectedYear];
-  if (selectedCurrencyProfile?.createdAt) {
+  if (selectedCurrencyProfile?.initialDate) {
     availableYears = getYearsBetweenDates(
-      selectedCurrencyProfile?.createdAt,
+      selectedCurrencyProfile?.initialDate,
       new Date()
     );
   }

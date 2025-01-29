@@ -4,6 +4,7 @@ export default {
     spanish: "Spanish",
   },
   common: {
+    apply: "Apply",
     close: "Close",
     refresh: "Refresh",
     cancel: "Cancel",
@@ -73,6 +74,7 @@ export default {
     name: "Name",
     namePlaceholder: "Name Placeholder",
     initialBalance: "Initial Balance",
+    initialDate: "Initial Date",
     monthlySavingsGoal: "Monthly Savings Goal",
     yearlySavingsGoal: "Yearly Savings Goal",
     create: "Create",

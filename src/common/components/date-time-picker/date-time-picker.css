@@ -1,0 +1,36 @@
+.date-time-picker-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.date-time-picker-input:hover {
+  border-color: var(--primary-color);
+}
+
+.date-time-picker-input:active {
+  background-color: #f0f7f0;
+  transform: scale(0.99);
+}
+
+.date-time-picker-value {
+  flex: 1;
+  font-size: 0.875rem;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date-time-picker-value:empty::before {
+  content: attr(data-placeholder);
+  color: #94a3b8;
+}

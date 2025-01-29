@@ -4,6 +4,7 @@ export default {
     spanish: "Español",
   },
   common: {
+    apply: "Aplicar",
     close: "Cerrar",
     refresh: "Actualizar",
     cancel: "Cancelar",
@@ -75,6 +76,7 @@ export default {
     name: "Nombre",
     namePlaceholder: "Nombre del perfil",
     initialBalance: "Balance inicial",
+    initialDate: "Fecha inicial",
     monthlySavingsGoal: "Meta de ahorros mensuales",
     yearlySavingsGoal: "Meta de ahorros anuales",
     create: "Crear",

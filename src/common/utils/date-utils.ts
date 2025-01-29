@@ -50,3 +50,21 @@ export function getDaysInMonth(month: number, year: number): number[] {
   const daysInMonth = new Date(year, month, 0).getDate();
   return Array.from({ length: daysInMonth }, (_, i) => i + 1);
 }
+
+export const formatDate = (date: Date | null, showTime: boolean) => {
+  if (!date) return '';
+  if (!showTime) {
+    return date.toLocaleString('default', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  }
+  return date.toLocaleString('default', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  });
+};

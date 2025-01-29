@@ -11,7 +11,7 @@ const VerifyEmailPage: React.FC = () => {
     <FormContainer>
       <div className="verify-email-page-header">
         <h1>{t("auth.verifyEmailTitle")}</h1>
-        <p className="verification-message">{t("auth.verificationSent")}</p>
+        <p>{t("auth.verificationSent")}</p>
       </div>
       <div className="verify-email-page-instructions">
         <p>{t("auth.checkInbox")}</p>

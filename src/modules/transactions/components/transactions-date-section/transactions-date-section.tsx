@@ -31,9 +31,9 @@ const TransactionsDateSection: React.FC<Props> = ({
   const isLoading = transactionCategoryStatisticsState.isStatisticsLoading;
 
   let availableYears: number[] = [selectedYear];
-  if (selectedCurrencyProfile?.createdAt) {
+  if (selectedCurrencyProfile?.initialDate) {
     availableYears = getYearsBetweenDates(
-      selectedCurrencyProfile?.createdAt,
+      selectedCurrencyProfile?.initialDate,
       new Date()
     );
   }

@@ -65,7 +65,7 @@ const TransactionsCategoryChart: React.FC<Props> = ({
               {formatTransactionCategory(data.category.code, t)}
             </span>
           </div>
-          <div className="transactions-category-chart-tooltip-amount">
+          <div className={`transactions-category-chart-tooltip-amount ${type.toLowerCase()}`}>
             {formatCurrency(data.value, selectedCurrencyProfile!.currency)}
           </div>
         </div>
@@ -130,7 +130,7 @@ const TransactionsCategoryChart: React.FC<Props> = ({
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="value"
-              fill="#4CAF50"
+              fill={`var(--color-${type.toLowerCase()})`}
               radius={[0, 4, 4, 0]}
               barSize={24}
             />

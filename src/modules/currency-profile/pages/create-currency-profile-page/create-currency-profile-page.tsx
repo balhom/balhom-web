@@ -13,6 +13,7 @@ import ImagePicker from "../../../../common/components/image-picker/image-picker
 import { useCurrencyProfiles } from "../../states/contexts/currency-profiles-context";
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { DASHBOARD_ROUTE_PATH } from "../../../dashboard/routes";
+import DateTimePicker from "../../../../common/components/date-time-picker/date-time-picker";
 
 const CreateCurrencyProfilePage: React.FC = () => {
   const { t } = useTranslation();
@@ -33,6 +34,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
   ] = useCurrencyProfileForm();
 
   const [initialBalance, setInitialBalance] = useState<string>("0");
+  const [initialDate, setInitialDate] = useState<Date>(new Date());
   const [monthlySavingsGoal, setMonthlySavingsGoal] = useState<string>("0");
   const [yearlySavingsGoal, setYearlySavingsGoal] = useState<string>("0");
   const [image, setImage] = useState<File | undefined>(undefined);
@@ -62,6 +64,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
         name: name,
         currency: currency!,
         balance: Number(initialBalance),
+        initialDate: initialDate,
         monthlySavingsGoal: Number(monthlySavingsGoal),
         yearlySavingsGoal: Number(yearlySavingsGoal),
       };
@@ -139,6 +142,20 @@ const CreateCurrencyProfilePage: React.FC = () => {
             value={initialBalance}
             onChange={setInitialBalance}
             min={-1000000000}
+          />
+        </div>
+
+        {/* Initial Date Part */}
+        <div className="create-currency-profile-page-form-group">
+          <label
+            className="create-currency-profile-page-label"
+          >
+            {t("currencyProfile.initialDate")}
+          </label>
+          <DateTimePicker
+            initialDate={initialDate}
+            onChange={(newDate) => setInitialDate(newDate ?? new Date())}
+            showTime={false}
           />
         </div>
 

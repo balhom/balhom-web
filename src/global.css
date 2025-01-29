@@ -22,6 +22,9 @@
   --color-shadow-secondary: rgba(0, 0, 0, 0.5);
   --color-success: #4caf50;
   --color-error: #ef4444;
+
+  --color-income: #1da53f;
+  --color-expense: #d61c2a;
 }
 
 /* Dark Theme Variables */
@@ -54,104 +57,4 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: var(--background-color);
   color: var(--color-text-primary);
-}
-
-/* Common Components Dark Mode */
-.auth-card,
-.profile-dialog,
-.income-card,
-.chart,
-.settings-section {
-  background-color: var(--color-bg-primary);
-  border-color: var(--color-border);
-}
-
-.form-group input,
-.form-group select,
-.filter-input,
-.settings-item-value {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-border);
-  color: var(--color-text-primary);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.filter-input:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
-}
-
-.settings-item {
-  background-color: var(--color-bg-secondary);
-}
-
-.nav-link {
-  color: var(--color-text-secondary);
-}
-
-.nav-link:hover {
-  background-color: var(--color-hover);
-}
-
-/* Dark mode specific overrides */
-:root.dark {
-  .app-header {
-    background-color: var(--color-bg-primary);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .chart {
-    background-color: var(--color-bg-primary);
-  }
-
-  .recharts-cartesian-grid line {
-    stroke: var(--color-border);
-  }
-
-  .recharts-text {
-    fill: var(--color-text-secondary);
-  }
-
-  .chart-tooltip {
-    background-color: var(--color-bg-primary);
-    border-color: var(--color-border);
-  }
-
-  .profile-item:hover,
-  .nav-link:hover {
-    background-color: var(--color-bg-tertiary);
-  }
-
-  .close-button:hover {
-    background-color: var(--color-bg-tertiary);
-  }
-
-  .filter-dialog,
-  .date-picker-dialog {
-    background-color: var(--color-bg-primary);
-  }
-
-  .react-datepicker {
-    background-color: var(--color-bg-primary) !important;
-    border-color: var(--color-border) !important;
-  }
-
-  .react-datepicker__header {
-    background-color: var(--color-bg-secondary) !important;
-    border-color: var(--color-border) !important;
-  }
-
-  .react-datepicker__day {
-    color: var(--color-text-primary) !important;
-  }
-
-  .react-datepicker__day:hover {
-    background-color: var(--color-bg-tertiary) !important;
-  }
-
-  .react-datepicker__day--selected {
-    background-color: var(--primary-color) !important;
-    color: white !important;
-  }
 }
