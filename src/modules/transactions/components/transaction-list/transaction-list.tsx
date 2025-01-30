@@ -1,32 +1,15 @@
+import './transaction-list.css';
 import { useState } from 'react';
-import type { Income } from '../../../types/income';
-import IncomeCard from '../income-card/income-card';
 import FilterButton from '../filters/filter-button';
 import FilterDialog from '../filters/filter-dialog';
 import IncomeSort from '../income-sort/income-sort';
-import Pagination from '../pagination/pagination';
-import './income-list.css';
+import Pagination from '../../../../common/components/pagination/pagination';
+import TransactionCard from '../transaction-card/transaction-card';
 
-interface IncomeListProps {
-  incomes: Income[];
-  currency: string;
-}
-
-const ITEMS_PER_PAGE = 10;
-
-const IncomeList = ({ incomes, currency }: IncomeListProps) => {
+const TransactionList: React.FC = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [minAmount, setMinAmount] = useState('');
-  const [maxAmount, setMaxAmount] = useState('');
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [sortValue, setSortValue] = useState('date-desc');
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const handleDelete = (id: string) => {
-    // Will be implemented later
-    console.log('Delete income:', id);
-  };
+  // TODO use TransactionPageState
 
   const getActiveFiltersCount = () => {
     let count = 0;
@@ -65,14 +48,10 @@ const IncomeList = ({ incomes, currency }: IncomeListProps) => {
       }
     });
 
-  const totalPages = Math.ceil(filteredIncomes.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedIncomes = filteredIncomes.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-
   return (
-    <div className="income-list">
-      <div className="income-list-header">
-        <FilterButton 
+    <div className="transaction-list">
+      <div className="transaction-list-header">
+        <FilterButton
           isOpen={isFilterOpen}
           onClick={() => setIsFilterOpen(!isFilterOpen)}
           activeFiltersCount={getActiveFiltersCount()}
@@ -106,22 +85,19 @@ const IncomeList = ({ incomes, currency }: IncomeListProps) => {
         }}
         onApplyFilters={handleFilterChange}
       />
-      
-      <div className="income-cards">
-        {paginatedIncomes.map(income => (
-          <IncomeCard
-            key={income.id}
-            income={income}
-            currency={currency}
-            onDelete={handleDelete}
+
+      <div className="transaction-list-cards">
+        {paginatedIncomes.map(transaction => (
+          <TransactionCard
+            key={transaction.id}
+            transaction={transaction}
           />
         ))}
       </div>
 
-      <div className="income-list-footer">
+      <div className="transaction-list-footer">
         <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
+          page={currentPage}
           onPageChange={setCurrentPage}
         />
       </div>
@@ -129,4 +105,4 @@ const IncomeList = ({ incomes, currency }: IncomeListProps) => {
   );
 };
 
-export default IncomeList;
+export default TransactionList;

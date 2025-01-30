@@ -55,7 +55,7 @@ const TransactionsListPage: React.FC<Props> = ({ transactionType }: Props) => {
       </div>
 
       <button
-        className="transactions-list-page-add-income-button"
+        className={`transactions-list-page-add-button ${transactionType.toLowerCase()}-background`}
         onClick={() =>
           navigate(
             transactionType === TransactionTypeEnum.Income

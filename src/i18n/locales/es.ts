@@ -16,6 +16,8 @@ export default {
     changeImage: "Cambiar imagen",
     selectImage: "Seleccionar imagen",
     imageMaxError: "El tamaño máximo de la imagen es de 700 KB",
+    previous: "Previo",
+    next: "Siguiente",
   },
   months: {
     jan: "Ene",

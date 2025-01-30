@@ -1,11 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PageState } from "../../../../../common/states/page-state";
 import { TransactionEntity } from "../../../data/entities/transaction-entity";
 import { fetchTransactionsPageAsync } from "../thunks/transactions-page-thunks";
 import { PageEntity } from "../../../../../common/data/entities/page-entity";
 import { AppError } from "../../../../../common/data/errors/app-error";
+import { TransactionFiltersEntity } from "../../../data/entities/transaction-filters-entity";
+import { TransactionSortEnum } from "../../../data/enums/transaction-sort-enum";
 
-const initialState: PageState<TransactionEntity> = {
+
+export interface TransactionPageState<T> {
+  filter: TransactionFiltersEntity;
+  sortValue: TransactionSortEnum;
+  page?: PageEntity<T>;
+  isLoading: boolean;
+  error?: AppError;
+}
+
+const initialState: TransactionPageState<TransactionEntity> = {
+  filter: {},
+  sortValue: TransactionSortEnum.DateDesc,
   isLoading: false,
 };
 
@@ -18,18 +30,18 @@ const transactionsPageSlice = createSlice({
       state,
       action: PayloadAction<TransactionEntity>
     ) => {
-      if (state.pageEntity) {
+      if (state.page) {
         const updatedTransaction = action.payload;
-        state.pageEntity.results = state.pageEntity.results.map((t) =>
+        state.page.results = state.page.results.map((t) =>
           t.id === updatedTransaction.id ? updatedTransaction : t
         );
       }
     },
     // Delete transaction section
     deleteTransactionInPage: (state, action: PayloadAction<string>) => {
-      if (state.pageEntity) {
+      if (state.page) {
         const transactionId = action.payload;
-        state.pageEntity.results = state.pageEntity.results.filter(
+        state.page.results = state.page.results.filter(
           (t) => t.id !== transactionId
         );
       }
@@ -51,7 +63,7 @@ const transactionsPageSlice = createSlice({
         (state, action: PayloadAction<PageEntity<TransactionEntity>>) => {
           state.isLoading = false;
           state.error = undefined;
-          state.pageEntity = action.payload;
+          state.page = action.payload;
         }
       );
   },

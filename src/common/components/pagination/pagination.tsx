@@ -1,33 +1,39 @@
+import { useTranslation } from 'react-i18next';
 import './pagination.css';
+import { PageEntity } from '../../data/entities/page-entity';
 
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
+interface Props<T> {
+  page: PageEntity<T>;
   onPageChange: (page: number) => void;
 }
 
-const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
+const Pagination = <T,>({ page, onPageChange }: Props<T>) => {
+  const { t } = useTranslation();
+
+  const currentPage = page.pageNum + 1;
+  const totalPages = page.lastPage + 1;
+
   const getPageNumbers = () => {
     const pages = [];
     const showPages = 3;
-    
+
     // Always show current page
     pages.push(currentPage);
-    
+
     // Add up to a max number of pages before current
     for (let i = 1; i <= showPages / 2; i++) {
       if (currentPage - i > 0) {
         pages.unshift(currentPage - i);
       }
     }
-    
+
     // Add up to a max number of pages after current
     for (let i = 1; i <= showPages / 2; i++) {
       if (currentPage + i <= totalPages) {
         pages.push(currentPage + i);
       }
     }
-    
+
     // If we have less than showPages, add more pages to the start or end
     while (pages.length < showPages && pages.length < totalPages) {
       if (pages[0] > 1) {
@@ -36,36 +42,36 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
         pages.push(pages[pages.length - 1] + 1);
       }
     }
-    
+
     return pages;
   };
 
   return (
     <div className="pagination">
       <button
-        className="page-button"
+        className="pagination-button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        Previous
+        {t("common.previous")}
       </button>
-      
+
       {getPageNumbers().map(page => (
         <button
           key={page}
-          className={`page-button ${page === currentPage ? 'active' : ''}`}
+          className={`pagination-button ${page === currentPage ? 'active' : ''}`}
           onClick={() => onPageChange(page)}
         >
           {page}
         </button>
       ))}
-      
+
       <button
-        className="page-button"
+        className="pagination-button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages}
       >
-        Next
+        {t("common.next")}
       </button>
     </div>
   );

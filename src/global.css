@@ -58,3 +58,11 @@ body {
   background-color: var(--background-color);
   color: var(--color-text-primary);
 }
+
+.income-background {
+  background: var(--color-income);
+}
+
+.expense-background {
+  background: var(--color-expense);
+}
