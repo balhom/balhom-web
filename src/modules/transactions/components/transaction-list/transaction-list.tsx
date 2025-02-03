@@ -10,6 +10,8 @@ import {
   fetchExpensesPageAsync,
   fetchIncomesPageAsync,
 } from "../../states/redux/thunks/transactions-page-thunks";
+import TransactionFilterButton from "../transaction-filter-button/transaction-filter-button";
+import TransactionFilterDialog from "../transaction-filter-dialog/transaction-filter-dialog";
 
 interface Props {
   type: TransactionTypeEnum;
@@ -64,10 +66,10 @@ const TransactionList: React.FC<Props> = ({
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  let minAmount = transactionsPageState.filter.minAmount;
-  let maxAmount = transactionsPageState.filter.maxAmount;
-  let startDate = transactionsPageState.filter.startDate;
-  let endDate = transactionsPageState.filter.endDate;
+  const minAmount = transactionsPageState.filter.minAmount;
+  const maxAmount = transactionsPageState.filter.maxAmount;
+  const startDate = transactionsPageState.filter.startDate;
+  const endDate = transactionsPageState.filter.endDate;
 
   const getActiveFiltersCount = () => {
     let count = 0;
@@ -83,12 +85,12 @@ const TransactionList: React.FC<Props> = ({
   return (
     <div className="transaction-list">
       <div className="transaction-list-header">
-        {/* 
-        <FilterButton
+        <TransactionFilterButton
           isOpen={isFilterOpen}
           onClick={() => setIsFilterOpen(!isFilterOpen)}
           activeFiltersCount={getActiveFiltersCount()}
         />
+        {/* 
         <IncomeSort
           value={sortValue}
           onChange={(value) => {
@@ -99,28 +101,13 @@ const TransactionList: React.FC<Props> = ({
       */}
       </div>
 
-      {/* 
-        <FilterDialog
+      <TransactionFilterDialog
+        type={type}
+        selectedMonth={selectedMonth}
+        selectedYear={selectedYear}
         isOpen={isFilterOpen}
         onClose={() => setIsFilterOpen(false)}
-        minAmount={minAmount}
-        maxAmount={maxAmount}
-        startDate={startDate}
-        endDate={endDate}
-        onMinAmountChange={setMinAmount}
-        onMaxAmountChange={setMaxAmount}
-        onStartDateChange={setStartDate}
-        onEndDateChange={setEndDate}
-        onClearFilters={() => {
-          setMinAmount("");
-          setMaxAmount("");
-          setStartDate(null);
-          setEndDate(null);
-          handleFilterChange();
-        }}
-        onApplyFilters={handleFilterChange}
       />
-      */}
 
       <div className="transaction-list-cards">
         {transactionsPageState.page.results.map((transaction) => (

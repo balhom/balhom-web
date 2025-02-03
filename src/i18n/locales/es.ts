@@ -6,6 +6,7 @@ export default {
   common: {
     apply: "Aplicar",
     close: "Cerrar",
+    clear: "Limpiar",
     refresh: "Actualizar",
     cancel: "Cancelar",
     delete: "Eliminar",
@@ -16,6 +17,7 @@ export default {
     changeImage: "Cambiar imagen",
     selectImage: "Seleccionar imagen",
     imageMaxError: "El tamaño máximo de la imagen es de 700 KB",
+    filters: "Filtros",
   },
   months: {
     jan: "Ene",

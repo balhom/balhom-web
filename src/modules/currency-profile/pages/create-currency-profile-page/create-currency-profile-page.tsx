@@ -147,14 +147,13 @@ const CreateCurrencyProfilePage: React.FC = () => {
 
         {/* Initial Date Part */}
         <div className="create-currency-profile-page-form-group">
-          <label
-            className="create-currency-profile-page-label"
-          >
+          <label className="create-currency-profile-page-label">
             {t("currencyProfile.initialDate")}
           </label>
           <DateTimePicker
             initialDate={initialDate}
             onChange={(newDate) => setInitialDate(newDate ?? new Date())}
+            maxDate={new Date()}
             showTime={false}
           />
         </div>

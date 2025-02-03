@@ -6,6 +6,7 @@ export default {
   common: {
     apply: "Apply",
     close: "Close",
+    clear: "Clear",
     refresh: "Refresh",
     cancel: "Cancel",
     delete: "Delete",
@@ -16,6 +17,7 @@ export default {
     changeImage: "Change Image",
     selectImage: "Select Image",
     imageMaxError: "Maximum image size is 700 KB",
+    filters: "Filters",
   },
   months: {
     jan: "Jan",
@@ -134,10 +136,6 @@ export default {
       other: "Other",
     },
     monthlyDistribution: "Monthly Distribution",
-    minAmount: "Min Amount",
-    maxAmount: "Max Amount",
-    minAmountPlaceholder: "Enter min amount",
-    maxAmountPlaceholder: "Enter max amount",
     sortBy: "Sort by",
     sortDateDesc: "Date (Newest first)",
     sortDateAsc: "Date (Oldest first)",

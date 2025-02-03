@@ -61,6 +61,7 @@ const deleteTransactionInPage = (
 
 const pendingFetchTransactionsPage = (
   state: TransactionPageState<TransactionEntity>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   action: any
 ) => {
   const args = action.meta.arg as TransactionPageFetchAsyncProps;
