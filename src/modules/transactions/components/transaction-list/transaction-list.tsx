@@ -1,56 +1,89 @@
-import './transaction-list.css';
-import { useState } from 'react';
-import FilterButton from '../filters/filter-button';
-import FilterDialog from '../filters/filter-dialog';
-import IncomeSort from '../income-sort/income-sort';
-import Pagination from '../../../../common/components/pagination/pagination';
-import TransactionCard from '../transaction-card/transaction-card';
+import "./transaction-list.css";
+import { useEffect, useState } from "react";
+import Pagination from "../../../../common/components/pagination/pagination";
+import TransactionCard from "../transaction-card/transaction-card";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, AppState } from "../../../../store";
+import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
+import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
+import {
+  fetchExpensesPageAsync,
+  fetchIncomesPageAsync,
+} from "../../states/redux/thunks/transactions-page-thunks";
 
-const TransactionList: React.FC = () => {
+interface Props {
+  type: TransactionTypeEnum;
+  selectedMonth: number;
+  selectedYear: number;
+}
+
+const TransactionList: React.FC<Props> = ({
+  type,
+  selectedMonth,
+  selectedYear,
+}: Props) => {
+  const { selectedCurrencyProfile } = useCurrencyProfiles();
+
+  const transactionsPageState = useSelector((state: AppState) =>
+    type === TransactionTypeEnum.Income ? state.incomesPage : state.expensesPage
+  );
+  const dispatch: AppDispatch = useDispatch();
+
+  const dispatchFecthTransactionsPageAsync = (pageNum: number) => {
+    if (selectedCurrencyProfile) {
+      if (type === TransactionTypeEnum.Income) {
+        dispatch(
+          fetchIncomesPageAsync({
+            currencyProfile: selectedCurrencyProfile,
+            month: selectedMonth,
+            year: selectedYear,
+            filters: transactionsPageState.filter,
+            sort: transactionsPageState.sortValue,
+            pageNum: pageNum,
+          })
+        );
+      } else {
+        dispatch(
+          fetchExpensesPageAsync({
+            currencyProfile: selectedCurrencyProfile,
+            month: selectedMonth,
+            year: selectedYear,
+            filters: transactionsPageState.filter,
+            sort: transactionsPageState.sortValue,
+            pageNum: pageNum,
+          })
+        );
+      }
+    }
+  };
+
+  useEffect(() => {
+    dispatchFecthTransactionsPageAsync(transactionsPageState.page.pageNum);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCurrencyProfile, selectedMonth, selectedYear, type]);
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  // TODO use TransactionPageState
+  let minAmount = transactionsPageState.filter.minAmount;
+  let maxAmount = transactionsPageState.filter.maxAmount;
+  let startDate = transactionsPageState.filter.startDate;
+  let endDate = transactionsPageState.filter.endDate;
 
   const getActiveFiltersCount = () => {
     let count = 0;
+
     if (minAmount) count++;
     if (maxAmount) count++;
     if (startDate) count++;
     if (endDate) count++;
+
     return count;
   };
-
-  const handleFilterChange = () => {
-    setCurrentPage(1);
-  };
-
-  const filteredIncomes = incomes
-    .filter(income => {
-      if (minAmount && income.amount < Number(minAmount)) return false;
-      if (maxAmount && income.amount > Number(maxAmount)) return false;
-      if (startDate && new Date(income.date) < startDate) return false;
-      if (endDate && new Date(income.date) > endDate) return false;
-      return true;
-    })
-    .sort((a, b) => {
-      const [field, order] = sortValue.split('-');
-      const multiplier = order === 'asc' ? 1 : -1;
-
-      switch (field) {
-        case 'date':
-          return multiplier * (new Date(a.date).getTime() - new Date(b.date).getTime());
-        case 'amount':
-          return multiplier * (a.amount - b.amount);
-        case 'title':
-          return multiplier * a.title.localeCompare(b.title);
-        default:
-          return 0;
-      }
-    });
 
   return (
     <div className="transaction-list">
       <div className="transaction-list-header">
+        {/* 
         <FilterButton
           isOpen={isFilterOpen}
           onClick={() => setIsFilterOpen(!isFilterOpen)}
@@ -63,9 +96,11 @@ const TransactionList: React.FC = () => {
             handleFilterChange();
           }}
         />
+      */}
       </div>
 
-      <FilterDialog
+      {/* 
+        <FilterDialog
         isOpen={isFilterOpen}
         onClose={() => setIsFilterOpen(false)}
         minAmount={minAmount}
@@ -77,28 +112,29 @@ const TransactionList: React.FC = () => {
         onStartDateChange={setStartDate}
         onEndDateChange={setEndDate}
         onClearFilters={() => {
-          setMinAmount('');
-          setMaxAmount('');
+          setMinAmount("");
+          setMaxAmount("");
           setStartDate(null);
           setEndDate(null);
           handleFilterChange();
         }}
         onApplyFilters={handleFilterChange}
       />
+      */}
 
       <div className="transaction-list-cards">
-        {paginatedIncomes.map(transaction => (
-          <TransactionCard
-            key={transaction.id}
-            transaction={transaction}
-          />
+        {transactionsPageState.page.results.map((transaction) => (
+          <TransactionCard key={transaction.id} transaction={transaction} />
         ))}
       </div>
 
       <div className="transaction-list-footer">
         <Pagination
-          page={currentPage}
-          onPageChange={setCurrentPage}
+          type={type}
+          page={transactionsPageState.page}
+          onPageChange={(newPageNum) => {
+            dispatchFecthTransactionsPageAsync(newPageNum);
+          }}
         />
       </div>
     </div>

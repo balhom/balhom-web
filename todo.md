@@ -1,6 +1,4 @@
 # TODO
 
-- [ ] Remove form-group class
 - [ ] Fix mobile pages picker in app header
-- [ ] Add red color for expense page
-- [ ] When loading styles
+- [ ] Update currency profile amount state when adding, editing or deleting a transaction

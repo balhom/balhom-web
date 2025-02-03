@@ -35,7 +35,9 @@ const TransactionCard: React.FC<Props> = ({ transaction }: Props) => {
       />
       <div className="transaction-card-content">
         <h3 className="transaction-card-title">{transaction.title}</h3>
-        <div className="transaction-card-amount">
+        <div
+          className={`transaction-card-amount ${transaction.type.toLowerCase()}-color`}
+        >
           {formatCurrency(transaction.amount, transaction.currency)}
         </div>
         <div className="transaction-card-date">{formattedDate}</div>

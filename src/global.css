@@ -24,7 +24,7 @@
   --color-error: #ef4444;
 
   --color-income: #1da53f;
-  --color-expense: #d61c2a;
+  --color-expense: #d6471c;
 }
 
 /* Dark Theme Variables */
@@ -59,10 +59,28 @@ body {
   color: var(--color-text-primary);
 }
 
+.income-color {
+  color: var(--color-income);
+}
+
+.expense-color {
+  color: var(--color-expense);
+}
+
 .income-background {
   background: var(--color-income);
 }
 
 .expense-background {
   background: var(--color-expense);
+}
+
+.income-background-and-border {
+  background: var(--color-income);
+  border-color: var(--color-income);
+}
+
+.expense-background-and-border {
+  background: var(--color-expense);
+  border-color: var(--color-expense);
 }

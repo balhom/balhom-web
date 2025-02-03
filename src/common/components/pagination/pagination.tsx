@@ -1,16 +1,16 @@
-import { useTranslation } from 'react-i18next';
-import './pagination.css';
-import { PageEntity } from '../../data/entities/page-entity';
+import "./pagination.css";
+import { PageEntity } from "../../data/entities/page-entity";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { TransactionTypeEnum } from "../../../modules/transactions/data/enums/transaction-type-enum";
 
 interface Props<T> {
+  type: TransactionTypeEnum;
   page: PageEntity<T>;
   onPageChange: (page: number) => void;
 }
 
-const Pagination = <T,>({ page, onPageChange }: Props<T>) => {
-  const { t } = useTranslation();
-
-  const currentPage = page.pageNum + 1;
+const Pagination = <T,>({ type, page, onPageChange }: Props<T>) => {
+  const currentPage = page.pageNum;
   const totalPages = page.lastPage + 1;
 
   const getPageNumbers = () => {
@@ -18,19 +18,19 @@ const Pagination = <T,>({ page, onPageChange }: Props<T>) => {
     const showPages = 3;
 
     // Always show current page
-    pages.push(currentPage);
+    pages.push(currentPage + 1);
 
     // Add up to a max number of pages before current
     for (let i = 1; i <= showPages / 2; i++) {
-      if (currentPage - i > 0) {
-        pages.unshift(currentPage - i);
+      if (currentPage + 1 - i > 0) {
+        pages.unshift(currentPage + 1 - i);
       }
     }
 
     // Add up to a max number of pages after current
     for (let i = 1; i <= showPages / 2; i++) {
-      if (currentPage + i <= totalPages) {
-        pages.push(currentPage + i);
+      if (currentPage + 1 + i <= totalPages) {
+        pages.push(currentPage + 1 + i);
       }
     }
 
@@ -51,27 +51,31 @@ const Pagination = <T,>({ page, onPageChange }: Props<T>) => {
       <button
         className="pagination-button"
         onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
+        disabled={currentPage + 1 === 1}
       >
-        {t("common.previous")}
+        <ChevronLeft size={16} />
       </button>
 
-      {getPageNumbers().map(page => (
+      {getPageNumbers().map((page) => (
         <button
           key={page}
-          className={`pagination-button ${page === currentPage ? 'active' : ''}`}
-          onClick={() => onPageChange(page)}
+          className={`pagination-button ${
+            page === currentPage + 1
+              ? `active ${type.toLowerCase()}-background-and-border`
+              : ""
+          }`}
+          onClick={() => onPageChange(page - 1)}
         >
           {page}
         </button>
       ))}
 
       <button
-        className="pagination-button"
+        className={"pagination-button"}
         onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage >= totalPages}
+        disabled={currentPage + 1 >= totalPages}
       >
-        {t("common.next")}
+        <ChevronRight size={16} />
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import TransactionsListPage from "./pages/transactions-list-page/transactions-list-page";
+import TransactionsListPage from "./pages/transactions-page/transactions-page";
 import { TransactionTypeEnum } from "./data/enums/transaction-type-enum";
 
 export const INCOME_ROUTE_PATH = "/income";

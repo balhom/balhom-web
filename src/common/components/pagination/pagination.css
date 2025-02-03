@@ -18,14 +18,12 @@
 }
 
 .pagination-button:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+  color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
 }
 
 .pagination-button.active {
-  background: var(--primary-color);
   color: var(--color-bg-primary);
-  border-color: var(--primary-color);
 }
 
 .pagination-button:disabled {
