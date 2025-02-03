@@ -86,6 +86,7 @@ const TransactionList: React.FC<Props> = ({
     <div className="transaction-list">
       <div className="transaction-list-header">
         <TransactionFilterButton
+          type={type}
           isOpen={isFilterOpen}
           onClick={() => setIsFilterOpen(!isFilterOpen)}
           activeFiltersCount={getActiveFiltersCount()}
