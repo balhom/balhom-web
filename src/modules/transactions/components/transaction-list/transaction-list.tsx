@@ -12,6 +12,7 @@ import {
 } from "../../states/redux/thunks/transactions-page-thunks";
 import TransactionFilterButton from "../transaction-filter-button/transaction-filter-button";
 import TransactionFilterDialog from "../transaction-filter-dialog/transaction-filter-dialog";
+import TransactionsSortPicker from "../transactions-sort-picker/transactions-sort-picker";
 
 interface Props {
   type: TransactionTypeEnum;
@@ -91,15 +92,11 @@ const TransactionList: React.FC<Props> = ({
           onClick={() => setIsFilterOpen(!isFilterOpen)}
           activeFiltersCount={getActiveFiltersCount()}
         />
-        {/* 
-        <IncomeSort
-          value={sortValue}
-          onChange={(value) => {
-            setSortValue(value);
-            handleFilterChange();
-          }}
+        <TransactionsSortPicker
+          type={type}
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
         />
-      */}
       </div>
 
       <TransactionFilterDialog

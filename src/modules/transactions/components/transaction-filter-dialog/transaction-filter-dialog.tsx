@@ -102,7 +102,7 @@ const TransactionFilterDialog: React.FC<Props> = ({
 
         <div className="transaction-filter-dialog-content">
           <div className="transaction-filter-dialog-section">
-            <h3>{t("income.amountRange")}</h3>
+            <h3>{t("transaction.amountRangeFilter")}</h3>
             <div className="transaction-filter-dialog-amount-inputs">
               <AppNumberInput
                 id="minAmount"
@@ -123,7 +123,7 @@ const TransactionFilterDialog: React.FC<Props> = ({
           </div>
 
           <div className="transaction-filter-dialog-section">
-            <h3>{t("income.dateRange")}</h3>
+            <h3>{t("transaction.dateRangeFilter")}</h3>
             <div className="transaction-filter-dialog-date-inputs">
               <DateTimePicker
                 initialDate={startDate}
