@@ -72,9 +72,7 @@ const TransactionCard: React.FC<Props> = ({ transaction }: Props) => {
         onClose={() => setIsDeleteDialogOpen(false)}
         onConfirm={handleDelete}
         title={t("transaction.deleteConfirmTitle")}
-        message={t("transaction.deleteConfirmMessage", {
-          title: transaction.title,
-        })}
+        message={t("transaction.deleteConfirmMessage")}
       />
     </div>
   );
