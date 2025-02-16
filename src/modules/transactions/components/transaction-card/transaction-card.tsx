@@ -9,6 +9,7 @@ import { formatTransactionCategory } from "../../utils";
 import { formatCurrency } from "../../../currency-profile/utils";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
 import { EXPENSE_ROUTE_PATH, INCOME_ROUTE_PATH } from "../../routes";
+import { deleteTransaction } from "../../usecases/delete-transaction-usecase";
 
 interface Props {
   transaction: TransactionEntity;
@@ -23,7 +24,7 @@ const TransactionCard: React.FC<Props> = ({ transaction }: Props) => {
   const formattedDate = new Date(transaction.date).toLocaleDateString();
 
   const handleDelete = () => {
-    // TODO
+    deleteTransaction(transaction.id);
   };
 
   return (

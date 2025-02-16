@@ -19,6 +19,8 @@ export interface TransactionRepository {
     sort: TransactionSortEnum,
     pageNum: number
   ) => Promise<Either<AppError, PageEntity<TransactionEntity>>>;
+
+  delete: (id: String) => Promise<Either<AppError, void>>;
 }
 
 export const transactionRepository = (): TransactionRepository => ({
@@ -62,5 +64,12 @@ export const transactionRepository = (): TransactionRepository => ({
       totalElements: 50,
       pageSize: 10,
     });
+  },
+
+  delete: async (id): Promise<Either<AppError, void>> => {
+    // TODO Implement
+    console.log(id);
+
+    return Either.right(undefined);
   },
 });
