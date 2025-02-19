@@ -35,7 +35,7 @@ const initialState: TransactionPageState<TransactionEntity> = {
   isLoading: false,
 };
 
-const updateTransactionInPage = (
+export const updateTransactionStateInPage = (
   state: TransactionPageState<TransactionEntity>,
   action: PayloadAction<TransactionEntity>
 ) => {
@@ -47,7 +47,7 @@ const updateTransactionInPage = (
   }
 };
 
-const deleteTransactionInPage = (
+export const deleteTransactionStateInPage = (
   state: TransactionPageState<TransactionEntity>,
   action: PayloadAction<string>
 ) => {
@@ -97,9 +97,9 @@ export const incomesPageSlice = createSlice({
   initialState,
   reducers: {
     // Update income section
-    updateTransactionInPage: updateTransactionInPage,
+    updateTransactionIncomeInPage: updateTransactionStateInPage,
     // Delete income section
-    deleteTransactionInPage: deleteTransactionInPage,
+    deleteTransactionIncomeInPage: deleteTransactionStateInPage,
   },
   extraReducers: (builder) => {
     builder
@@ -114,9 +114,9 @@ export const expensesPageSlice = createSlice({
   initialState,
   reducers: {
     // Update expense section
-    updateTransactionInPage: updateTransactionInPage,
+    updateTransactionExpenseInPage: updateTransactionStateInPage,
     // Delete expense section
-    deleteTransactionInPage: deleteTransactionInPage,
+    deleteTransactionExpenseInPage: deleteTransactionStateInPage,
   },
   extraReducers: (builder) => {
     builder
@@ -128,3 +128,11 @@ export const expensesPageSlice = createSlice({
       );
   },
 });
+
+export const { updateTransactionIncomeInPage, deleteTransactionIncomeInPage } =
+  incomesPageSlice.actions;
+
+export const {
+  updateTransactionExpenseInPage,
+  deleteTransactionExpenseInPage,
+} = expensesPageSlice.actions;

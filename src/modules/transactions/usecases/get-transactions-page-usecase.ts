@@ -17,7 +17,7 @@ export const getTransactionsPage = async (
   sort: TransactionSortEnum,
   pageNum: number
 ): Promise<Either<AppError, PageEntity<TransactionEntity>>> => {
-  return await transactionRepositoryInstance.get(
+  return await transactionRepositoryInstance.list(
     currencyProfile,
     type,
     month,

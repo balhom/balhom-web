@@ -10,7 +10,7 @@ import { TransactionTypeEnum } from "../data/enums/transaction-type-enum";
 import { categoryToImage } from "../utils";
 
 export interface TransactionRepository {
-  get: (
+  list: (
     currencyProfile: CurrencyProfileEntity,
     type: TransactionTypeEnum,
     month: number,
@@ -20,11 +20,21 @@ export interface TransactionRepository {
     pageNum: number
   ) => Promise<Either<AppError, PageEntity<TransactionEntity>>>;
 
-  delete: (id: String) => Promise<Either<AppError, void>>;
+  get: (
+    id: String,
+    type: TransactionTypeEnum,
+    currencyProfile: CurrencyProfileEntity
+  ) => Promise<Either<AppError, TransactionEntity>>;
+
+  delete: (
+    id: String,
+    type: TransactionTypeEnum,
+    currencyProfile: CurrencyProfileEntity
+  ) => Promise<Either<AppError, void>>;
 }
 
 export const transactionRepository = (): TransactionRepository => ({
-  get: async (
+  list: async (
     currencyProfile,
     type,
     month,
@@ -66,9 +76,50 @@ export const transactionRepository = (): TransactionRepository => ({
     });
   },
 
-  delete: async (id): Promise<Either<AppError, void>> => {
+  get: async (
+    id,
+    type,
+    currencyProfile
+  ): Promise<Either<AppError, TransactionEntity>> => {
     // TODO Implement
     console.log(id);
+
+    if (type === TransactionTypeEnum.Income) {
+      const transaction = mockIncomes.find((t) => t.id === id);
+      if (transaction) {
+        return Either.right({
+          ...transaction,
+          currency: currencyProfile.currency,
+          category: {
+            code: transaction.category.code,
+            image: categoryToImage(transaction.category.code),
+          },
+        });
+      }
+    } else {
+      const transaction = mockExpenses.find((t) => t.id === id);
+      if (transaction) {
+        return Either.right({
+          ...transaction,
+          currency: currencyProfile.currency,
+          category: {
+            code: transaction.category.code,
+            image: categoryToImage(transaction.category.code),
+          },
+        });
+      }
+    }
+
+    return Either.left(new AppError(""));
+  },
+
+  delete: async (
+    id,
+    type,
+    currencyProfile
+  ): Promise<Either<AppError, void>> => {
+    // TODO Implement
+    console.log(id, type, currencyProfile);
 
     return Either.right(undefined);
   },

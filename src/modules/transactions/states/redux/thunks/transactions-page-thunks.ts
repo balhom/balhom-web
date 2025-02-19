@@ -25,8 +25,6 @@ export const fetchIncomesPageAsync = createAsyncThunk<
 >(
   "transactions/fetchIncomesPage",
   async ({ currencyProfile, month, year, filters, sort, pageNum }) => {
-    // TODO call get page usecase
-
     return await getTransactionsPage(
       currencyProfile,
       TransactionTypeEnum.Income,
@@ -46,8 +44,6 @@ export const fetchExpensesPageAsync = createAsyncThunk<
 >(
   "transactions/fetchExpensesPage",
   async ({ currencyProfile, month, year, filters, sort, pageNum }) => {
-    // TODO call get page usecase
-
     return await getTransactionsPage(
       currencyProfile,
       TransactionTypeEnum.Expense,

@@ -10,21 +10,81 @@ import { formatCurrency } from "../../../currency-profile/utils";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
 import { EXPENSE_ROUTE_PATH, INCOME_ROUTE_PATH } from "../../routes";
 import { deleteTransaction } from "../../usecases/delete-transaction-usecase";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, AppState } from "../../../../store";
+import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
+import {
+  fetchExpensesPageAsync,
+  fetchIncomesPageAsync,
+} from "../../states/redux/thunks/transactions-page-thunks";
+import {
+  deleteTransactionExpenseInPage,
+  deleteTransactionIncomeInPage,
+} from "../../states/redux/slices/transactions-page-slice";
 
 interface Props {
   transaction: TransactionEntity;
+  selectedMonth: number;
+  selectedYear: number;
 }
 
-const TransactionCard: React.FC<Props> = ({ transaction }: Props) => {
+const TransactionCard: React.FC<Props> = ({
+  transaction,
+  selectedMonth,
+  selectedYear,
+}: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const { selectedCurrencyProfile } = useCurrencyProfiles();
+
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
+  const transactionsPageState = useSelector((state: AppState) =>
+    transaction.type === TransactionTypeEnum.Income
+      ? state.incomesPage
+      : state.expensesPage
+  );
+  const dispatch: AppDispatch = useDispatch();
 
   const formattedDate = new Date(transaction.date).toLocaleDateString();
 
+  const dispatchDeleteAndFecthTransactionsPageAsync = () => {
+    if (selectedCurrencyProfile) {
+      if (transaction.type === TransactionTypeEnum.Income) {
+        dispatch(deleteTransactionIncomeInPage(transaction.id));
+        dispatch(
+          fetchIncomesPageAsync({
+            currencyProfile: selectedCurrencyProfile,
+            month: selectedMonth,
+            year: selectedYear,
+            filters: transactionsPageState.filter,
+            sort: transactionsPageState.sortValue,
+            pageNum: transactionsPageState.page.pageNum,
+          })
+        );
+      } else {
+        dispatch(deleteTransactionExpenseInPage(transaction.id));
+        dispatch(
+          fetchExpensesPageAsync({
+            currencyProfile: selectedCurrencyProfile,
+            month: selectedMonth,
+            year: selectedYear,
+            filters: transactionsPageState.filter,
+            sort: transactionsPageState.sortValue,
+            pageNum: transactionsPageState.page.pageNum,
+          })
+        );
+      }
+    }
+  };
+
   const handleDelete = () => {
-    deleteTransaction(transaction.id);
+    // Call usecase
+    deleteTransaction(transaction.id, transaction.type);
+
+    // Remove transaction from UI
+    dispatchDeleteAndFecthTransactionsPageAsync();
   };
 
   return (

@@ -109,7 +109,12 @@ const TransactionList: React.FC<Props> = ({
 
       <div className="transaction-list-cards">
         {transactionsPageState.page.results.map((transaction) => (
-          <TransactionCard key={transaction.id} transaction={transaction} />
+          <TransactionCard
+            key={transaction.id}
+            transaction={transaction}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+          />
         ))}
       </div>
 
