@@ -16,6 +16,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeBizum,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "2",
@@ -29,6 +43,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeGift,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "3",
@@ -42,6 +70,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeDeposit,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "4",
@@ -55,6 +97,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeDeposit,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "5",
@@ -68,6 +124,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeDeposit,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "6",
@@ -81,6 +151,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeDeposit,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "7",
@@ -94,6 +178,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeDeposit,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "8",
@@ -107,6 +205,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeDeposit,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "9",
@@ -120,6 +232,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeDeposit,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "10",
@@ -133,6 +259,20 @@ export const mockIncomes: TransactionEntity[] = [
       code: TransactionCategoryEnum.IncomeDeposit,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
 ];
 
@@ -149,6 +289,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseBills,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "2",
@@ -162,6 +316,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseFamily,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "3",
@@ -175,6 +343,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseDebt,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "4",
@@ -188,6 +370,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseDebt,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "5",
@@ -201,6 +397,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseDebt,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "6",
@@ -214,6 +424,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseDebt,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "7",
@@ -227,6 +451,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseDebt,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "8",
@@ -240,6 +478,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseDebt,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "9",
@@ -253,6 +505,20 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseDebt,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
   {
     id: "10",
@@ -266,5 +532,19 @@ export const mockExpenses: TransactionEntity[] = [
       code: TransactionCategoryEnum.ExpenseDebt,
       image: "",
     },
+    documents: [
+      {
+        id: "1",
+        name: "Invoice_March_2024.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+      {
+        id: "2",
+        name: "Receipt_123456.pdf",
+        url: "http://localhost:9080/Invoice_March_2024.pdf",
+        createdAt: new Date(2024, 3, 15),
+      },
+    ],
   },
 ];

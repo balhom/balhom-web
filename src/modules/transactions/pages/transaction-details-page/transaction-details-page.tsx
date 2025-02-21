@@ -12,22 +12,6 @@ import AppLoaderPage from "../../../../common/pages/app-loader-page/app-loader-p
 import { formatTransactionCategory } from "../../utils";
 import { EXPENSE_ROUTE_PATH, INCOME_ROUTE_PATH } from "../../routes";
 
-// Mock attachments data
-const mockAttachments = [
-  {
-    id: "1",
-    name: "Invoice_March_2024.pdf",
-    size: "156 KB",
-    date: "2024-03-15",
-  },
-  {
-    id: "2",
-    name: "Receipt_123456.pdf",
-    size: "89 KB",
-    date: "2024-03-15",
-  },
-];
-
 interface Props {
   transactionType: TransactionTypeEnum;
 }
@@ -157,10 +141,13 @@ const TransactionDetailsPage: React.FC<Props> = ({
             </div>
 
             <div className="transaction-details-page-attachments-list">
-              {mockAttachments.map((attachment) => (
+              {transactionState.documents.map((doc) => (
                 <div
-                  key={attachment.id}
+                  key={doc.id}
                   className="transaction-details-page-attachment-item"
+                  onClick={() => {
+                    window.open(doc.url);
+                  }}
                 >
                   <FileText
                     size={24}
@@ -169,13 +156,14 @@ const TransactionDetailsPage: React.FC<Props> = ({
 
                   <div className="transaction-details-page-attachment-info">
                     <div className="transaction-details-page-attachment-name">
-                      {attachment.name}
+                      {doc.name}
                     </div>
 
-                    <div className="transaction-details-page-attachment-meta">
-                      {attachment.size} •{" "}
-                      {new Date(attachment.date).toLocaleDateString()}
-                    </div>
+                    {doc.createdAt && (
+                      <div className="transaction-details-page-attachment-meta">
+                        {new Date(doc.createdAt).toLocaleDateString()}
+                      </div>
+                    )}
                   </div>
 
                   <Download
