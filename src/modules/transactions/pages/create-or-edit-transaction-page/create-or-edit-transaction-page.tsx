@@ -101,7 +101,6 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
       return;
     }
 
-    // TODO fill documentsToRemove and documentsToUpload
     const documentsToRemove: DocumentEntity[] = [];
     const documentsToUpload: File[] = [];
 
