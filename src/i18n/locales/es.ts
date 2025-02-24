@@ -5,6 +5,7 @@ export default {
   },
   common: {
     apply: "Aplicar",
+    confirm: "Confirmar",
     close: "Cerrar",
     clear: "Limpiar",
     refresh: "Actualizar",
@@ -150,7 +151,6 @@ export default {
     category: "Categoría",
     date: "Fecha",
     attachments: "Adjuntos",
-    create: "Crear transacción",
     amountRangeFilter: "Rango de cantidad",
     dateRangeFilter: "Rango de fechas",
     sortDateDesc: "Fecha (Descendente)",
@@ -165,6 +165,8 @@ export default {
       "Añade una nueva entrada de ingresos para hacer un seguimiento de tus ganancias.",
     createExpenseDescription:
       "Añada una nueva entrada de gastos para controlar sus pérdidas.",
+    editIncomeTitle: "Editar ingreso",
+    editExpenseTitle: "Editar gasto",
     titleRequiredError: "Título obligatorio",
   },
   settings: {

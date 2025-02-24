@@ -7,6 +7,8 @@ import { TransactionEntity } from "../data/entities/transaction-entity";
 import { TransactionFiltersEntity } from "../data/entities/transaction-filters-entity";
 import { TransactionSortEnum } from "../data/enums/transaction-sort-enum";
 import { TransactionTypeEnum } from "../data/enums/transaction-type-enum";
+import { TransactionCreateProps } from "../data/props/transaction-create-props";
+import { TransactionUpdateProps } from "../data/props/transaction-update-props";
 import { categoryToImage } from "../utils";
 
 export interface TransactionRepository {
@@ -25,6 +27,10 @@ export interface TransactionRepository {
     type: TransactionTypeEnum,
     currencyProfile: CurrencyProfileEntity
   ) => Promise<Either<AppError, TransactionEntity>>;
+
+  create: (props: TransactionCreateProps) => Promise<Either<AppError, void>>;
+
+  update: (props: TransactionUpdateProps) => Promise<Either<AppError, void>>;
 
   delete: (
     id: String,
@@ -111,6 +117,24 @@ export const transactionRepository = (): TransactionRepository => ({
     }
 
     return Either.left(new AppError(""));
+  },
+
+  create: async (props): Promise<Either<AppError, void>> => {
+    // TODO Implement
+    console.log(props);
+
+    // TODO take in mind to upload documents
+
+    return Either.right(undefined);
+  },
+
+  update: async (props): Promise<Either<AppError, void>> => {
+    // TODO Implement
+    console.log(props);
+
+    // TODO take in mind to upload documents
+
+    return Either.right(undefined);
   },
 
   delete: async (

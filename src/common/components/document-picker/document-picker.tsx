@@ -4,12 +4,14 @@ import { Upload, File, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import AppErrorText from "../app-error-text/app-error-text";
 import IconButton from "../icon-button/icon-button";
+import { DocumentEntity } from "../../data/entities/document-entity";
+import { Either } from "../../data/either";
 
 const maxDocumentSize = 5 * 1024 * 1024; // 5MB default
 
 interface Props {
-  documents: File[];
-  onDocumentsChange: (files: File[]) => void;
+  documents: Either<File, DocumentEntity>[];
+  onDocumentsChange: (files: Either<File, DocumentEntity>[]) => void;
   maxSize?: number; // in bytes
   maxDocuments?: number;
   accept?: string;
@@ -58,8 +60,13 @@ const DocumentPicker: React.FC<Props> = ({
         return;
       }
 
-      if (!updatedFiles.find((f) => f.name === file.name)) {
-        updatedFiles.push(file);
+      if (
+        !updatedFiles.find(
+          (docEither) =>
+            docEither.isLeft() && docEither.getLeft()?.name === file.name
+        )
+      ) {
+        updatedFiles.push(Either.left(file));
       }
     });
 
@@ -119,22 +126,38 @@ const DocumentPicker: React.FC<Props> = ({
 
       {documents.length > 0 && (
         <div className="file-list">
-          {documents.map((document, index) => (
-            <div key={`${document.name}-${index}`} className="file-item">
-              <File size={20} className="file-icon" />
+          {documents.map((documentEither, index) => {
+            let docName = "";
+            let docSize: number | undefined;
 
-              <div className="file-info">
-                <div className="file-name">{document.name}</div>
+            documentEither.fold(
+              (file) => {
+                docName = file.name;
+                docSize = file.size;
+              },
+              (documentEntity) => {
+                docName = documentEntity.name;
+              }
+            );
+            return (
+              <div key={`${docName}-${index}`} className="file-item">
+                <File size={20} className="file-icon" />
 
-                <div className="file-size">{formatFileSize(document.size)}</div>
+                <div className="file-info">
+                  <div className="file-name">{docName}</div>
+
+                  {docSize && (
+                    <div className="file-size">{formatFileSize(docSize)}</div>
+                  )}
+                </div>
+
+                <IconButton
+                  icon={<X size={20} />}
+                  onClick={() => removeFile(index)}
+                />
               </div>
-
-              <IconButton
-                icon={<X size={20} />}
-                onClick={() => removeFile(index)}
-              />
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

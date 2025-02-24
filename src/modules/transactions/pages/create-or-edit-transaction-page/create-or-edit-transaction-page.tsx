@@ -19,6 +19,10 @@ import DocumentPicker from "../../../../common/components/document-picker/docume
 import { TransactionEntity } from "../../data/entities/transaction-entity";
 import { getTransaction } from "../../usecases/get-transaction-usecase";
 import AppLoaderPage from "../../../../common/pages/app-loader-page/app-loader-page";
+import { Either } from "../../../../common/data/either";
+import { DocumentEntity } from "../../../../common/data/entities/document-entity";
+import { updateTransaction } from "../../usecases/update-transaction-usecase";
+import { createTransaction } from "../../usecases/create-transaction-usecase";
 
 interface Props {
   transactionType: TransactionTypeEnum;
@@ -55,8 +59,9 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
       : TransactionCategoryEnum.ExpenseBills
   );
   const [date, setDate] = useState<Date>(new Date());
-  // TODO change state from File to Either DocumentEntity or File
-  const [documents, setDocuments] = useState<File[]>([]);
+  const [documents, setDocuments] = useState<Either<File, DocumentEntity>[]>(
+    []
+  );
 
   useEffect(() => {
     if (id && selectedCurrencyProfile) {
@@ -73,7 +78,9 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
               setAmount(transaction.amount.toString());
               setCategory(transaction.category.code);
               setDate(transaction.date);
-              // TODO set documents state
+              setDocuments(
+                transaction.documents.map((doc) => Either.right(doc))
+              );
             }
           );
         }
@@ -94,10 +101,54 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
       return;
     }
 
+    // TODO fill documentsToRemove and documentsToUpload
+    const documentsToRemove: DocumentEntity[] = [];
+    const documentsToUpload: File[] = [];
+
+    const oldDocuments = [...(transactionState?.documents ?? [])];
+    const newDocuments = [...documents];
+
+    oldDocuments.forEach((oldDoc) => {
+      // If new documents does not contain old document
+      // then it should be removed
+      if (
+        !newDocuments.find(
+          (newDoc) => newDoc.isRight() && newDoc.getRight()?.id === oldDoc.id
+        )
+      ) {
+        documentsToRemove.push(oldDoc);
+      }
+    });
+
+    newDocuments.forEach((newDoc) => {
+      // If new document is a file then it should be uploaded
+      if (newDoc.isLeft()) {
+        documentsToUpload.push(newDoc.getLeft()!);
+      }
+    });
+
     if (isEditPage) {
-      // TODO Call update usecase
+      updateTransaction({
+        id: id,
+        type: transactionType,
+        title: title,
+        description: description,
+        amount: Number(amount),
+        date: date,
+        category: category,
+        documentsToRemove: documentsToRemove,
+        documentsToUpload: documentsToUpload,
+      });
     } else {
-      // TODO Call create usecase
+      createTransaction({
+        type: transactionType,
+        title: title,
+        description: description,
+        amount: Number(amount),
+        date: date,
+        category: category,
+        documents: documentsToUpload,
+      });
     }
 
     navigate(
@@ -107,15 +158,26 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
     );
   };
 
-  const pageTitle =
-    transactionType === TransactionTypeEnum.Income
-      ? t("transaction.createIncomeTitle")
-      : t("transaction.createExpenseTitle");
+  let pageTitle = "";
+  if (!isEditPage) {
+    pageTitle =
+      transactionType === TransactionTypeEnum.Income
+        ? t("transaction.createIncomeTitle")
+        : t("transaction.createExpenseTitle");
+  } else {
+    pageTitle =
+      transactionType === TransactionTypeEnum.Income
+        ? t("transaction.editIncomeTitle")
+        : t("transaction.editExpenseTitle");
+  }
 
-  const pageDescription =
-    transactionType === TransactionTypeEnum.Income
-      ? t("transaction.createIncomeDescription")
-      : t("transaction.createExpenseDescription");
+  let pageSubtitle = "";
+  if (!isEditPage) {
+    pageSubtitle =
+      transactionType === TransactionTypeEnum.Income
+        ? t("transaction.createIncomeDescription")
+        : t("transaction.createExpenseDescription");
+  }
 
   return (
     <div className="create-or-edit-transaction-page">
@@ -139,7 +201,7 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
           <h1 className="create-or-edit-transaction-page-title">{pageTitle}</h1>
 
           <p className="create-or-edit-transaction-page-subtitle">
-            {pageDescription}
+            {pageSubtitle}
           </p>
         </div>
 
@@ -232,7 +294,7 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
             />
           </div>
 
-          <AppFormButton text={t("transaction.create")} />
+          <AppFormButton text={t("common.confirm")} />
         </form>
       </div>
     </div>

@@ -5,6 +5,7 @@ export default {
   },
   common: {
     apply: "Apply",
+    confirm: "Confirm",
     close: "Close",
     clear: "Clear",
     refresh: "Refresh",
@@ -150,7 +151,6 @@ export default {
     category: "Category",
     date: "Date",
     attachments: "Attachments",
-    create: "Create Transaction",
     dropzoneText: "Drop files here or click to upload",
     amountRangeFilter: "Amount range",
     dateRangeFilter: "Date range",
@@ -165,6 +165,8 @@ export default {
     createIncomeDescription: "Add a new income entry to track your earnings.",
     createExpenseDescription:
       "Add a new expense entry to keep track of your losses.",
+    editIncomeTitle: "Edit Income",
+    editExpenseTitle: "Edit Expense",
     titleRequiredError: "A title is required",
   },
   settings: {
