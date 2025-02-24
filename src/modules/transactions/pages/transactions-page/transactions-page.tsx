@@ -6,7 +6,10 @@ import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/c
 import TransactionsCategoryChart from "../../components/transactions-category-chart/transaction-category-chart";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
 import TransactionsDateSection from "../../components/transactions-date-section/transactions-date-section";
-import { EXPENSE_ADD_ROUTE_PATH, INCOME_ADD_ROUTE_PATH } from "../../routes";
+import {
+  EXPENSE_CREATE_ROUTE_PATH,
+  INCOME_CREATE_ROUTE_PATH,
+} from "../../routes";
 import TransactionList from "../../components/transaction-list/transaction-list";
 
 interface Props {
@@ -58,8 +61,8 @@ const TransactionsPage: React.FC<Props> = ({ transactionType }: Props) => {
         onClick={() =>
           navigate(
             transactionType === TransactionTypeEnum.Income
-              ? INCOME_ADD_ROUTE_PATH
-              : EXPENSE_ADD_ROUTE_PATH
+              ? INCOME_CREATE_ROUTE_PATH
+              : EXPENSE_CREATE_ROUTE_PATH
           )
         }
       >

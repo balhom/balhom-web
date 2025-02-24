@@ -8,7 +8,10 @@ import AppDeleteDialog from "../../../../common/components/app-delete-dialog/app
 import { formatTransactionCategory } from "../../utils";
 import { formatCurrency } from "../../../currency-profile/utils";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
-import { EXPENSE_ROUTE_PATH, INCOME_ROUTE_PATH } from "../../routes";
+import {
+  EXPENSE_DETAILS_ROUTE_PATH,
+  INCOME_DETAILS_ROUTE_PATH,
+} from "../../routes";
 import { deleteTransaction } from "../../usecases/delete-transaction-usecase";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppState } from "../../../../store";
@@ -110,8 +113,8 @@ const TransactionCard: React.FC<Props> = ({
             navigate(
               `${
                 transaction.type === TransactionTypeEnum.Income
-                  ? INCOME_ROUTE_PATH
-                  : EXPENSE_ROUTE_PATH
+                  ? INCOME_DETAILS_ROUTE_PATH
+                  : EXPENSE_DETAILS_ROUTE_PATH
               }/${transaction.id}`
             )
           }

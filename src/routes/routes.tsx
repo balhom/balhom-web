@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from '../components/layout/layout';
 import Dashboard from '../pages/dashboard/dashboard';
 import Incomes from '../pages/incomes/incomes';
-import AddIncome from '../pages/incomes/add-income/add-income';
+import AddIncome from '../modules/transactions/pages/create-or-edit-transaction-page/create-or-edit-transaction-page';
 import IncomeDetails from '../pages/incomes/income-details/income-details';
 import Expenses from '../pages/expenses/expenses';
 import Settings from '../pages/settings/settings';

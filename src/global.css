@@ -20,6 +20,9 @@
   --color-border-hover: #f0fdf4;
   --color-shadow-primary: rgba(0, 0, 0, 0.1);
   --color-shadow-secondary: rgba(0, 0, 0, 0.5);
+
+  --color-selected: #dcfce7;
+  
   --color-success: #4caf50;
   --color-error: #ef4444;
 

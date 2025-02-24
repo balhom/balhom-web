@@ -59,7 +59,7 @@
 
 .app-header-nav-link.active {
   color: #1da53f;
-  background-color: #dcfce7;
+  background-color: var(--color-selected);
 }
 
 .app-header-nav-link-text {

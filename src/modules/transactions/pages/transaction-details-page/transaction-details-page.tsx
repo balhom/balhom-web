@@ -10,7 +10,14 @@ import { getTransaction } from "../../usecases/get-transaction-usecase";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
 import AppLoaderPage from "../../../../common/pages/app-loader-page/app-loader-page";
 import { formatTransactionCategory } from "../../utils";
-import { EXPENSE_ROUTE_PATH, INCOME_ROUTE_PATH } from "../../routes";
+import {
+  EXPENSE_EDIT_ROUTE_PATH,
+  EXPENSE_ROUTE_PATH,
+  INCOME_EDIT_ROUTE_PATH,
+  INCOME_ROUTE_PATH,
+} from "../../routes";
+import IconButton from "../../../../common/components/icon-button/icon-button";
+import { formatDate } from "../../../../common/utils/date-utils";
 
 interface Props {
   transactionType: TransactionTypeEnum;
@@ -49,18 +56,23 @@ const TransactionDetailsPage: React.FC<Props> = ({
     return <AppLoaderPage />;
   }
 
-  const formattedDate = new Date(transactionState.date).toLocaleDateString();
+  const formattedDate = formatDate(transactionState.date, true);
 
   const handleEdit = () => {
-    // TODO
-    console.log("Edit income:", transactionState.id);
+    navigate(
+      (transactionType === TransactionTypeEnum.Income
+        ? INCOME_EDIT_ROUTE_PATH
+        : EXPENSE_EDIT_ROUTE_PATH) +
+        "/" +
+        transactionState.id
+    );
   };
 
   return (
     <div className="transaction-details-page">
       <div className="transaction-details-page-header">
-        <button
-          className="transaction-details-page-header-button"
+        <IconButton
+          icon={<ArrowLeft size={20} />}
           onClick={() =>
             navigate(
               transactionType === TransactionTypeEnum.Income
@@ -68,15 +80,8 @@ const TransactionDetailsPage: React.FC<Props> = ({
                 : EXPENSE_ROUTE_PATH
             )
           }
-        >
-          <ArrowLeft size={20} />
-        </button>
-        <button
-          className="transaction-details-page-header-button"
-          onClick={handleEdit}
-        >
-          <Pencil size={20} />
-        </button>
+        />
+        <IconButton icon={<Pencil size={20} />} onClick={handleEdit} />
       </div>
 
       <div className="transaction-details-page-card">

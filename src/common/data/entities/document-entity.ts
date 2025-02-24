@@ -1,4 +1,4 @@
-export interface TransactionDocumentEntity {
+export interface DocumentEntity {
   id: string;
   name: string;
   url: string;
