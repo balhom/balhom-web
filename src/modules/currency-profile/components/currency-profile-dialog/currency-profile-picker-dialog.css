@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-shadow-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,7 @@
   padding: 1.5rem;
   width: 90%;
   max-width: 400px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px var(--color-shadow-primary);
 }
 
 .currency-profile-picker-dialog-header {
@@ -36,7 +36,7 @@
 .currency-profile-picker-dialog-close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--color-text-secondary);
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
@@ -46,8 +46,8 @@
 }
 
 .currency-profile-picker-dialog-close-button:hover {
-  background-color: #f1f5f9;
-  color: #334155;
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
 }
 
 .currency-profile-picker-dialog-list {
@@ -67,11 +67,11 @@
 }
 
 .currency-profile-picker-dialog-item:hover {
-  background-color: #f8fafc;
+  background-color: var(--color-bg-secondary);
 }
 
 .currency-profile-picker-dialog-item.selected {
-  background-color: #f1f5f9;
+  background-color: var(--color-bg-tertiary);
 }
 
 .currency-profile-picker-dialog-item-info {
@@ -87,18 +87,18 @@
 
 .currency-profile-picker-dialog-item-name {
   font-weight: 500;
-  color: #334155;
+  color: var(--color-text-primary);
 }
 
 .currency-profile-picker-dialog-item-amount {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--color-text-secondary);
 }
 
 .currency-profile-picker-dialog-footer {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--color-border);
 }
 
 .currency-profile-picker-dialog-button {

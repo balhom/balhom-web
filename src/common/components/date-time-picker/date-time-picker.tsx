@@ -36,7 +36,8 @@ const DateTimePicker: React.FC<Props> = ({
         role="button"
         tabIndex={0}
       >
-        <Calendar size={20} color="#64748b" />
+        <Calendar size={20} color="var(--color-text-secondary)" />
+        
         <span className="date-time-picker-value">
           {initialDate ? formatDate(initialDate, showTime) : "-"}
         </span>

@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-shadow-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,7 @@
   padding: 1.5rem;
   width: 90%;
   max-width: 400px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px var(--color-shadow-primary);
 }
 
 .app-delete-dialog-header {
@@ -57,7 +57,7 @@
 .app-delete-dialog-button.cancel {
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border);
-  color: #64748b;
+  color: var(--color-text-secondary);
 }
 
 .app-delete-dialog-button.cancel:hover {
@@ -66,9 +66,9 @@
 }
 
 .app-delete-dialog-button.confirm {
-  background: #ef4444;
+  background: var(--color-error);
   border: none;
-  color: white;
+  color: var(--color-text-tertiary);
 }
 
 .app-delete-dialog-button.confirm:hover {

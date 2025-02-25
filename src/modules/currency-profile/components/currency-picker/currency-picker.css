@@ -4,12 +4,13 @@
 }
 
 .currency-picker select {
+  color: var(--color-text-primary);
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   appearance: none;
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-bg-primary);
   font-size: 1rem;
   cursor: pointer;
   padding-right: 2.5rem;

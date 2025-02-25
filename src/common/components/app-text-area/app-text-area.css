@@ -6,7 +6,7 @@
   font-size: 1rem;
   transition: border-color 0.2s;
   width: 100%;
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
 }
 

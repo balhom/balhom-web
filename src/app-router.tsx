@@ -10,6 +10,7 @@ import { CurrencyProfilesProvider } from "./modules/currency-profile/states/prov
 import { dashboardRoutes } from "./modules/dashboard/routes";
 import AppMainLayout from "./common/components/app-main-layout/app-main-layout";
 import { transactionsRoutes } from "./modules/transactions/routes";
+import { settingsRoutes } from "./modules/settings/routes";
 
 export const AppRouter: React.FC = () => {
   return (
@@ -45,6 +46,7 @@ export const AppRouter: React.FC = () => {
           >
             {dashboardRoutes()}
             {transactionsRoutes()}
+            {settingsRoutes()}
           </Route>
         </Route>
         <Route path="*" element={<AppNotFoundPage />} />

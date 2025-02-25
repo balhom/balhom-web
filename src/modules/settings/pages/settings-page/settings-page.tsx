@@ -1,49 +1,62 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../hooks/use-auth';
-import { useCurrencyProfile } from '../../hooks/use-currency-profile';
-import { KeyRound, LogOut, Trash2, X, UserPlus, Moon, Sun, Languages } from 'lucide-react';
-import ImagePicker from '../../components/forms/image-picker/image-picker';
-import CurrencySelect from '../../components/forms/currency-select/currency-select';
-import NumberInput from '../../components/forms/number-input/number-input';
-import './settings.css';
-import { useTheme } from '../../common/states/contexts/theme-mode-context';
+import "./settings-page.css";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  KeyRound,
+  LogOut,
+  Trash2,
+  X,
+  UserPlus,
+  Moon,
+  Sun,
+  Languages,
+} from "lucide-react";
+import ImagePicker from "../../../../common/components/image-picker/image-picker";
+import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
+import { useTheme } from "../../../../common/states/contexts/theme-mode-context";
+import CurrencyPicker from "../../../currency-profile/components/currency-picker/currency-picker";
+import AppNumberInput from "../../../../common/components/app-number-input/app-number-input";
+import { ThemeModeEnum } from "../../../../common/data/enums/theme-mode-enum";
 
-const Settings = () => {
+const SettingsPage: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const { user } = useAuth();
-  const { profile } = useCurrencyProfile();
+
+  const { selectedCurrencyProfile } = useCurrencyProfiles();
+
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isProfileDeleting, setIsProfileDeleting] = useState(false);
-  const [newUserEmail, setNewUserEmail] = useState('');
-  const { isDarkMode, toggleTheme } = useTheme();
-  
-  // Mock shared users
-  const [sharedUsers] = useState(['shared@example.com', 'another@example.com']);
+  const [newUserEmail, setNewUserEmail] = useState("");
+  const { themeMode, setThemeMode } = useTheme();
 
-  if (!user || !profile) return null;
+  // Mock shared users
+  const [sharedUsers] = useState(["shared@example.com", "another@example.com"]);
+
+  if (!selectedCurrencyProfile) return null;
+
+  // TODO
+  const userEmail = "test@test.com";
 
   const handleProfileUpdate = (field: string, value: any) => {
     // Will be implemented later
-    console.log('Update profile:', field, value);
+    console.log("Update profile:", field, value);
   };
 
   const handleAddUser = (e: React.FormEvent) => {
     e.preventDefault();
     // Will be implemented later
-    console.log('Add user:', newUserEmail);
-    setNewUserEmail('');
+    console.log("Add user:", newUserEmail);
+    setNewUserEmail("");
   };
 
   const handleRemoveUser = (email: string) => {
     // Will be implemented later
-    console.log('Remove user:', email);
+    console.log("Remove user:", email);
   };
 
   const handleDeleteProfile = () => {
     setIsProfileDeleting(true);
     // Will be implemented later
-    console.log('Delete profile:', profile.id);
+    console.log("Delete profile:", selectedCurrencyProfile.id);
   };
 
   const handleLanguageChange = (language: string) => {
@@ -55,9 +68,9 @@ const Settings = () => {
       {/* Account Section */}
       <section className="settings-section">
         <div className="settings-section-header">
-          <h2 className="settings-section-title">{t('settings.account')}</h2>
+          <h2 className="settings-section-title">{t("settings.account")}</h2>
           <p className="settings-section-description">
-            {t('settings.accountDescription')}
+            {t("settings.accountDescription")}
           </p>
         </div>
 
@@ -65,26 +78,28 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.email')}</div>
+                <div className="settings-item-title">{t("settings.email")}</div>
                 <div className="settings-item-description">
-                  {t('settings.emailDescription')}
+                  {t("settings.emailDescription")}
                 </div>
               </div>
-              <div className="settings-item-value">{user.email}</div>
+              <div className="settings-item-value">{userEmail}</div>
             </div>
           </div>
 
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.password')}</div>
+                <div className="settings-item-title">
+                  {t("settings.password")}
+                </div>
                 <div className="settings-item-description">
-                  {t('settings.passwordDescription')}
+                  {t("settings.passwordDescription")}
                 </div>
               </div>
               <button className="settings-button secondary">
                 <KeyRound size={18} />
-                {t('settings.changePassword')}
+                {t("settings.changePassword")}
               </button>
             </div>
           </div>
@@ -92,14 +107,16 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.logout')}</div>
+                <div className="settings-item-title">
+                  {t("settings.logout")}
+                </div>
                 <div className="settings-item-description">
-                  {t('settings.logoutDescription')}
+                  {t("settings.logoutDescription")}
                 </div>
               </div>
               <button className="settings-button secondary">
                 <LogOut size={18} />
-                {t('settings.logoutButton')}
+                {t("settings.logoutButton")}
               </button>
             </div>
           </div>
@@ -107,17 +124,19 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.deleteAccount')}</div>
+                <div className="settings-item-title">
+                  {t("settings.deleteAccount")}
+                </div>
                 <div className="settings-item-description">
-                  {t('settings.deleteAccountDescription')}
+                  {t("settings.deleteAccountDescription")}
                 </div>
               </div>
-              <button 
+              <button
                 className="settings-button danger"
                 onClick={() => setShowDeleteConfirm(true)}
               >
                 <Trash2 size={18} />
-                {t('settings.deleteAccountButton')}
+                {t("settings.deleteAccountButton")}
               </button>
             </div>
           </div>
@@ -127,9 +146,11 @@ const Settings = () => {
       {/* Currency Profile Section */}
       <section className="settings-section">
         <div className="settings-section-header">
-          <h2 className="settings-section-title">{t('settings.currencyProfile')}</h2>
+          <h2 className="settings-section-title">
+            {t("settings.currencyProfile")}
+          </h2>
           <p className="settings-section-description">
-            {t('settings.currencyProfileDescription')}
+            {t("settings.currencyProfileDescription")}
           </p>
         </div>
 
@@ -137,19 +158,23 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-profile-header">
               <ImagePicker
-                value={profile.imageUrl || ''}
-                onChange={(value) => handleProfileUpdate('imageUrl', value)}
+                initialImageUrl={selectedCurrencyProfile?.imageUrl}
+                onImageChange={(value) =>
+                  handleProfileUpdate("imageUrl", value)
+                }
               />
             </div>
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.profileName')}</div>
+                <div className="settings-item-title">
+                  {t("settings.profileName")}
+                </div>
               </div>
               <input
                 type="text"
                 className="settings-item-value"
-                value={profile.name}
-                onChange={(e) => handleProfileUpdate('name', e.target.value)}
+                value={selectedCurrencyProfile.name}
+                onChange={(e) => handleProfileUpdate("name", e.target.value)}
               />
             </div>
           </div>
@@ -157,11 +182,13 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.currency')}</div>
+                <div className="settings-item-title">
+                  {t("settings.currency")}
+                </div>
               </div>
-              <CurrencySelect
-                value={profile.currency}
-                onChange={(value) => handleProfileUpdate('currency', value)}
+              <CurrencyPicker
+                value={selectedCurrencyProfile.currency}
+                onChange={(value) => handleProfileUpdate("currency", value)}
               />
             </div>
           </div>
@@ -169,14 +196,18 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.monthlySavingsGoal')}</div>
+                <div className="settings-item-title">
+                  {t("settings.monthlySavingsGoal")}
+                </div>
               </div>
-              <NumberInput
+              <AppNumberInput
                 id="monthlySavingsGoal"
-                value={profile.monthlySavingsGoal || 0}
-                onChange={(value) => handleProfileUpdate('monthlySavingsGoal', value)}
-                label=""
-                currency={profile.currency}
+                value={
+                  selectedCurrencyProfile.monthlySavingsGoal?.toString() ?? "0"
+                }
+                onChange={(value) =>
+                  handleProfileUpdate("monthlySavingsGoal", value)
+                }
               />
             </div>
           </div>
@@ -184,14 +215,18 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.yearlySavingsGoal')}</div>
+                <div className="settings-item-title">
+                  {t("settings.yearlySavingsGoal")}
+                </div>
               </div>
-              <NumberInput
+              <AppNumberInput
                 id="yearlySavingsGoal"
-                value={profile.yearlySavingsGoal || 0}
-                onChange={(value) => handleProfileUpdate('yearlySavingsGoal', value)}
-                label=""
-                currency={profile.currency}
+                value={
+                  selectedCurrencyProfile.yearlySavingsGoal?.toString() || "0"
+                }
+                onChange={(value) =>
+                  handleProfileUpdate("yearlySavingsGoal", value)
+                }
               />
             </div>
           </div>
@@ -199,9 +234,11 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.sharedUsers')}</div>
+                <div className="settings-item-title">
+                  {t("settings.sharedUsers")}
+                </div>
                 <div className="settings-item-description">
-                  {t('settings.sharedUsersDescription')}
+                  {t("settings.sharedUsersDescription")}
                 </div>
               </div>
             </div>
@@ -213,7 +250,7 @@ const Settings = () => {
                     <button
                       className="remove-user-button"
                       onClick={() => handleRemoveUser(email)}
-                      aria-label={t('settings.removeUser')}
+                      aria-label={t("settings.removeUser")}
                     >
                       <X size={18} />
                     </button>
@@ -226,12 +263,12 @@ const Settings = () => {
                   className="add-user-input"
                   value={newUserEmail}
                   onChange={(e) => setNewUserEmail(e.target.value)}
-                  placeholder={t('settings.addUserPlaceholder')}
+                  placeholder={t("settings.addUserPlaceholder")}
                   required
                 />
                 <button type="submit" className="add-user-button">
                   <UserPlus size={18} />
-                  {t('settings.addUser')}
+                  {t("settings.addUser")}
                 </button>
               </form>
             </div>
@@ -240,18 +277,20 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.deleteProfile')}</div>
+                <div className="settings-item-title">
+                  {t("settings.deleteProfile")}
+                </div>
                 <div className="settings-item-description">
-                  {t('settings.deleteProfileDescription')}
+                  {t("settings.deleteProfileDescription")}
                 </div>
               </div>
-              <button 
+              <button
                 className="settings-button danger"
                 onClick={handleDeleteProfile}
                 disabled={isProfileDeleting}
               >
                 <Trash2 size={18} />
-                {t('settings.deleteProfileButton')}
+                {t("settings.deleteProfileButton")}
               </button>
             </div>
           </div>
@@ -261,9 +300,11 @@ const Settings = () => {
       {/* Application Settings Section */}
       <section className="settings-section">
         <div className="settings-section-header">
-          <h2 className="settings-section-title">{t('settings.appPreferences')}</h2>
+          <h2 className="settings-section-title">
+            {t("settings.appPreferences")}
+          </h2>
           <p className="settings-section-description">
-            {t('settings.appPreferencesDescription')}
+            {t("settings.appPreferencesDescription")}
           </p>
         </div>
 
@@ -271,9 +312,11 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.language')}</div>
+                <div className="settings-item-title">
+                  {t("settings.language")}
+                </div>
                 <div className="settings-item-description">
-                  {t('settings.languageDescription')}
+                  {t("settings.languageDescription")}
                 </div>
               </div>
               <div className="language-selector">
@@ -293,23 +336,33 @@ const Settings = () => {
           <div className="settings-item">
             <div className="settings-item-header">
               <div className="settings-item-info">
-                <div className="settings-item-title">{t('settings.theme')}</div>
+                <div className="settings-item-title">{t("settings.theme")}</div>
                 <div className="settings-item-description">
-                  {t('settings.themeDescription')}
+                  {t("settings.themeDescription")}
                 </div>
               </div>
               <button
-                className={`theme-toggle-button ${isDarkMode ? 'dark' : 'light'}`}
-                onClick={toggleTheme}
-                aria-label={t('settings.toggleTheme')}
+                className={`theme-toggle-button ${
+                  themeMode === ThemeModeEnum.Dark ? "dark" : "light"
+                }`}
+                onClick={() => {
+                  setThemeMode(
+                    themeMode === ThemeModeEnum.Dark
+                      ? ThemeModeEnum.Light
+                      : ThemeModeEnum.Dark
+                  );
+                }}
+                aria-label={t("settings.toggleTheme")}
               >
-                {isDarkMode ? (
+                {themeMode === ThemeModeEnum.Dark ? (
                   <Sun size={20} className="theme-icon" />
                 ) : (
                   <Moon size={20} className="theme-icon" />
                 )}
                 <span className="theme-label">
-                  {isDarkMode ? t('settings.lightMode') : t('settings.darkMode')}
+                  {ThemeModeEnum.Dark
+                    ? t("settings.lightMode")
+                    : t("settings.darkMode")}
                 </span>
               </button>
             </div>
@@ -320,4 +373,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default SettingsPage;

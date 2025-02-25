@@ -85,6 +85,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
       {/* Header Part */}
       <div className="create-currency-profile-page-header">
         <h1>{t("currencyProfile.createCurrencyProfileTitle")}</h1>
+
         <p>{t("currencyProfile.createDescription")}</p>
       </div>
 
@@ -103,13 +104,13 @@ const CreateCurrencyProfilePage: React.FC = () => {
           >
             {t("currencyProfile.name") + "*"}
           </label>
+
           <AppTextInput
             id="currency-profile-name"
             text={name}
             onTextChange={handleNameChange}
             errorText={nameError}
             maxLength={15}
-            placeholder={t("currencyProfile.namePlaceholder")}
           />
         </div>
 

@@ -2,7 +2,7 @@
   background: var(--color-bg-primary);
   border-radius: 12px;
   padding: 1.25rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-shadow-primary);
   display: flex;
   gap: 1.25rem;
   align-items: center;
@@ -12,7 +12,7 @@
 
 .transaction-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--color-shadow-primary);
 }
 
 .transaction-card-category-image {
@@ -66,19 +66,19 @@
 }
 
 .transaction-card-view-button {
-  color: #64748b;
+  color: var(--color-text-secondary);
 }
 
 .transaction-card-view-button:hover {
-  background-color: #f1f5f9;
-  color: #4caf50;
+  background-color: var(--color-bg-tertiary);
+  color: var(--primary-color);
 }
 
 .transaction-card-delete-button {
-  color: #94a3b8;
+  color: var(--color-text-secondary);
 }
 
 .transaction-card-delete-button:hover {
-  background-color: #fee2e2;
-  color: #ef4444;
+  background-color: var(--color-text-secondary);
+  color: var(--color-error);
 }

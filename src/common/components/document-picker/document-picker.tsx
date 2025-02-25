@@ -125,7 +125,7 @@ const DocumentPicker: React.FC<Props> = ({
       <AppErrorText text={errorText} />
 
       {documents.length > 0 && (
-        <div className="file-list">
+        <div className="document-picker-list">
           {documents.map((documentEither, index) => {
             let docName = "";
             let docSize: number | undefined;
@@ -141,13 +141,15 @@ const DocumentPicker: React.FC<Props> = ({
             );
             return (
               <div key={`${docName}-${index}`} className="file-item">
-                <File size={20} className="file-icon" />
+                <File size={20} className="document-picker-file-icon" />
 
-                <div className="file-info">
-                  <div className="file-name">{docName}</div>
+                <div className="document-picker-file-info">
+                  <div className="document-picker-file-name">{docName}</div>
 
                   {docSize && (
-                    <div className="file-size">{formatFileSize(docSize)}</div>
+                    <div className="document-picker-file-size">
+                      {formatFileSize(docSize)}
+                    </div>
                   )}
                 </div>
 

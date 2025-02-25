@@ -1,7 +1,7 @@
 .app-header {
   height: var(--header-height);
   background-color: var(--color-bg-primary);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-shadow-primary);
   position: fixed;
   top: 0;
   left: 0;
@@ -27,11 +27,11 @@
 }
 
 .app-header-logo-bal {
-  color: #d61c2a;
+  color: var(--color-expense);
 }
 
 .app-header-logo-hom {
-  color: #1da53f;
+  color: var(--color-income);
 }
 
 .app-header-nav {
@@ -46,19 +46,19 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
-  color: #64748b;
+  color: var(--color-text-secondary);
   text-decoration: none;
   border-radius: 0.5rem;
   transition: all 0.2s;
 }
 
 .app-header-nav-link:hover {
-  background-color: #f1f5f9;
-  color: #1da53f;
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-income);
 }
 
 .app-header-nav-link.active {
-  color: #1da53f;
+  color: var(--color-income);
   background-color: var(--color-selected);
 }
 
@@ -71,7 +71,7 @@
   padding: 0.5rem;
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--color-text-secondary);
   cursor: pointer;
 }
 
@@ -81,9 +81,9 @@
   top: var(--header-height);
   left: 0;
   right: 0;
-  background: white;
+  background: var(--color-bg-primary);
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-shadow-primary);
 }
 
 @media (max-width: 768px) {

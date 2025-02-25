@@ -4,8 +4,8 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  background-color: var(--color-bg-secondary);
-  border: 1px solid #e2e8f0;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -24,7 +24,7 @@
 .date-time-picker-value {
   flex: 1;
   font-size: 0.875rem;
-  color: #334155;
+  color: var(--color-text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -32,5 +32,5 @@
 
 .date-time-picker-value:empty::before {
   content: attr(data-placeholder);
-  color: #94a3b8;
+  color: var(--color-text-secondary);
 }

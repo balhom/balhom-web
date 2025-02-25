@@ -45,7 +45,6 @@ export default {
     checkInbox: "Revisa tu bandeja de entrada para un correo de verificación.",
     checkSpam: "Revisa tu carpeta de spam si no ves el correo.",
     name: "Nombre",
-    namePlaceholder: "Nombre del perfil",
     monthlySavingsGoal: "Meta de ahorros mensuales",
     yearlySavingsGoal: "Meta de ahorros anuales",
     create: "Crear",
@@ -80,7 +79,6 @@ export default {
     createDescription:
       "Crea un nuevo perfil de moneda para gestionar tus ahorros",
     name: "Nombre",
-    namePlaceholder: "Nombre del perfil",
     initialBalance: "Balance inicial",
     initialDate: "Fecha inicial",
     monthlySavingsGoal: "Meta de ahorros mensuales",
