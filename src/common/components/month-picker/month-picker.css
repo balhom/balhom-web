@@ -1,4 +1,5 @@
 .month-picker {
+  color: var(--color-text-primary);
   padding: 0.5rem;
   border: 1px solid var(--color-border);
   border-radius: 6px;

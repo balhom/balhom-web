@@ -50,7 +50,9 @@ const TransactionCategoryPicker: React.FC<Props> = ({
           className="transaction-category-picker-trigger-image"
         />
 
-        {formatTransactionCategory(value, t)}
+        <span className="transaction-category-picker-option-text">
+          {formatTransactionCategory(value, t)}
+        </span>
 
         <ChevronDown
           size={20}
