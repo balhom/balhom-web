@@ -63,9 +63,16 @@ const DailyTransactionsChart: React.FC = () => {
             data={transactionStatisticsState.dailyStatistics.points}
             margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="day" tickFormatter={(value) => `${value}`} />
-            <YAxis />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="var(--color-text-secondary)"
+            />
+            <XAxis
+              dataKey="day"
+              tickFormatter={(value) => `${value}`}
+              stroke="var(--color-text-secondary)"
+            />
+            <YAxis stroke="var(--color-text-secondary)" />
             <Tooltip
               formatter={(value: number) =>
                 formatCurrency(value, selectedCurrencyProfile!.currency)

@@ -119,7 +119,7 @@ const TransactionsCategoryChart: React.FC<Props> = ({
                     x="-10"
                     y="4"
                     textAnchor="start"
-                    fill="#666"
+                    fill="var(--color-text-secondary)"
                     className="transactions-category-chart-label"
                   >
                     {formatTransactionCategory(payload.value, t)}

@@ -72,5 +72,5 @@
 }
 
 .app-delete-dialog-button.confirm:hover {
-  background: #dc2626;
+  background: var(--color-error);
 }

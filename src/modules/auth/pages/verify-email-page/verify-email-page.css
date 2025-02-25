@@ -30,7 +30,7 @@
 
 .verify-email-page-spam-notice {
   margin-top: 0.75rem;
-  color: #666;
+  color: var(--color-text-secondary);
   font-style: italic;
 }
 

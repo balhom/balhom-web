@@ -17,7 +17,7 @@
 }
 
 .date-time-picker-input:active {
-  background-color: #f0f7f0;
+  background-color: var(--color-bg-secondary);
   transform: scale(0.99);
 }
 

@@ -12,6 +12,9 @@
   --color-bg-secondary: #f8fafc;
   --color-bg-tertiary: #f1f5f9;
 
+  --color-form-container-primary: #f5f7fa;
+  --color-form-container-secondary: #c3cfe2;
+
   --color-text-primary: #333333;
   --color-text-secondary: #64748b;
   --color-text-tertiary: #ffffff;
@@ -29,6 +32,9 @@
 
   --color-income: #1da53f;
   --color-expense: #d6471c;
+  
+  --color-saving: #9C27B0;
+  --color-saving-goal: #FFB74D;
 }
 
 /* Dark Theme Variables */

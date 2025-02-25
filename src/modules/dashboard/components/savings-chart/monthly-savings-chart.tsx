@@ -74,12 +74,16 @@ const MonthlySavingsChart: React.FC = () => {
             data={savingStatisticsState.monthlyStatistics.points}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="var(--color-text-secondary)"
+            />
             <XAxis
               dataKey="month"
               tickFormatter={(value: number) => formatMonth(value, t)}
+              stroke="var(--color-text-secondary)"
             />
-            <YAxis />
+            <YAxis stroke="var(--color-text-secondary)" />
             <Tooltip
               formatter={(value: number) =>
                 formatCurrency(value, selectedCurrencyProfile!.currency)
@@ -89,8 +93,8 @@ const MonthlySavingsChart: React.FC = () => {
             <Area
               type="monotone"
               dataKey="goal"
-              stroke="#FFB74D"
-              fill="#FFB74D"
+              stroke="var(--color-saving-goal)"
+              fill="var(--color-saving-goal)"
               fillOpacity={0.2}
               strokeWidth={2}
               name={t("dashboard.expectedSavings")}
@@ -98,8 +102,8 @@ const MonthlySavingsChart: React.FC = () => {
             <Area
               type="monotone"
               dataKey="saving"
-              stroke="#9C27B0"
-              fill="#9C27B0"
+              stroke="var(--color-saving)"
+              fill="var(--color-saving)"
               fillOpacity={0.2}
               strokeWidth={2}
               name={t("dashboard.actualSavings")}

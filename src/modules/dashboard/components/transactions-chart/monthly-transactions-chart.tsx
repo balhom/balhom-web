@@ -19,7 +19,10 @@ import {
 import { formatCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import { YearPicker } from "../../../../common/components/year-picker/year-picker";
-import { formatMonth, getYearsBetweenDates } from "../../../../common/utils/date-utils";
+import {
+  formatMonth,
+  getYearsBetweenDates,
+} from "../../../../common/utils/date-utils";
 
 const MonthlyTransactionsChart: React.FC = () => {
   const { t } = useTranslation();
@@ -80,12 +83,16 @@ const MonthlyTransactionsChart: React.FC = () => {
             data={transactionStatisticsState.monthlyStatistics.points}
             margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="var(--color-text-secondary)"
+            />
             <XAxis
               dataKey="month"
               tickFormatter={(value: number) => formatMonth(value, t)}
+              stroke="var(--color-text-secondary)"
             />
-            <YAxis />
+            <YAxis stroke="var(--color-text-secondary)" />
             <Tooltip
               formatter={(value: number) =>
                 formatCurrency(value, selectedCurrencyProfile!.currency)
