@@ -65,7 +65,9 @@ const TransactionsCategoryChart: React.FC<Props> = ({
               {formatTransactionCategory(data.category.code, t)}
             </span>
           </div>
-          <div className={`transactions-category-chart-tooltip-amount ${type.toLowerCase()}`}>
+          <div
+            className={`transactions-category-chart-tooltip-amount ${type.toLowerCase()}`}
+          >
             {formatCurrency(data.value, selectedCurrencyProfile!.currency)}
           </div>
         </div>
@@ -88,10 +90,15 @@ const TransactionsCategoryChart: React.FC<Props> = ({
             layout="vertical"
             margin={{ top: 10, right: 20, left: 34, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              horizontal={false}
+              stroke="var(--color-text-secondary)"
+            />
             <XAxis
               type="number"
               dataKey="value"
+              stroke="var(--color-text-secondary)"
               tickFormatter={(value) =>
                 formatCurrency(value, selectedCurrencyProfile!.currency)
               }
@@ -99,6 +106,7 @@ const TransactionsCategoryChart: React.FC<Props> = ({
             <YAxis
               type="category"
               dataKey="category.code"
+              stroke="var(--color-text-secondary)"
               tickLine={false}
               tickMargin={45}
               tick={({ x, y, payload }) => (

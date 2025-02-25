@@ -11,7 +11,12 @@ export function ThemeModeProvider({ children }: { children: React.ReactNode }) {
     if (savedThemeMode == ThemeModeEnum.Light) {
       return ThemeModeEnum.Light;
     } else if (savedThemeMode == ThemeModeEnum.Dark) {
-      return ThemeModeEnum.Light;
+      return ThemeModeEnum.Dark;
+    }
+
+    const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (darkThemeMq.matches) {
+      return ThemeModeEnum.Dark;
     }
 
     return ThemeModeEnum.Light;
@@ -22,8 +27,6 @@ export function ThemeModeProvider({ children }: { children: React.ReactNode }) {
       "dark",
       themeMode == ThemeModeEnum.Dark
     );
-
-    localStorage.setItem("theme", themeMode);
   }, [themeMode]);
 
   return (
