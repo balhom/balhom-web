@@ -30,7 +30,7 @@ export function formatMonth(
     case 12:
       return t("months.dec");
     default:
-      return t("months.jan");
+      return month.toString();
   }
 }
 
@@ -52,19 +52,19 @@ export function getDaysInMonth(month: number, year: number): number[] {
 }
 
 export const formatDate = (date: Date | null, showTime: boolean) => {
-  if (!date) return '';
+  if (!date) return "";
   if (!showTime) {
-    return date.toLocaleString('default', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
+    return date.toLocaleString("default", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
     });
   }
-  return date.toLocaleString('default', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric'
+  return date.toLocaleString("default", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
   });
 };

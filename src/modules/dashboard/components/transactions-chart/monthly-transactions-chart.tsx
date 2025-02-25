@@ -23,6 +23,7 @@ import {
   formatMonth,
   getYearsBetweenDates,
 } from "../../../../common/utils/date-utils";
+import { dashboardChartTooltip } from "../dashboard-chart-tooltip/dashboard-chart-tooltip";
 
 const MonthlyTransactionsChart: React.FC = () => {
   const { t } = useTranslation();
@@ -94,10 +95,11 @@ const MonthlyTransactionsChart: React.FC = () => {
             />
             <YAxis stroke="var(--color-text-secondary)" />
             <Tooltip
-              formatter={(value: number) =>
-                formatCurrency(value, selectedCurrencyProfile!.currency)
-              }
-              labelFormatter={(label) => formatMonth(label, t)}
+              content={dashboardChartTooltip({
+                formatter: (value: number) =>
+                  formatCurrency(value, selectedCurrencyProfile!.currency),
+                labelFormatter: (label) => formatMonth(label, t),
+              })}
             />
             <Area
               type="monotone"

@@ -16,6 +16,7 @@ import { fetchDailyTransactionStatisticsAsync } from "../../states/redux/thunks/
 import { MonthPicker } from "../../../../common/components/month-picker/month-picker";
 import { formatCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
+import { dashboardChartTooltip } from "../dashboard-chart-tooltip/dashboard-chart-tooltip";
 
 const DailyTransactionsChart: React.FC = () => {
   const { t } = useTranslation();
@@ -74,9 +75,11 @@ const DailyTransactionsChart: React.FC = () => {
             />
             <YAxis stroke="var(--color-text-secondary)" />
             <Tooltip
-              formatter={(value: number) =>
-                formatCurrency(value, selectedCurrencyProfile!.currency)
-              }
+              content={dashboardChartTooltip({
+                formatter: (value: number) =>
+                  formatCurrency(value, selectedCurrencyProfile!.currency),
+                labelFormatter: (label) => label,
+              })}
             />
             <Area
               type="monotone"

@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchYearlySavingStatisticsAsync } from "../../states/redux/thunks/saving-statistics-thunks";
 import { formatCurrency } from "../../../currency-profile/utils";
+import { dashboardChartTooltip } from "../dashboard-chart-tooltip/dashboard-chart-tooltip";
 
 const YearlySavingsChart: React.FC = () => {
   const { t } = useTranslation();
@@ -51,9 +52,11 @@ const YearlySavingsChart: React.FC = () => {
             <XAxis dataKey="year" stroke="var(--color-text-secondary)" />
             <YAxis stroke="var(--color-text-secondary)" />
             <Tooltip
-              formatter={(value: number) =>
-                formatCurrency(value, selectedCurrencyProfile!.currency)
-              }
+              content={dashboardChartTooltip({
+                formatter: (value) =>
+                  formatCurrency(value, selectedCurrencyProfile!.currency),
+                labelFormatter: (label) => label,
+              })}
             />
             <Area
               type="monotone"
