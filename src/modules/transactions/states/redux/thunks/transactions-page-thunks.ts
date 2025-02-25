@@ -13,6 +13,7 @@ export interface TransactionPageFetchAsyncProps {
   currencyProfile: CurrencyProfileEntity;
   month: number;
   year: number;
+  search: string;
   filters: TransactionFiltersEntity;
   sort: TransactionSortEnum;
   pageNum: number;
@@ -24,12 +25,13 @@ export const fetchIncomesPageAsync = createAsyncThunk<
   TransactionPageFetchAsyncProps
 >(
   "transactions/fetchIncomesPage",
-  async ({ currencyProfile, month, year, filters, sort, pageNum }) => {
+  async ({ currencyProfile, month, year, search, filters, sort, pageNum }) => {
     return await getTransactionsPage(
       currencyProfile,
       TransactionTypeEnum.Income,
       month,
       year,
+      search,
       filters,
       sort,
       pageNum
@@ -43,12 +45,13 @@ export const fetchExpensesPageAsync = createAsyncThunk<
   TransactionPageFetchAsyncProps
 >(
   "transactions/fetchExpensesPage",
-  async ({ currencyProfile, month, year, filters, sort, pageNum }) => {
+  async ({ currencyProfile, month, year, search, filters, sort, pageNum }) => {
     return await getTransactionsPage(
       currencyProfile,
       TransactionTypeEnum.Expense,
       month,
       year,
+      search,
       filters,
       sort,
       pageNum

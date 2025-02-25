@@ -17,13 +17,14 @@ export interface TransactionRepository {
     type: TransactionTypeEnum,
     month: number,
     year: number,
+    search: string,
     filters: TransactionFiltersEntity,
     sort: TransactionSortEnum,
     pageNum: number
   ) => Promise<Either<AppError, PageEntity<TransactionEntity>>>;
 
   get: (
-    id: String,
+    id: string,
     type: TransactionTypeEnum,
     currencyProfile: CurrencyProfileEntity
   ) => Promise<Either<AppError, TransactionEntity>>;
@@ -33,7 +34,7 @@ export interface TransactionRepository {
   update: (props: TransactionUpdateProps) => Promise<Either<AppError, void>>;
 
   delete: (
-    id: String,
+    id: string,
     type: TransactionTypeEnum,
     currencyProfile: CurrencyProfileEntity
   ) => Promise<Either<AppError, void>>;
@@ -45,6 +46,7 @@ export const transactionRepository = (): TransactionRepository => ({
     type,
     month,
     year,
+    search: string,
     filters,
     sort,
     pageNum
@@ -54,7 +56,7 @@ export const transactionRepository = (): TransactionRepository => ({
     // TODO remove and do api call
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    console.log(month, year, filters, sort);
+    console.log(month, year, search, filters, sort);
     if (type === TransactionTypeEnum.Income) {
       results = mockIncomes;
     } else {

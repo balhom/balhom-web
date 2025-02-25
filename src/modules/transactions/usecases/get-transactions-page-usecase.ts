@@ -13,6 +13,7 @@ export const getTransactionsPage = async (
   type: TransactionTypeEnum,
   month: number,
   year: number,
+  search: string,
   filters: TransactionFiltersEntity,
   sort: TransactionSortEnum,
   pageNum: number
@@ -22,6 +23,7 @@ export const getTransactionsPage = async (
     type,
     month,
     year,
+    search,
     filters,
     sort,
     pageNum

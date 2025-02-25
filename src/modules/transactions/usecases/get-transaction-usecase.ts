@@ -6,7 +6,7 @@ import { TransactionTypeEnum } from "../data/enums/transaction-type-enum";
 import { transactionRepositoryInstance } from "../repositories/repository-instances";
 
 export const getTransaction = async (
-  id: String,
+  id: string,
   type: TransactionTypeEnum,
   currencyProfile: CurrencyProfileEntity
 ): Promise<Either<AppError, TransactionEntity>> => {

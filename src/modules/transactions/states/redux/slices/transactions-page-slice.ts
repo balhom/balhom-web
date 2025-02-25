@@ -12,6 +12,7 @@ import { TransactionSortEnum } from "../../../data/enums/transaction-sort-enum";
 import { Either } from "../../../../../common/data/either";
 
 export interface TransactionPageState<T> {
+  search: string;
   filter: TransactionFiltersEntity;
   sortValue: TransactionSortEnum;
   page: PageEntity<T>;
@@ -29,6 +30,7 @@ const defaultPage = {
 };
 
 const initialState: TransactionPageState<TransactionEntity> = {
+  search: "",
   filter: {},
   sortValue: TransactionSortEnum.DateDesc,
   page: defaultPage,
@@ -70,6 +72,7 @@ const pendingFetchTransactionsPage = (
     state.page.pageNum = args.pageNum;
   }
   state.isLoading = true;
+  state.search = args.search;
   state.filter = args.filters;
   state.sortValue = args.sort;
   state.error = undefined;

@@ -11,6 +11,12 @@
   gap: 1rem;
 }
 
+.transaction-list-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 .transaction-list-cards {
   display: grid;
   gap: 1rem;
@@ -21,4 +27,15 @@
 .transaction-list-footer {
   margin-top: auto;
   border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 640px) {
+  .transaction-list-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .transaction-list-actions {
+    justify-content: space-between;
+  }
 }

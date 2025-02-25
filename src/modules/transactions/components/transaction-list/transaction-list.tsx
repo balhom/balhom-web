@@ -13,12 +13,15 @@ import {
 import TransactionFilterButton from "../transaction-filter-button/transaction-filter-button";
 import TransactionFilterDialog from "../transaction-filter-dialog/transaction-filter-dialog";
 import TransactionsSortPicker from "../transactions-sort-picker/transactions-sort-picker";
+import SearchTextInput from "../../../../common/components/search-text-input/search-text-input";
 
 interface Props {
   type: TransactionTypeEnum;
   selectedMonth: number;
   selectedYear: number;
 }
+
+let searchTimer: number | undefined;
 
 const TransactionList: React.FC<Props> = ({
   type,
@@ -27,12 +30,17 @@ const TransactionList: React.FC<Props> = ({
 }: Props) => {
   const { selectedCurrencyProfile } = useCurrencyProfiles();
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const transactionsPageState = useSelector((state: AppState) =>
     type === TransactionTypeEnum.Income ? state.incomesPage : state.expensesPage
   );
   const dispatch: AppDispatch = useDispatch();
 
-  const dispatchFecthTransactionsPageAsync = (pageNum: number) => {
+  const dispatchFecthTransactionsPageAsync = (
+    pageNum: number,
+    search: string
+  ) => {
     if (selectedCurrencyProfile) {
       if (type === TransactionTypeEnum.Income) {
         dispatch(
@@ -40,6 +48,7 @@ const TransactionList: React.FC<Props> = ({
             currencyProfile: selectedCurrencyProfile,
             month: selectedMonth,
             year: selectedYear,
+            search: search,
             filters: transactionsPageState.filter,
             sort: transactionsPageState.sortValue,
             pageNum: pageNum,
@@ -51,6 +60,7 @@ const TransactionList: React.FC<Props> = ({
             currencyProfile: selectedCurrencyProfile,
             month: selectedMonth,
             year: selectedYear,
+            search: search,
             filters: transactionsPageState.filter,
             sort: transactionsPageState.sortValue,
             pageNum: pageNum,
@@ -61,9 +71,28 @@ const TransactionList: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    dispatchFecthTransactionsPageAsync(transactionsPageState.page.pageNum);
+    dispatchFecthTransactionsPageAsync(
+      transactionsPageState.page.pageNum,
+      searchTerm
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCurrencyProfile, selectedMonth, selectedYear, type]);
+
+  useEffect(() => {
+    console.log(transactionsPageState.search, searchTerm)
+    if (transactionsPageState.search !== searchTerm) {
+      clearTimeout(searchTimer);
+
+      searchTimer = setTimeout(() => {
+        dispatchFecthTransactionsPageAsync(
+          transactionsPageState.page.pageNum,
+          searchTerm
+        );
+      }, 1000);
+    }
+    return () => clearTimeout(searchTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -86,17 +115,25 @@ const TransactionList: React.FC<Props> = ({
   return (
     <div className="transaction-list">
       <div className="transaction-list-header">
-        <TransactionFilterButton
-          type={type}
-          isOpen={isFilterOpen}
-          onClick={() => setIsFilterOpen(!isFilterOpen)}
-          activeFiltersCount={getActiveFiltersCount()}
+        <SearchTextInput
+          text={searchTerm}
+          onTextChange={(newText) => setSearchTerm(newText)}
         />
-        <TransactionsSortPicker
-          type={type}
-          selectedMonth={selectedMonth}
-          selectedYear={selectedYear}
-        />
+
+        <div className="transaction-list-actions">
+          <TransactionFilterButton
+            type={type}
+            isOpen={isFilterOpen}
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            activeFiltersCount={getActiveFiltersCount()}
+          />
+
+          <TransactionsSortPicker
+            type={type}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+          />
+        </div>
       </div>
 
       <TransactionFilterDialog
@@ -123,7 +160,7 @@ const TransactionList: React.FC<Props> = ({
           type={type}
           page={transactionsPageState.page}
           onPageChange={(newPageNum) => {
-            dispatchFecthTransactionsPageAsync(newPageNum);
+            dispatchFecthTransactionsPageAsync(newPageNum, searchTerm);
           }}
         />
       </div>

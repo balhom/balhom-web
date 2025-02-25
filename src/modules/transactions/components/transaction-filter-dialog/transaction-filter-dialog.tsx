@@ -63,6 +63,7 @@ const TransactionFilterDialog: React.FC<Props> = ({
             month: selectedMonth,
             year: selectedYear,
             filters: filters,
+            search: transactionsPageState.search,
             sort: transactionsPageState.sortValue,
             pageNum: transactionsPageState.page.pageNum,
           })
@@ -74,6 +75,7 @@ const TransactionFilterDialog: React.FC<Props> = ({
             month: selectedMonth,
             year: selectedYear,
             filters: filters,
+            search: transactionsPageState.search,
             sort: transactionsPageState.sortValue,
             pageNum: transactionsPageState.page.pageNum,
           })
@@ -159,7 +161,7 @@ const TransactionFilterDialog: React.FC<Props> = ({
           >
             {t("common.apply")}
           </button>
-          
+
           <button
             className="transaction-filter-dialog-clear-button"
             onClick={() => {

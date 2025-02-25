@@ -61,6 +61,7 @@ const TransactionCard: React.FC<Props> = ({
             currencyProfile: selectedCurrencyProfile,
             month: selectedMonth,
             year: selectedYear,
+            search: transactionsPageState.search,
             filters: transactionsPageState.filter,
             sort: transactionsPageState.sortValue,
             pageNum: transactionsPageState.page.pageNum,
@@ -73,6 +74,7 @@ const TransactionCard: React.FC<Props> = ({
             currencyProfile: selectedCurrencyProfile,
             month: selectedMonth,
             year: selectedYear,
+            search: transactionsPageState.search,
             filters: transactionsPageState.filter,
             sort: transactionsPageState.sortValue,
             pageNum: transactionsPageState.page.pageNum,
@@ -82,9 +84,17 @@ const TransactionCard: React.FC<Props> = ({
     }
   };
 
+  if (!selectedCurrencyProfile) {
+    return null;
+  }
+
   const handleDelete = () => {
     // Call usecase
-    deleteTransaction(transaction.id, transaction.type);
+    deleteTransaction(
+      transaction.id,
+      transaction.type,
+      selectedCurrencyProfile
+    );
 
     // Remove transaction from UI
     dispatchDeleteAndFecthTransactionsPageAsync();
