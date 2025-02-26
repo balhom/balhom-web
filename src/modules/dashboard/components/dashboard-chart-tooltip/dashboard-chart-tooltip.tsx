@@ -22,6 +22,7 @@ export function dashboardChartTooltip({ labelFormatter, formatter }: Props) {
               (pld: any) => {
                 return (
                   <li
+                    key={pld.name + "-" + pld.value}
                     className="recharts-tooltip-item"
                     style={{ color: pld.color, display: "block" }}
                   >

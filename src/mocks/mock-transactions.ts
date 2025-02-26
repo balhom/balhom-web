@@ -20,13 +20,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -47,13 +45,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -74,13 +70,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -101,13 +95,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -128,13 +120,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -155,13 +145,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -182,13 +170,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -209,13 +195,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -236,13 +220,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -263,13 +245,11 @@ export const mockIncomes: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -293,13 +273,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -320,13 +298,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -347,13 +323,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -374,13 +348,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -401,13 +373,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -428,13 +398,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -455,13 +423,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -482,13 +448,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -509,13 +473,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],
@@ -536,13 +498,11 @@ export const mockExpenses: TransactionEntity[] = [
       {
         id: "1",
         name: "Invoice_March_2024.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
       {
         id: "2",
         name: "Receipt_123456.pdf",
-        url: "http://localhost:9080/Invoice_March_2024.pdf",
         createdAt: new Date(2024, 3, 15),
       },
     ],

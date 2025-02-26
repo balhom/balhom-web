@@ -18,6 +18,7 @@ import {
 } from "../../routes";
 import IconButton from "../../../../common/components/icon-button/icon-button";
 import { formatDate } from "../../../../common/utils/date-utils";
+import { getTransactionDocumentUrl } from "../../usecases/get-transaction-ducment-url-usecase";
 
 interface Props {
   transactionType: TransactionTypeEnum;
@@ -50,6 +51,7 @@ const TransactionDetailsPage: React.FC<Props> = ({
         }
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!transactionState || !selectedCurrencyProfile || !id) {
@@ -151,7 +153,12 @@ const TransactionDetailsPage: React.FC<Props> = ({
                   key={doc.id}
                   className="transaction-details-page-attachment-item"
                   onClick={() => {
-                    window.open(doc.url);
+                    getTransactionDocumentUrl(doc.id).then((res) => {
+                      res.fold(
+                        () => undefined,
+                        (url) => window.open(url)
+                      );
+                    });
                   }}
                 >
                   <FileText
