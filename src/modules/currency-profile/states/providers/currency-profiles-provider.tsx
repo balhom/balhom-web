@@ -10,6 +10,9 @@ import { getSelectedCurrencyProfile } from "../../usecases/get-selected-currency
 import { getCurrencyProfiles } from "../../usecases/get-currency-profiles-usecase";
 import { CREATE_CURRENCY_PROFILE_ROUTE_PATH } from "../../routes";
 import { Navigate } from "react-router-dom";
+import { listenCurrencyProfileChanges } from "../../usecases/listen-currency-profile-changes-usecase";
+import { StreamChangeTypeEnum } from "../../../../common/data/enums/stream-change-type-enum";
+import { getCurrencyProfile } from "../../usecases/get-currency-profile-usecase";
 
 export const CurrencyProfilesProvider = ({
   children,
@@ -42,6 +45,45 @@ export const CurrencyProfilesProvider = ({
           );
 
           setCurrencyProfiles(currencyProfiles);
+
+          // Currency profile changes event listener
+          listenCurrencyProfileChanges((event) => {
+            const newCurrencyProfiles = [...currencyProfiles];
+
+            // Create event handler
+            if (event.action === StreamChangeTypeEnum.Create) {
+              getCurrencyProfile(event.id).then((currencyProfileEither) =>
+                currencyProfileEither.fold(
+                  () => {},
+                  (newCurrencyProfile) => {
+                    newCurrencyProfiles.push(newCurrencyProfile);
+                    setCurrencyProfiles(newCurrencyProfiles);
+                  }
+                )
+              );
+            }
+            // Update event handler
+            else if (event.action === StreamChangeTypeEnum.Update) {
+              setCurrencyProfiles(
+                newCurrencyProfiles.map((oldCurrencyProfile) => {
+                  if (oldCurrencyProfile.id === event.id) {
+                    oldCurrencyProfile.balance = event.balance;
+                    oldCurrencyProfile.monthlySavingsGoal = event.monthlyGoal;
+                    oldCurrencyProfile.yearlySavingsGoal = event.yearlyGoal;
+                  }
+                  return oldCurrencyProfile;
+                })
+              );
+            }
+            // Delete event handler
+            else if (event.action === StreamChangeTypeEnum.Delete) {
+              setCurrencyProfiles(
+                newCurrencyProfiles.filter(
+                  (oldCurrencyProfile) => oldCurrencyProfile.id !== event.id
+                )
+              );
+            }
+          });
 
           setIsLoading(false);
           return Either.right(null);
