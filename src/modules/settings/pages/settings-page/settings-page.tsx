@@ -69,6 +69,7 @@ const SettingsPage: React.FC = () => {
       <section className="settings-section">
         <div className="settings-section-header">
           <h2 className="settings-section-title">{t("settings.account")}</h2>
+          
           <p className="settings-section-description">
             {t("settings.accountDescription")}
           </p>

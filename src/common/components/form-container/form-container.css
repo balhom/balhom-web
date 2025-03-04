@@ -12,7 +12,7 @@
 }
 
 .form-container-card {
-  background-color: var(--color-bg-primary);
+  background-color: var(--color-bg-secondary);
   border-color: var(--color-border);
   padding: 2rem;
   border-radius: 12px;

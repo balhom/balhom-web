@@ -11,7 +11,7 @@
 }
 
 .transaction-details-page-card {
-  background: var(--color-bg-primary);
+  background: var(--color-bg-secondary);
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 2px 4px var(--color-shadow-primary);
@@ -43,9 +43,7 @@
 }
 
 .transaction-details-page-info-group {
-  padding: 1.5rem;
-  background: var(--color-bg-secondary);
-  border-radius: 8px;
+  padding: 0.7rem;
 }
 
 .transaction-details-page-info-label {

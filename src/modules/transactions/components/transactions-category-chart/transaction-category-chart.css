@@ -1,5 +1,5 @@
 .transactions-category-chart {
-  background: var(--color-bg-primary);
+  background: var(--color-bg-secondary);
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 2px 4px var(--color-shadow-primary);

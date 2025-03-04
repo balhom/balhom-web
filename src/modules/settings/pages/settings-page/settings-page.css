@@ -5,7 +5,7 @@
 }
 
 .settings-section {
-  background: var(--color-bg-primary);
+  background: var(--color-bg-secondary);
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 2px 4px var(--color-shadow-primary);
@@ -19,7 +19,7 @@
 .settings-section-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #1a2027;
+  color: var(--color-text-primary);
   margin-bottom: 0.5rem;
 }
 

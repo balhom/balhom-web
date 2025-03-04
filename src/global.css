@@ -40,8 +40,11 @@
 /* Dark Theme Variables */
 :root.dark {
   --color-bg-primary: #1f2937;
-  --color-bg-secondary: #374151;
+  --color-bg-secondary: #323b4a;
   --color-bg-tertiary: #4b5563;
+
+  --color-form-container-primary: #222121;
+  --color-form-container-secondary: #2a2d32;
 
   --color-text-primary: #e5e7eb;
   --color-text-secondary: #9ca3af;
