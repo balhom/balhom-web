@@ -1,4 +1,4 @@
-class Session {
+class AuthSession {
   private _accessToken: string | null = null;
 
   public get accessToken(): string | null {
@@ -14,6 +14,4 @@ class Session {
   }
 }
 
-export const sessionInstance = new Session();
-
-// TODO use listener, when auth state changes then change sessionInstance.accessToken
+export const authSessionInstance = new AuthSession();
