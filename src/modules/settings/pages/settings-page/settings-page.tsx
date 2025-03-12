@@ -17,6 +17,7 @@ import { useTheme } from "../../../../common/states/contexts/theme-mode-context"
 import CurrencyPicker from "../../../currency-profile/components/currency-picker/currency-picker";
 import AppNumberInput from "../../../../common/components/app-number-input/app-number-input";
 import { ThemeModeEnum } from "../../../../common/data/enums/theme-mode-enum";
+import { keycloakInstance } from "../../../../common/config/keycloak";
 
 const SettingsPage: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -69,7 +70,7 @@ const SettingsPage: React.FC = () => {
       <section className="settings-section">
         <div className="settings-section-header">
           <h2 className="settings-section-title">{t("settings.account")}</h2>
-          
+
           <p className="settings-section-description">
             {t("settings.accountDescription")}
           </p>
@@ -98,7 +99,14 @@ const SettingsPage: React.FC = () => {
                   {t("settings.passwordDescription")}
                 </div>
               </div>
-              <button className="settings-button secondary">
+              <button
+                className="settings-button secondary"
+                onClick={() => {
+                  const changePasswordUrl = `${keycloakInstance.authServerUrl}/realms/${keycloakInstance.realm}/login-actions/required-action?execution=UPDATE_PASSWORD&client_id=${keycloakInstance.clientId}`;
+
+                  window.location.href = changePasswordUrl;
+                }}
+              >
                 <KeyRound size={18} />
                 {t("settings.changePassword")}
               </button>
@@ -115,7 +123,12 @@ const SettingsPage: React.FC = () => {
                   {t("settings.logoutDescription")}
                 </div>
               </div>
-              <button className="settings-button secondary">
+              <button
+                className="settings-button secondary"
+                onClick={() => {
+                  keycloakInstance.logout();
+                }}
+              >
                 <LogOut size={18} />
                 {t("settings.logoutButton")}
               </button>
@@ -134,7 +147,9 @@ const SettingsPage: React.FC = () => {
               </div>
               <button
                 className="settings-button danger"
-                onClick={() => setShowDeleteConfirm(true)}
+                onClick={() => {
+                  // TODO: call api
+                }}
               >
                 <Trash2 size={18} />
                 {t("settings.deleteAccountButton")}

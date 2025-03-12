@@ -23,6 +23,8 @@ export function ThemeModeProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
+    localStorage.setItem(THEME_MODE_KEY, themeMode);
+
     document.documentElement.classList.toggle(
       "dark",
       themeMode == ThemeModeEnum.Dark
