@@ -17,10 +17,12 @@ import { useTheme } from "../../../../common/states/contexts/theme-mode-context"
 import CurrencyPicker from "../../../currency-profile/components/currency-picker/currency-picker";
 import AppNumberInput from "../../../../common/components/app-number-input/app-number-input";
 import { ThemeModeEnum } from "../../../../common/data/enums/theme-mode-enum";
-import { keycloakInstance } from "../../../../common/config/keycloak";
+import { useOidc } from "../../../../common/config/oidc";
 
 const SettingsPage: React.FC = () => {
   const { t, i18n } = useTranslation();
+
+  const oidc = useOidc();
 
   const { selectedCurrencyProfile } = useCurrencyProfiles();
 
@@ -102,9 +104,11 @@ const SettingsPage: React.FC = () => {
               <button
                 className="settings-button secondary"
                 onClick={() => {
-                  const changePasswordUrl = `${keycloakInstance.authServerUrl}/realms/${keycloakInstance.realm}/login-actions/required-action?execution=UPDATE_PASSWORD&client_id=${keycloakInstance.clientId}`;
-
-                  window.location.href = changePasswordUrl;
+                  oidc.goToAuthServer?.({
+                    extraQueryParams: {
+                      kc_action: "UPDATE_PASSWORD",
+                    },
+                  });
                 }}
               >
                 <KeyRound size={18} />
@@ -126,7 +130,9 @@ const SettingsPage: React.FC = () => {
               <button
                 className="settings-button secondary"
                 onClick={() => {
-                  keycloakInstance.logout();
+                  oidc.logout?.({
+                    redirectTo: "current page",
+                  });
                 }}
               >
                 <LogOut size={18} />
