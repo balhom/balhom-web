@@ -1,0 +1,22 @@
+.theme-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.theme-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.theme-button-icon {
+  transition: transform 0.2s;
+}
