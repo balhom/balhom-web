@@ -1,21 +1,21 @@
 .language-picker {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border);
   border-radius: 6px;
 }
 
 .language-picker-icon {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
 }
 
 .language-picker select {
   color: var(--color-text-primary);
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   appearance: none;

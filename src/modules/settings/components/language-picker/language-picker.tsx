@@ -11,7 +11,7 @@ const LanguagePicker: React.FC = () => {
 
   return (
     <div className="language-picker">
-      <Languages size={20} className="language-picker-icon" />
+      <Languages size={22} className="language-picker-icon" />
 
       <select
         value={i18n.language}
