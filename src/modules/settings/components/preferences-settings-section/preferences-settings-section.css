@@ -1,0 +1,61 @@
+.preferences-settings-section {
+  background: var(--color-bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px var(--color-shadow-primary);
+  margin-bottom: 2rem;
+}
+
+.preferences-settings-section-header {
+  margin-bottom: 2rem;
+}
+
+.preferences-settings-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.preferences-settings-section-description {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.preferences-settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.preferences-settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.7rem;
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  display: flex;
+  gap: 1rem;
+}
+
+.preferences-settings-item-title {
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.preferences-settings-item-description {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 640px) {
+  .preferences-settings-section {
+    padding: 1.5rem;
+  }
+
+  .preferences-settings-item {
+    flex-direction: column;
+  }
+}

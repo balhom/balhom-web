@@ -24,12 +24,14 @@ const ThemeButton: React.FC = () => {
       aria-label={t("settings.toggleTheme")}
     >
       {themeMode === ThemeModeEnum.Dark ? (
-        <Sun size={20} />
-      ) : (
         <Moon size={20} />
+      ) : (
+        <Sun size={20} />
       )}
       <span className="theme-label">
-        {ThemeModeEnum.Dark ? t("settings.lightMode") : t("settings.darkMode")}
+        {themeMode === ThemeModeEnum.Dark
+          ? t("settings.darkMode")
+          : t("settings.lightMode")}
       </span>
     </button>
   );

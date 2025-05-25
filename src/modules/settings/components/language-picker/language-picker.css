@@ -44,3 +44,10 @@
   border-top: 5px solid var(--color-text-secondary);
   pointer-events: none;
 }
+
+@media (max-width: 640px) {
+  .language-picker {
+    width: 100%;
+    justify-content: center;
+  }
+}

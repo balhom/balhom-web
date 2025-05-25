@@ -67,6 +67,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
         initialDate: initialDate,
         monthlySavingsGoal: Number(monthlySavingsGoal),
         yearlySavingsGoal: Number(yearlySavingsGoal),
+        ownerId: "",
       };
 
       // Update states

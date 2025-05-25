@@ -114,6 +114,9 @@ const AppHeader: React.FC = () => {
       {/* Pages Part (only available for mobile) */}
       <div
         className={`app-header-mobile-menu ${isMobileMenuOpen ? "open" : ""}`}
+        onClick={() => {
+          setIsMobileMenuOpen(false);
+        }}
       >
         <NavLinks />
       </div>

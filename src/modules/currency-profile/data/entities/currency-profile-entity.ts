@@ -9,5 +9,6 @@ export interface CurrencyProfileEntity {
   initialDate: Date;
   monthlySavingsGoal?: number;
   yearlySavingsGoal?: number;
+  ownerId: string;
   createdAt?: Date;
 }

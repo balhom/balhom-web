@@ -11,6 +11,7 @@ export const mockCurrencyProfiles: CurrencyProfileEntity[] = [
     initialDate: new Date(2010, 10, 0),
     monthlySavingsGoal: 1000,
     yearlySavingsGoal: 2000,
+    ownerId: "673fdf24-2305-427c-a00f-d245a711e94a",
     createdAt: new Date(2010, 10, 0),
   },
   {
@@ -21,6 +22,7 @@ export const mockCurrencyProfiles: CurrencyProfileEntity[] = [
     initialDate: new Date(2010, 10, 0),
     monthlySavingsGoal: 1000,
     yearlySavingsGoal: 2000,
+    ownerId: "2",
   },
   {
     id: "3",
@@ -31,5 +33,6 @@ export const mockCurrencyProfiles: CurrencyProfileEntity[] = [
     initialDate: new Date(2010, 10, 0),
     monthlySavingsGoal: 1000,
     yearlySavingsGoal: 2000,
+    ownerId: "673fdf24-2305-427c-a00f-d245a711e94a",
   },
 ];

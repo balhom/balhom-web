@@ -14,9 +14,17 @@
 }
 
 .theme-button:hover {
-  background-color: var(--primary-color-hover);
+  background-color: var(--color-bg-scondary);
+  border-color: var(--color-border-hover);
 }
 
 .theme-button-icon {
   transition: transform 0.2s;
+}
+
+@media (max-width: 640px) {
+  .theme-button {
+    width: 100%;
+    justify-content: center;
+  }
 }

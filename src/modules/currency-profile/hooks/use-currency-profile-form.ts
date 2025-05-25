@@ -2,6 +2,7 @@ import { CurrencyEnum } from "../data/enums/currency-enum";
 import { useCurrencyProfileCurrencyForm } from "./use-currency-profile-currency-form";
 import { useCurrencyProfileNameForm } from "./use-currency-profile-name-form";
 
+// TODO add balance, inital date, monthly savings goal, yearly savings goal
 export const useCurrencyProfileForm = (): [
   string,
   CurrencyEnum | undefined,

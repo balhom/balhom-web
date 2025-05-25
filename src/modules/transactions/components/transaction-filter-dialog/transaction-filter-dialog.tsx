@@ -1,7 +1,6 @@
 import "./transaction-filter-dialog.css";
 import { useTranslation } from "react-i18next";
 import { X, Trash2 } from "lucide-react";
-import DateTimePicker from "../../../../common/components/date-time-picker/date-time-picker";
 import { useDispatch, useSelector } from "react-redux";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
 import { AppDispatch, AppState } from "../../../../store";
@@ -43,13 +42,6 @@ const TransactionFilterDialog: React.FC<Props> = ({
   );
   const [maxAmount, setMaxAmount] = useState<string | undefined>(
     transactionsPageState.filter.maxAmount?.toString()
-  );
-
-  const [startDate, setStartDate] = useState<Date | undefined>(
-    transactionsPageState.filter.startDate
-  );
-  const [endDate, setEndDate] = useState<Date | undefined>(
-    transactionsPageState.filter.endDate
   );
 
   const dispatchFecthTransactionsPageAsync = (
@@ -123,26 +115,6 @@ const TransactionFilterDialog: React.FC<Props> = ({
               />
             </div>
           </div>
-
-          <div className="transaction-filter-dialog-section">
-            <h3>{t("transaction.dateRangeFilter")}</h3>
-            <div className="transaction-filter-dialog-date-inputs">
-              <DateTimePicker
-                initialDate={startDate}
-                onChange={(date) => setStartDate(date ?? undefined)}
-                maxDate={endDate ?? new Date()}
-                showTime={false}
-              />
-
-              <DateTimePicker
-                initialDate={endDate}
-                onChange={(date) => setEndDate(date ?? undefined)}
-                minDate={startDate}
-                maxDate={new Date()}
-                showTime={false}
-              />
-            </div>
-          </div>
         </div>
 
         <div className="transaction-filter-dialog-actions">
@@ -152,8 +124,6 @@ const TransactionFilterDialog: React.FC<Props> = ({
               dispatchFecthTransactionsPageAsync({
                 minAmount: Number(minAmount),
                 maxAmount: Number(maxAmount),
-                startDate: startDate,
-                endDate: endDate,
               });
 
               onClose();
@@ -168,8 +138,6 @@ const TransactionFilterDialog: React.FC<Props> = ({
               dispatchFecthTransactionsPageAsync({
                 minAmount: undefined,
                 maxAmount: undefined,
-                startDate: undefined,
-                endDate: undefined,
               });
 
               onClose();

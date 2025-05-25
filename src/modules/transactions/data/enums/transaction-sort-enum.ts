@@ -3,6 +3,4 @@ export enum TransactionSortEnum {
   DateAsc = "date-asc",
   AmountDesc = "amount-desc",
   AmountAsc = "amount-asc",
-  TitleDesc = "title-desc",
-  TitleAsc = "title-asc",
 }

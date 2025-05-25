@@ -87,12 +87,6 @@ const TransactionsSortPicker: React.FC<Props> = ({
         <option value={TransactionSortEnum.AmountAsc}>
           {t("transaction.sortAmountAsc")}
         </option>
-        <option value={TransactionSortEnum.TitleDesc}>
-          {t("transaction.sortTitleAsc")}
-        </option>
-        <option value={TransactionSortEnum.TitleAsc}>
-          {t("transaction.sortTitleDesc")}
-        </option>
       </select>
     </div>
   );

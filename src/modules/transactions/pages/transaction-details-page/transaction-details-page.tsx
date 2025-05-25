@@ -51,7 +51,7 @@ const TransactionDetailsPage: React.FC<Props> = ({
         }
       );
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!transactionState || !selectedCurrencyProfile || !id) {
@@ -153,12 +153,14 @@ const TransactionDetailsPage: React.FC<Props> = ({
                   key={doc.id}
                   className="transaction-details-page-attachment-item"
                   onClick={() => {
-                    getTransactionDocumentUrl(doc.id).then((res) => {
-                      res.fold(
-                        () => undefined,
-                        (url) => window.open(url)
-                      );
-                    });
+                    getTransactionDocumentUrl(transactionState.id, doc.id).then(
+                      (res) => {
+                        res.fold(
+                          () => undefined,
+                          (url) => window.open(url)
+                        );
+                      }
+                    );
                   }}
                 >
                   <FileText

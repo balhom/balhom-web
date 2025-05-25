@@ -79,7 +79,7 @@ const TransactionList: React.FC<Props> = ({
   }, [selectedCurrencyProfile, selectedMonth, selectedYear, type]);
 
   useEffect(() => {
-    console.log(transactionsPageState.search, searchTerm)
+    console.log(transactionsPageState.search, searchTerm);
     if (transactionsPageState.search !== searchTerm) {
       clearTimeout(searchTimer);
 
@@ -98,16 +98,12 @@ const TransactionList: React.FC<Props> = ({
 
   const minAmount = transactionsPageState.filter.minAmount;
   const maxAmount = transactionsPageState.filter.maxAmount;
-  const startDate = transactionsPageState.filter.startDate;
-  const endDate = transactionsPageState.filter.endDate;
 
   const getActiveFiltersCount = () => {
     let count = 0;
 
     if (minAmount) count++;
     if (maxAmount) count++;
-    if (startDate) count++;
-    if (endDate) count++;
 
     return count;
   };
@@ -118,6 +114,7 @@ const TransactionList: React.FC<Props> = ({
         <SearchTextInput
           text={searchTerm}
           onTextChange={(newText) => setSearchTerm(newText)}
+          maxLength={15}
         />
 
         <div className="transaction-list-actions">

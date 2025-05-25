@@ -1,0 +1,103 @@
+.currency-profile-settings-section {
+  background: var(--color-bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px var(--color-shadow-primary);
+  margin-bottom: 2rem;
+}
+
+.currency-profile-settings-section-header {
+  margin-bottom: 2rem;
+}
+
+.currency-profile-settings-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.currency-profile-settings-section-description {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.currency-profile-settings-section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.currency-profile-settings-section-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.7rem;
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  display: flex;
+  gap: 1rem;
+}
+
+.currency-profile-settings-section-divider {
+  border-top: 1px solid var(--color-bg-tertiary);
+  margin: 0.5rem 0;
+}
+
+.currency-profile-settings-section-halfitem {
+  flex: 1;
+}
+
+.currency-profile-settings-section-item-title {
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.currency-profile-settings-section-item-description {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.currency-profile-settings-section-shared-user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.currency-profile-settings-section-add-user-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.currency-profile-settings-section-add-user-button {
+  padding: 0.7rem;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 6px;
+  color: var(--color-text-tertiary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.currency-profile-settings-section-add-user-button:hover {
+  background: var(--primary-color-hover);
+}
+
+@media (max-width: 640px) {
+  .currency-profile-settings-section {
+    padding: 1.5rem;
+  }
+
+  .currency-profile-settings-section-item {
+    flex-direction: column;
+  }
+
+  .currency-profile-settings-section-halfitem {
+    width: 100%;
+  }
+}

@@ -8,6 +8,7 @@ interface Props {
   errorText?: string;
   maxLength?: number;
   placeholder?: string;
+  isReadOnly?: boolean;
 }
 
 const AppTextInput: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const AppTextInput: React.FC<Props> = ({
   errorText,
   maxLength,
   placeholder,
+  isReadOnly,
 }: Props) => {
   return (
     <div>
@@ -32,6 +34,7 @@ const AppTextInput: React.FC<Props> = ({
           onTextChange(e.target.value);
         }}
         placeholder={placeholder}
+        readOnly={isReadOnly}
       />
       {maxLength && (
         <p className="app-text-input-char-count">

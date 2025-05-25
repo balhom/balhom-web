@@ -86,11 +86,6 @@
   font-size: 0.875rem;
 }
 
-.transaction-filter-dialog-date-inputs {
-  display: flex;
-  gap: 0.75rem;
-}
-
 .transaction-filter-dialog-actions {
   display: flex;
   gap: 2rem;
@@ -154,11 +149,6 @@
 
   .transaction-filter-dialog-amount-separator {
     display: none;
-  }
-
-  .transaction-filter-dialog-date-inputs {
-    flex-direction: column;
-    gap: 0.5rem;
   }
 
   .transaction-filter-dialog-actions {

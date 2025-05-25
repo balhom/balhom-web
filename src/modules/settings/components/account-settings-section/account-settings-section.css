@@ -1,0 +1,69 @@
+.account-settings-section {
+  background: var(--color-bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px var(--color-shadow-primary);
+  margin-bottom: 2rem;
+}
+
+.account-settings-section-header {
+  margin-bottom: 2rem;
+}
+
+.account-settings-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.account-settings-section-description {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.account-settings-section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.account-settings-section-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.7rem;
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  display: flex;
+  gap: 1rem;
+}
+
+.account-settings-section-item-title {
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.account-settings-section-item-description {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.account-settings-section-halfitem {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .account-settings-section {
+    padding: 1.5rem;
+  }
+
+  .account-settings-section-item {
+    flex-direction: column;
+  }
+
+  .account-settings-section-halfitem {
+    width: 100%;
+  }
+}

@@ -11,10 +11,13 @@ interface Props {
   onImageChange?: (imageFile: File) => void;
 }
 
-const ImagePicker = ({ initialImageUrl, onImageChange }: Props) => {
+const ImagePicker: React.FC<Props> = ({
+  initialImageUrl,
+  onImageChange,
+}: Props) => {
   const { t } = useTranslation();
 
-  const [imageUrl, setImageUrl] = useState(initialImageUrl);
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -63,9 +66,9 @@ const ImagePicker = ({ initialImageUrl, onImageChange }: Props) => {
 
       {!isLoading && (
         <div className="image-picker-preview">
-          {imageUrl ? (
+          {imageUrl ?? initialImageUrl ? (
             <>
-              <img src={imageUrl} />
+              <img src={imageUrl ?? initialImageUrl} />
               <div className="image-picker-preview-overlay">
                 <span className="image-picker-preview-text">
                   {t("common.changeImage")}
