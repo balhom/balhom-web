@@ -29,8 +29,7 @@ const YearlySavingsChart: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchYearlySavingStatisticsAsync());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCurrencyProfile]);
+  }, [dispatch, selectedCurrencyProfile]);
 
   return (
     <div className="savings-chart">
