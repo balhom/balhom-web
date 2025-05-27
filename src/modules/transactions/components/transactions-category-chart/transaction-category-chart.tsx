@@ -46,8 +46,7 @@ const TransactionsCategoryChart: React.FC<Props> = ({
         year: year,
       })
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCurrencyProfile, type, month, year]);
+  }, [dispatch, selectedCurrencyProfile, type, month, year]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomTooltip = ({ active, payload }: any) => {
