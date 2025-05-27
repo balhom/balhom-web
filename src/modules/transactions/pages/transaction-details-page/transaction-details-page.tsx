@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowLeft, FileText, Download, Pencil } from "lucide-react";
 import { formatCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TransactionEntity } from "../../data/entities/transaction-entity";
 import { getTransaction } from "../../usecases/get-transaction-usecase";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
@@ -38,21 +38,25 @@ const TransactionDetailsPage: React.FC<Props> = ({
     TransactionEntity | undefined
   >();
 
+  const selectedCurrencyProfileRef = useRef(selectedCurrencyProfile);
+
   useEffect(() => {
-    if (id && selectedCurrencyProfile) {
-      getTransaction(id, transactionType, selectedCurrencyProfile).then(
-        (transactionEither) => {
-          transactionEither.fold(
-            () => {},
-            (transaction) => {
-              setTransactionState(transaction);
-            }
-          );
-        }
-      );
+    console.log("hola");
+    if (id && selectedCurrencyProfileRef.current) {
+      getTransaction(
+        id,
+        transactionType,
+        selectedCurrencyProfileRef.current
+      ).then((transactionEither) => {
+        transactionEither.fold(
+          () => {},
+          (transaction) => {
+            setTransactionState(transaction);
+          }
+        );
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id, transactionType, selectedCurrencyProfileRef]);
 
   if (!transactionState || !selectedCurrencyProfile || !id) {
     return <AppLoaderPage />;
