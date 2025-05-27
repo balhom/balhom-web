@@ -11,7 +11,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { YearPicker } from "../../../../common/components/year-picker/year-picker";
 import { fetchMonthlySavingStatisticsAsync } from "../../states/redux/thunks/saving-statistics-thunks";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
@@ -32,14 +32,15 @@ const MonthlySavingsChart: React.FC = () => {
   );
   const dispatch: AppDispatch = useDispatch();
 
+  const selectedYearRef = useRef(savingStatisticsState.selectedYear);
+
   useEffect(() => {
     dispatch(
       fetchMonthlySavingStatisticsAsync({
-        year: savingStatisticsState.selectedYear,
+        year: selectedYearRef.current,
       })
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCurrencyProfile]);
+  }, [dispatch, selectedYearRef, selectedCurrencyProfile]);
 
   const onYearChange = (newYear: number) => {
     dispatch(
