@@ -5,7 +5,7 @@ import AppNumberInput from "../../../../common/components/app-number-input/app-n
 import ImagePicker from "../../../../common/components/image-picker/image-picker";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import CurrencyPicker from "../../../currency-profile/components/currency-picker/currency-picker";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import { useCurrencyProfileForm } from "../../../currency-profile/hooks/use-currency-profile-form";
 import DeleteSettingsButton from "../delete-settings-button/delete-settings-button";
@@ -48,10 +48,14 @@ const CurrencyProfileSettingsSection: React.FC = () => {
   const [yearlySavingsGoal, setYearlySavingsGoal] = useState<string>("0");
   const [image, setImage] = useState<File | undefined>(undefined);
 
+  const handleNameChangeRef = useRef(handleNameChange);
+  const handleCurrencyChangeRef = useRef(handleCurrencyChange);
+
   useEffect(() => {
     if (selectedCurrencyProfile) {
-      handleNameChange(selectedCurrencyProfile.name);
-      handleCurrencyChange(selectedCurrencyProfile.currency);
+      handleNameChangeRef.current(selectedCurrencyProfile.name);
+      handleCurrencyChangeRef.current(selectedCurrencyProfile.currency);
+
       setBalance(selectedCurrencyProfile.balance.toString());
       setInitialDate(selectedCurrencyProfile.initialDate);
       if (selectedCurrencyProfile.monthlySavingsGoal) {
@@ -65,8 +69,7 @@ const CurrencyProfileSettingsSection: React.FC = () => {
         );
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCurrencyProfile]);
+  }, [handleNameChangeRef, handleCurrencyChangeRef, selectedCurrencyProfile]);
 
   const sharedUsers = ["test@test.com"];
 
