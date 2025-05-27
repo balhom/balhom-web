@@ -11,7 +11,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   fetchDailyTransactionStatisticsAsync,
   fetchMonthlyTransactionStatisticsAsync,
@@ -35,14 +35,15 @@ const MonthlyTransactionsChart: React.FC = () => {
   );
   const dispatch: AppDispatch = useDispatch();
 
+  const selectedYearRef = useRef(transactionStatisticsState.selectedYear);
+
   useEffect(() => {
     dispatch(
       fetchMonthlyTransactionStatisticsAsync({
-        year: transactionStatisticsState.selectedYear,
+        year: selectedYearRef.current,
       })
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCurrencyProfile]);
+  }, [dispatch, selectedYearRef, selectedCurrencyProfile]);
 
   const onYearChange = (newYear: number) => {
     dispatch(
