@@ -1,5 +1,5 @@
 import "./transaction-list.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Pagination from "../../../../common/components/pagination/pagination";
 import TransactionCard from "../transaction-card/transaction-card";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,38 +37,39 @@ const TransactionList: React.FC<Props> = ({
   );
   const dispatch: AppDispatch = useDispatch();
 
-  const dispatchFecthTransactionsPageAsync = (
-    pageNum: number,
-    search: string
-  ) => {
-    if (selectedCurrencyProfile) {
-      if (type === TransactionTypeEnum.Income) {
-        dispatch(
-          fetchIncomesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
-            month: selectedMonth,
-            year: selectedYear,
-            search: search,
-            filters: transactionsPageState.filter,
-            sort: transactionsPageState.sortValue,
-            pageNum: pageNum,
-          })
-        );
-      } else {
-        dispatch(
-          fetchExpensesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
-            month: selectedMonth,
-            year: selectedYear,
-            search: search,
-            filters: transactionsPageState.filter,
-            sort: transactionsPageState.sortValue,
-            pageNum: pageNum,
-          })
-        );
+  const dispatchFecthTransactionsPageAsync = useCallback(
+    (pageNum: number, search: string) => {
+      if (selectedCurrencyProfile) {
+        if (type === TransactionTypeEnum.Income) {
+          dispatch(
+            fetchIncomesPageAsync({
+              currencyProfile: selectedCurrencyProfile,
+              month: selectedMonth,
+              year: selectedYear,
+              search: search,
+              filters: transactionsPageState.filter,
+              sort: transactionsPageState.sortValue,
+              pageNum: pageNum,
+            })
+          );
+        } else {
+          dispatch(
+            fetchExpensesPageAsync({
+              currencyProfile: selectedCurrencyProfile,
+              month: selectedMonth,
+              year: selectedYear,
+              search: search,
+              filters: transactionsPageState.filter,
+              sort: transactionsPageState.sortValue,
+              pageNum: pageNum,
+            })
+          );
+        }
       }
-    }
-  };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [dispatch]
+  );
 
   useEffect(() => {
     dispatchFecthTransactionsPageAsync(
@@ -79,10 +80,9 @@ const TransactionList: React.FC<Props> = ({
   }, [selectedCurrencyProfile, selectedMonth, selectedYear, type]);
 
   useEffect(() => {
-    console.log(transactionsPageState.search, searchTerm);
-    if (transactionsPageState.search !== searchTerm) {
-      clearTimeout(searchTimer);
+    clearTimeout(searchTimer);
 
+    if (transactionsPageState.search !== searchTerm) {
       searchTimer = setTimeout(() => {
         dispatchFecthTransactionsPageAsync(
           transactionsPageState.page.pageNum,
@@ -92,7 +92,7 @@ const TransactionList: React.FC<Props> = ({
     }
     return () => clearTimeout(searchTimer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm]);
+  }, [searchTerm, dispatchFecthTransactionsPageAsync]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
