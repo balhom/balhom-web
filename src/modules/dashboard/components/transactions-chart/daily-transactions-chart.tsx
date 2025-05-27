@@ -11,7 +11,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { fetchDailyTransactionStatisticsAsync } from "../../states/redux/thunks/transaction-statistics-thunks";
 import { MonthPicker } from "../../../../common/components/month-picker/month-picker";
 import { formatCurrency } from "../../../currency-profile/utils";
@@ -28,15 +28,17 @@ const DailyTransactionsChart: React.FC = () => {
   );
   const dispatch: AppDispatch = useDispatch();
 
+  const selectedMonthRef = useRef(transactionStatisticsState.selectedMonth);
+  const selectedYearRef = useRef(transactionStatisticsState.selectedYear);
+
   useEffect(() => {
     dispatch(
       fetchDailyTransactionStatisticsAsync({
-        month: transactionStatisticsState.selectedMonth,
-        year: transactionStatisticsState.selectedYear,
+        month: selectedMonthRef.current,
+        year: selectedYearRef.current,
       })
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCurrencyProfile]);
+  }, [dispatch, selectedMonthRef, selectedYearRef, selectedCurrencyProfile]);
 
   const onMonthChange = (newMonth: number) => {
     dispatch(
