@@ -2,10 +2,11 @@ import "./account-settings-section.css";
 import { useTranslation } from "react-i18next";
 import { useOidc } from "../../../../common/config/oidc";
 import DeleteSettingsButton from "../delete-settings-button/delete-settings-button";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import LogoutSettingsButton from "../logout-settings-button/logout-settings-button";
 import ChanngePasswordSettingsButton from "../change-password-settings-button/change-password-settings-button";
+import { deleteAllCurrencyProfiles } from "../../../currency-profile/usecases/delete-all-currency-profiles-usecase";
 
 const AccountSettingsSection: React.FC = () => {
   const { t } = useTranslation();
@@ -15,13 +16,28 @@ const AccountSettingsSection: React.FC = () => {
 
   const [isDeletingAccount, setIsDeletingAccount] = useState<boolean>(false);
 
-  const handleDeleteAccount = () => {
+  // TODO Add delete confirmation dialog
+
+  const handleDeleteAccount = useCallback(() => {
     setIsDeletingAccount(true);
 
-    // TODO Will be implemented later
+    deleteAllCurrencyProfiles().then((result) => {
+      result.fold(
+        (error) => {
+          // TODO Show error dialog
+          console.error("Error deleting account:", error);
+        },
+        () => {
+          logout?.({
+            redirectTo: "home",
+          });
+        }
+      );
 
-    setIsDeletingAccount(false);
-  };
+      setIsDeletingAccount(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="account-settings-section">
@@ -93,7 +109,7 @@ const AccountSettingsSection: React.FC = () => {
           <LogoutSettingsButton
             onClick={() => {
               logout?.({
-                redirectTo: "current page",
+                redirectTo: "home",
               });
             }}
           />

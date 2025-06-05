@@ -17,6 +17,8 @@ export interface CurrencyProfileRepository {
   listen: (
     onChange: (event: CurrencyProfileChangeEventEntity) => void
   ) => Promise<Either<AppError, void>>;
+  
+  deleteAll: () => Promise<Either<AppError, void>>;
 }
 
 export const currencyProfileRepository = (): CurrencyProfileRepository => ({
@@ -66,6 +68,14 @@ export const currencyProfileRepository = (): CurrencyProfileRepository => ({
     // TODO Only one stream available, close old one if new is created
 
     // TODO if stream is closed from sever then retry connection
+
+    return Either.right(undefined);
+  },
+  
+  deleteAll: async (): Promise<Either<AppError, void>> => {
+    // TODO remove and do api call
+    
+    // TODO if call went well then close listen stream
 
     return Either.right(undefined);
   },
