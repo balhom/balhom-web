@@ -26,18 +26,22 @@ const CreateCurrencyProfilePage: React.FC = () => {
   const [
     name,
     currency,
+    initialBalance,
+    initialDate,
+    monthlySavingsGoal,
+    yearlySavingsGoal,
+    image,
     nameError,
     currencyError,
     handleNameChange,
     handleCurrencyChange,
+    setInitialBalance,
+    setInitialDate,
+    setMonthlySavingsGoal,
+    setYearlySavingsGoal,
+    setImage,
     isFormValid,
   ] = useCurrencyProfileForm();
-
-  const [initialBalance, setInitialBalance] = useState<string>("0");
-  const [initialDate, setInitialDate] = useState<Date>(new Date());
-  const [monthlySavingsGoal, setMonthlySavingsGoal] = useState<string>("0");
-  const [yearlySavingsGoal, setYearlySavingsGoal] = useState<string>("0");
-  const [image, setImage] = useState<File | undefined>(undefined);
 
   const [formError, setFormError] = useState("");
 

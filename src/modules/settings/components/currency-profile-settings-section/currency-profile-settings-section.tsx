@@ -5,7 +5,7 @@ import AppNumberInput from "../../../../common/components/app-number-input/app-n
 import ImagePicker from "../../../../common/components/image-picker/image-picker";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import CurrencyPicker from "../../../currency-profile/components/currency-picker/currency-picker";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import { useCurrencyProfileForm } from "../../../currency-profile/hooks/use-currency-profile-form";
 import DeleteSettingsButton from "../delete-settings-button/delete-settings-button";
@@ -35,26 +35,27 @@ const CurrencyProfileSettingsSection: React.FC = () => {
   const [
     name,
     currency,
+    balance,
+    initialDate,
+    monthlySavingsGoal,
+    yearlySavingsGoal,
+    image,
     nameError,
     currencyError,
     handleNameChange,
     handleCurrencyChange,
+    setBalance,
+    setInitialDate,
+    setMonthlySavingsGoal,
+    setYearlySavingsGoal,
+    setImage,
     isFormValid,
   ] = useCurrencyProfileForm();
 
-  const [balance, setBalance] = useState<string>("0");
-  const [initialDate, setInitialDate] = useState<Date>(new Date());
-  const [monthlySavingsGoal, setMonthlySavingsGoal] = useState<string>("0");
-  const [yearlySavingsGoal, setYearlySavingsGoal] = useState<string>("0");
-  const [image, setImage] = useState<File | undefined>(undefined);
-
-  const handleNameChangeRef = useRef(handleNameChange);
-  const handleCurrencyChangeRef = useRef(handleCurrencyChange);
-
   useEffect(() => {
     if (selectedCurrencyProfile) {
-      handleNameChangeRef.current(selectedCurrencyProfile.name);
-      handleCurrencyChangeRef.current(selectedCurrencyProfile.currency);
+      handleNameChange(selectedCurrencyProfile.name);
+      handleCurrencyChange(selectedCurrencyProfile.currency);
 
       setBalance(selectedCurrencyProfile.balance.toString());
       setInitialDate(selectedCurrencyProfile.initialDate);
@@ -69,7 +70,8 @@ const CurrencyProfileSettingsSection: React.FC = () => {
         );
       }
     }
-  }, [handleNameChangeRef, handleCurrencyChangeRef, selectedCurrencyProfile]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCurrencyProfile]);
 
   const sharedUsers = ["test@test.com"];
 
