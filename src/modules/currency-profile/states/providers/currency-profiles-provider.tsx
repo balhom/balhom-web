@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AppError } from "../../../../common/data/errors/app-error";
 import { useTranslation } from "react-i18next";
 import { Either } from "../../../../common/data/either";
@@ -13,6 +13,7 @@ import { Navigate } from "react-router-dom";
 import { listenCurrencyProfileChanges } from "../../usecases/listen-currency-profile-changes-usecase";
 import { StreamChangeTypeEnum } from "../../../../common/data/enums/stream-change-type-enum";
 import { getCurrencyProfile } from "../../usecases/get-currency-profile-usecase";
+import { saveSelectedCurrencyProfile } from "../../usecases/save-selected-currency-profile-usecase";
 
 export const CurrencyProfilesProvider = ({
   children,
@@ -27,6 +28,18 @@ export const CurrencyProfilesProvider = ({
   const [currencyProfiles, setCurrencyProfiles] = useState<
     CurrencyProfileEntity[]
   >([]);
+
+  const onChangeSelectedCurrencyProfile = useCallback(
+    (newCurrencyProfile: CurrencyProfileEntity | null) => {
+      if (newCurrencyProfile) {
+        // Persist currency profile as selected
+        saveSelectedCurrencyProfile(newCurrencyProfile);
+      }
+      // Update the selected currency profile in the context
+      setSelectedCurrencyProfile(newCurrencyProfile);
+    },
+    []
+  );
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
@@ -110,10 +123,10 @@ export const CurrencyProfilesProvider = ({
   return (
     <CurrencyProfilesContext.Provider
       value={{
-        selectedCurrencyProfile,
-        currencyProfiles,
-        setSelectedCurrencyProfile,
-        setCurrencyProfiles,
+        selectedCurrencyProfile: selectedCurrencyProfile,
+        currencyProfiles: currencyProfiles,
+        setSelectedCurrencyProfile: onChangeSelectedCurrencyProfile,
+        setCurrencyProfiles: setCurrencyProfiles,
       }}
     >
       {children}

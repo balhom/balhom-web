@@ -9,7 +9,6 @@ import {
   Settings,
   Menu,
 } from "lucide-react";
-import { useCurrencyProfiles } from "../../../modules/currency-profile/states/contexts/currency-profiles-context";
 import { DASHBOARD_ROUTE_PATH } from "../../../modules/dashboard/routes";
 import { SETTINGS_ROUTE_PATH } from "../../../modules/settings/routes";
 import {
@@ -21,15 +20,9 @@ import CurrencyProfilePicker from "../../../modules/currency-profile/components/
 const AppHeader: React.FC = () => {
   const { t } = useTranslation();
 
-  const {
-    selectedCurrencyProfile,
-    currencyProfiles,
-    setSelectedCurrencyProfile,
-  } = useCurrencyProfiles();
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const NavLinks = () => (
+  const NavLinks: React.FC = () => (
     <>
       <NavLink
         to={DASHBOARD_ROUTE_PATH}
@@ -102,13 +95,7 @@ const AppHeader: React.FC = () => {
         </button>
 
         {/* Menu Button Part (only available for mobile) */}
-        {selectedCurrencyProfile && (
-          <CurrencyProfilePicker
-            currencyProfile={selectedCurrencyProfile}
-            onCurrencyProfileChange={setSelectedCurrencyProfile}
-            availableCurrencyProfiles={currencyProfiles}
-          />
-        )}
+        <CurrencyProfilePicker />
       </div>
 
       {/* Pages Part (only available for mobile) */}

@@ -5,7 +5,6 @@ import React from "react";
 import { formatCurrency } from "../../utils";
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { CURRENCY_PROFILE_DEFAULT_IMAGE_CONSTANT } from "../../data/constants/currency-profile-constants";
-import { setSelectedCurrencyProfile } from "../../usecases/set-selected-currency-profile-usecase";
 import { useNavigate } from "react-router-dom";
 import { CREATE_CURRENCY_PROFILE_ROUTE_PATH } from "../../routes";
 
@@ -60,9 +59,6 @@ const CurrencyProfilePickerDialog: React.FC<Props> = ({
                 profile.id === selectedCurrencyProfile.id ? "selected" : ""
               }`}
               onClick={() => {
-                // Persist currency profile as selected
-                setSelectedCurrencyProfile(profile);
-
                 onSelectCurrencyProfile(profile);
                 onClose();
               }}

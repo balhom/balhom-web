@@ -4,12 +4,10 @@ import { CurrencyProfileEntity } from "../../data/entities/currency-profile-enti
 export interface CurrencyProfilesContextState {
   selectedCurrencyProfile: CurrencyProfileEntity | null;
   currencyProfiles: CurrencyProfileEntity[];
-  setSelectedCurrencyProfile: React.Dispatch<
-    React.SetStateAction<CurrencyProfileEntity | null>
-  >;
-  setCurrencyProfiles: React.Dispatch<
-    React.SetStateAction<CurrencyProfileEntity[]>
-  >;
+  setSelectedCurrencyProfile: (
+    currencyProfile: CurrencyProfileEntity | null
+  ) => void;
+  setCurrencyProfiles: (currencyProfiles: CurrencyProfileEntity[]) => void;
 }
 
 export const CurrencyProfilesContext =

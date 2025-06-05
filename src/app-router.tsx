@@ -33,7 +33,16 @@ export const AppRouter: React.FC = () => {
             </OidcProvider>
           }
         >
-          {currencyProfileRoutes()}
+          <Route
+            element={
+              <CurrencyProfilesProvider>
+                <Outlet />
+              </CurrencyProfilesProvider>
+            }
+          >
+            {currencyProfileRoutes()}
+          </Route>
+
           <Route
             element={
               <CurrencyProfilesProvider>

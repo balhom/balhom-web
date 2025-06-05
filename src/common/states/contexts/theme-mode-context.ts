@@ -3,7 +3,7 @@ import { ThemeModeEnum } from "../../data/enums/theme-mode-enum";
 
 export interface ThemeModeContextState {
   themeMode: ThemeModeEnum;
-  setThemeMode: React.Dispatch<React.SetStateAction<ThemeModeEnum>>;
+  setThemeMode: (theme: ThemeModeEnum) => void;
 }
 
 export const ThemeModeContext = createContext<ThemeModeContextState>({
