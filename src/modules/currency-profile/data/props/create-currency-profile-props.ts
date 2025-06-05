@@ -1,14 +1,11 @@
 import { CurrencyEnum } from "../enums/currency-enum";
 
-export interface CurrencyProfileEntity {
-  id: string;
+export interface CreateCurrencyProfileProps {
   name: string;
-  imageUrl?: string;
   currency: CurrencyEnum;
   balance: number;
   initialDate: Date;
   monthlySavingsGoal: number;
   yearlySavingsGoal: number;
-  ownerId: string;
-  createdAt?: Date;
+  image?: File;
 }

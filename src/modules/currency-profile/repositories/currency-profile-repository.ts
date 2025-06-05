@@ -3,11 +3,16 @@ import { AppError } from "../../../common/data/errors/app-error";
 import { mockCurrencyProfiles } from "../../../mocks/mock-currency-profiles";
 import { CurrencyProfileChangeEventEntity } from "../data/entities/currency-profile-change-event-entity";
 import { CurrencyProfileEntity } from "../data/entities/currency-profile-entity";
+import { CreateCurrencyProfileProps } from "../data/props/create-currency-profile-props";
 
 export interface CurrencyProfileRepository {
   get: (id: string) => Promise<Either<AppError, CurrencyProfileEntity>>;
 
   list: () => Promise<Either<AppError, CurrencyProfileEntity[]>>;
+
+  create: (
+    props: CreateCurrencyProfileProps
+  ) => Promise<Either<AppError, CurrencyProfileEntity>>;
 
   listen: (
     onChange: (event: CurrencyProfileChangeEventEntity) => void
@@ -32,6 +37,24 @@ export const currencyProfileRepository = (): CurrencyProfileRepository => ({
   list: async (): Promise<Either<AppError, CurrencyProfileEntity[]>> => {
     // TODO remove and do api call
     return Either.right(mockCurrencyProfiles);
+  },
+
+  create: async (
+    props: CreateCurrencyProfileProps
+  ): Promise<Either<AppError, CurrencyProfileEntity>> => {
+    // TODO remove and do api call
+    const createdCurrencyProfile: CurrencyProfileEntity = {
+      id: "12345678",
+      name: props.name,
+      currency: props.currency,
+      balance: props.balance,
+      initialDate: props.initialDate,
+      monthlySavingsGoal: props.monthlySavingsGoal,
+      yearlySavingsGoal: props.yearlySavingsGoal,
+      ownerId: "",
+    };
+
+    return Either.right(createdCurrencyProfile);
   },
 
   listen: async (

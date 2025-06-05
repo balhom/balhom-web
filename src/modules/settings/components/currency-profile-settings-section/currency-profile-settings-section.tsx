@@ -13,6 +13,7 @@ import AppButton from "../../../../common/components/app-button/app-button";
 import DateTimePicker from "../../../../common/components/date-time-picker/date-time-picker";
 import { useOidc } from "../../../../common/config/oidc";
 import SharedUserCard from "../shared-user-card/shared-user-card";
+import { CURRENCY_PROFILE_DEFAULT_IMAGE_CONSTANT } from "../../../currency-profile/data/constants/currency-profile-constants";
 
 const CurrencyProfileSettingsSection: React.FC = () => {
   const { t } = useTranslation();
@@ -122,7 +123,10 @@ const CurrencyProfileSettingsSection: React.FC = () => {
         {/* Image Part */}
         <div className="currency-profile-settings-section-item">
           <ImagePicker
-            initialImageUrl={selectedCurrencyProfile.imageUrl}
+            initialImageUrl={
+              selectedCurrencyProfile.imageUrl ??
+              CURRENCY_PROFILE_DEFAULT_IMAGE_CONSTANT
+            }
             onImageChange={setImage}
           />
         </div>

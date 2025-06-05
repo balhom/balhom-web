@@ -14,6 +14,7 @@ import { useCurrencyProfiles } from "../../states/contexts/currency-profiles-con
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { DASHBOARD_ROUTE_PATH } from "../../../dashboard/routes";
 import DateTimePicker from "../../../../common/components/date-time-picker/date-time-picker";
+import { createCurrencyProfile } from "../../usecases/create-currency-profile-usecase";
 
 const CreateCurrencyProfilePage: React.FC = () => {
   const { t } = useTranslation();
@@ -53,32 +54,28 @@ const CreateCurrencyProfilePage: React.FC = () => {
     }
 
     try {
-      // TODO Remove
-      console.log("Creating currency profile:", {
-        name,
-        currency,
-        image,
-        monthlySavingsGoal,
-        yearlySavingsGoal,
-      });
-
-      // TODO call create usecase
-      const createdCurrencyProfile: CurrencyProfileEntity = {
-        id: "12345678",
+      const createdCurrencyProfileEither = await createCurrencyProfile({
         name: name,
         currency: currency!,
         balance: Number(initialBalance),
         initialDate: initialDate,
         monthlySavingsGoal: Number(monthlySavingsGoal),
         yearlySavingsGoal: Number(yearlySavingsGoal),
-        ownerId: "",
-      };
+        image: image,
+      });
 
-      // Update states
-      setCurrencyProfiles([...currencyProfiles, createdCurrencyProfile]);
-      setSelectedCurrencyProfile(createdCurrencyProfile);
+      createdCurrencyProfileEither.fold(
+        () => {
+          setFormError(t("common.genericError"));
+        },
+        (createdCurrencyProfile: CurrencyProfileEntity) => {
+          // Update states
+          setCurrencyProfiles([...currencyProfiles, createdCurrencyProfile]);
+          setSelectedCurrencyProfile(createdCurrencyProfile);
 
-      navigate(DASHBOARD_ROUTE_PATH);
+          navigate(DASHBOARD_ROUTE_PATH);
+        }
+      );
     } catch (err) {
       setFormError(t("common.genericError"));
       console.error("Error creating currency profile:", err);
