@@ -1,5 +1,5 @@
 import "./transaction-card.css";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Trash2, Eye } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -41,6 +41,7 @@ const TransactionCard: React.FC<Props> = ({
 
   const { selectedCurrencyProfile } = useCurrencyProfiles();
 
+  // State to manage the delete confirmation dialog
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const transactionsPageState = useSelector((state: AppState) =>
@@ -52,7 +53,7 @@ const TransactionCard: React.FC<Props> = ({
 
   const formattedDate = new Date(transaction.date).toLocaleDateString();
 
-  const dispatchDeleteAndFecthTransactionsPageAsync = () => {
+  const dispatchDeleteAndFecthTransactionsPageAsync = useCallback(() => {
     if (selectedCurrencyProfile) {
       if (transaction.type === TransactionTypeEnum.Income) {
         dispatch(deleteTransactionIncomeInPage(transaction.id));
@@ -82,23 +83,40 @@ const TransactionCard: React.FC<Props> = ({
         );
       }
     }
-  };
+  }, [
+    dispatch,
+    selectedCurrencyProfile,
+    selectedMonth,
+    selectedYear,
+    transaction.id,
+    transaction.type,
+    transactionsPageState.filter,
+    transactionsPageState.page.pageNum,
+    transactionsPageState.search,
+    transactionsPageState.sortValue,
+  ]);
+
+  const handleDelete = useCallback(() => {
+    if (selectedCurrencyProfile) {
+      // Call usecase
+      deleteTransaction(
+        transaction.id,
+        transaction.type,
+        selectedCurrencyProfile
+      );
+
+      // Remove transaction from UI
+      dispatchDeleteAndFecthTransactionsPageAsync();
+    }
+  }, [
+    transaction,
+    selectedCurrencyProfile,
+    dispatchDeleteAndFecthTransactionsPageAsync,
+  ]);
 
   if (!selectedCurrencyProfile) {
     return null;
   }
-
-  const handleDelete = () => {
-    // Call usecase
-    deleteTransaction(
-      transaction.id,
-      transaction.type,
-      selectedCurrencyProfile
-    );
-
-    // Remove transaction from UI
-    dispatchDeleteAndFecthTransactionsPageAsync();
-  };
 
   return (
     <div className="transaction-card">

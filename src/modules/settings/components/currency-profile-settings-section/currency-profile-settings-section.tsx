@@ -5,7 +5,7 @@ import AppNumberInput from "../../../../common/components/app-number-input/app-n
 import ImagePicker from "../../../../common/components/image-picker/image-picker";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import CurrencyPicker from "../../../currency-profile/components/currency-picker/currency-picker";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AppTextInput from "../../../../common/components/app-text-input/app-text-input";
 import { useCurrencyProfileForm } from "../../../currency-profile/hooks/use-currency-profile-form";
 import DeleteSettingsButton from "../delete-settings-button/delete-settings-button";
@@ -14,23 +14,63 @@ import DateTimePicker from "../../../../common/components/date-time-picker/date-
 import { useOidc } from "../../../../common/config/oidc";
 import SharedUserCard from "../shared-user-card/shared-user-card";
 import { CURRENCY_PROFILE_DEFAULT_IMAGE_CONSTANT } from "../../../currency-profile/data/constants/currency-profile-constants";
+import { updateCurrencyProfile } from "../../../currency-profile/usecases/update-currency-profile-usecase";
+import AppDeleteDialog from "../../../../common/components/app-delete-dialog/app-delete-dialog";
+import { deleteCurrencyProfile } from "../../../currency-profile/usecases/delete-currency-profile-usecase";
+import { useNavigate } from "react-router-dom";
+import { DASHBOARD_ROUTE_PATH } from "../../../dashboard/routes";
+import { CurrencyProfileSharedUserEntity } from "../../../currency-profile/data/entities/currency-profile-shared-user-entity";
+import { listCurrencyProfileSharedUsers } from "../../../currency-profile/usecases/list-currency-profile-shared-users-usecase";
+import { removeSharedUserFromCurrencyProfile } from "../../../currency-profile/usecases/remove-shared-user-from-currency-profile-usecase";
+import { addCurrencyProfileSharedUser } from "../../../currency-profile/usecases/add-currency-profile-shared-user-usecase";
+import { isEmail } from "../../../../common/utils/form-utils";
+import { CREATE_CURRENCY_PROFILE_ROUTE_PATH } from "../../../currency-profile/routes";
 
 const CurrencyProfileSettingsSection: React.FC = () => {
   const { t } = useTranslation();
 
+  const navigate = useNavigate();
+
   const { tokens } = useOidc();
   const userId = tokens?.decodedIdToken?.sub ?? "";
 
-  const { selectedCurrencyProfile } = useCurrencyProfiles();
+  const {
+    selectedCurrencyProfile,
+    currencyProfiles,
+    setSelectedCurrencyProfile,
+    setCurrencyProfiles,
+  } = useCurrencyProfiles();
+
+  // State to manage the delete confirmation dialog
+  const [
+    isCurrencyProfileDeleteDialogOpen,
+    setIsCurrencyProfileDeleteDialogOpen,
+  ] = useState(false);
+
+  // State to manage the user removal confirmation dialog
+  const [isUserRemovalDialogOpen, setIsUserRemovalDialogOpen] = useState(false);
+
+  // State to manage the email of the user to be removed
+  const [sharedUserToRemove, setSharedUserToRemove] =
+    useState<CurrencyProfileSharedUserEntity>();
 
   const isCurrencyProfileOwner = userId === selectedCurrencyProfile?.ownerId;
 
+  // State to manage the new shared user email input
+  // and its error message
   const [newSharedUserEmail, setNewSharedUserEmail] = useState("");
   const [newSharedUserEmailError, setNewSharedUserEmailError] =
     useState<string>("");
 
   const [isDeletingCurrencyProfile, setIsDeletingCurrencyProfile] =
     useState<boolean>(false);
+
+  const [isAddingSharedUser, setIsAddingSharedUser] = useState<boolean>(false);
+
+  // State to manage the list of shared users
+  const [sharedUsers, setSharedUsers] = useState<
+    CurrencyProfileSharedUserEntity[]
+  >([]);
 
   // Form hooks
   const [
@@ -70,42 +110,134 @@ const CurrencyProfileSettingsSection: React.FC = () => {
           selectedCurrencyProfile.yearlySavingsGoal.toString()
         );
       }
+
+      // Set shared users for the selected currency profile
+      // It fetches the shared users
+      listCurrencyProfileSharedUsers(selectedCurrencyProfile.id).then(
+        (result) => {
+          if (result.isRight()) {
+            // Set the shared users from the result
+            setSharedUsers(result.getRight() ?? []);
+          }
+        }
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCurrencyProfile]);
 
-  const sharedUsers = ["test@test.com"];
+  // Function to handle the update of the currency profile
+  // It checks if the form is valid before proceeding with the update
+  const handleUpdateCurrencyProfile = useCallback(() => {
+    if (!isFormValid()) {
+      updateCurrencyProfile({
+        name: name,
+        balance: Number(balance),
+        initialDate: initialDate,
+        monthlySavingsGoal: parseFloat(monthlySavingsGoal),
+        yearlySavingsGoal: parseFloat(yearlySavingsGoal),
+        image: image,
+      });
+    }
+  }, [
+    balance,
+    image,
+    initialDate,
+    isFormValid,
+    monthlySavingsGoal,
+    name,
+    yearlySavingsGoal,
+  ]);
+
+  // Function to handle the deletion of the current currency profile
+  const handleDeleteCurrencyProfile = useCallback(() => {
+    if (selectedCurrencyProfile) {
+      setIsDeletingCurrencyProfile(true);
+
+      deleteCurrencyProfile(selectedCurrencyProfile.id).then(() => {
+        // Remove selected currency profile from the currency profiles list
+        const newCurrencyProfiles = currencyProfiles.filter(
+          (profile) => profile.id !== selectedCurrencyProfile?.id
+        );
+        setCurrencyProfiles(newCurrencyProfiles);
+        setSelectedCurrencyProfile(newCurrencyProfiles[0] ?? null);
+
+        // If there are no currency profiles left, navigate to the create currency profile route
+        // Otherwise, navigate to the dashboard route
+        if (newCurrencyProfiles.length === 0) {
+          navigate(CREATE_CURRENCY_PROFILE_ROUTE_PATH);
+        } else {
+          navigate(DASHBOARD_ROUTE_PATH);
+        }
+
+        setIsDeletingCurrencyProfile(false);
+      });
+    }
+  }, [
+    currencyProfiles,
+    navigate,
+    selectedCurrencyProfile,
+    setCurrencyProfiles,
+    setSelectedCurrencyProfile,
+  ]);
+
+  const handleAddSharedUser = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+
+      // Check if the new shared user email is empty
+      if (!newSharedUserEmail.trim() || !isEmail(newSharedUserEmail)) return;
+
+      // Avoid if the selected currency profile is null
+      if (!selectedCurrencyProfile) return;
+
+      // Check if a user is already being added
+      if (isAddingSharedUser) return;
+
+      setIsAddingSharedUser(true);
+
+      setNewSharedUserEmailError("");
+
+      addCurrencyProfileSharedUser(
+        selectedCurrencyProfile.id,
+        newSharedUserEmail
+      ).then((result) => {
+        result.fold(
+          () => {
+            setNewSharedUserEmailError(t("common.genericError"));
+          },
+          (newSharedUser) => {
+            // Add the new shared user to the shared users list
+            setSharedUsers((prevUsers) => [
+              ...prevUsers,
+              {
+                id: newSharedUser.id,
+                email: newSharedUser.email,
+              },
+            ]);
+          }
+        );
+
+        setIsAddingSharedUser(false);
+      });
+    },
+    [isAddingSharedUser, newSharedUserEmail, selectedCurrencyProfile, t]
+  );
+
+  const handleRemoveUser = useCallback(() => {
+    if (selectedCurrencyProfile && sharedUserToRemove) {
+      removeSharedUserFromCurrencyProfile(
+        selectedCurrencyProfile.id,
+        sharedUserToRemove.id
+      );
+
+      // Remove the user from the shared users list
+      setSharedUsers(
+        sharedUsers.filter((email) => email !== sharedUserToRemove)
+      );
+    }
+  }, [selectedCurrencyProfile, sharedUsers, sharedUserToRemove]);
 
   if (!selectedCurrencyProfile) return null;
-
-  const handleUpdateCurrencyProfile = () => {
-    // TODO Will be implemented later
-    // Check isFormValid
-  };
-
-  const handleDeleteCurrencyProfile = () => {
-    setIsDeletingCurrencyProfile(true);
-
-    // TODO Will be implemented later
-    console.log("Delete profile:", selectedCurrencyProfile.id);
-
-    setIsDeletingCurrencyProfile(false);
-  };
-
-  const handleAddSharedUser = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // TODO Validate email
-    setNewSharedUserEmailError("");
-
-    // TODO Will be implemented later
-    console.log("Add user: ", newSharedUserEmail);
-  };
-
-  const handleRemoveUser = (email: string) => {
-    // TODO Will be implemented later
-    console.log("Remove user:", email);
-  };
 
   return (
     <section className="currency-profile-settings-section">
@@ -238,11 +370,11 @@ const CurrencyProfileSettingsSection: React.FC = () => {
             <div>
               <div className="currency-profile-settings-section-item">
                 <div>
-                  <div className="currency-profile-settings-item-title">
+                  <div className="currency-profile-settings-section-item-title">
                     {t("settings.sharedUsers")}
                   </div>
 
-                  <div className="currency-profile-settings-item-description">
+                  <div className="currency-profile-settings-section-item-description">
                     {t("settings.sharedUsersDescription")}
                   </div>
                 </div>
@@ -250,11 +382,14 @@ const CurrencyProfileSettingsSection: React.FC = () => {
 
               <div>
                 <div className="currency-profile-settings-section-shared-user-list">
-                  {sharedUsers.map((email) => (
+                  {sharedUsers.map((sharedUser) => (
                     <SharedUserCard
-                      key={email}
-                      email={email}
-                      handleRemoveUser={handleRemoveUser}
+                      key={sharedUser.id}
+                      email={sharedUser.email}
+                      handleRemoveUser={() => {
+                        setSharedUserToRemove(sharedUser);
+                        setIsUserRemovalDialogOpen(true);
+                      }}
                     />
                   ))}
                 </div>
@@ -296,13 +431,27 @@ const CurrencyProfileSettingsSection: React.FC = () => {
               </div>
 
               <DeleteSettingsButton
-                onClick={handleDeleteCurrencyProfile}
+                onClick={() => setIsCurrencyProfileDeleteDialogOpen(true)}
                 isDisabled={isDeletingCurrencyProfile}
               />
             </div>
           </>
         )}
       </div>
+
+      <AppDeleteDialog
+        isOpen={isCurrencyProfileDeleteDialogOpen}
+        onClose={() => setIsCurrencyProfileDeleteDialogOpen(false)}
+        onConfirm={handleDeleteCurrencyProfile}
+        message={t("settings.deleteCurrencyProfileConfirmMessage")}
+      />
+
+      <AppDeleteDialog
+        isOpen={isUserRemovalDialogOpen}
+        onClose={() => setIsUserRemovalDialogOpen(false)}
+        onConfirm={handleRemoveUser}
+        message={t("settings.userRemovalConfirmMessage")}
+      />
     </section>
   );
 };

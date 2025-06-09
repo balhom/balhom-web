@@ -7,7 +7,7 @@ import AppLoaderPage from "../../../../common/pages/app-loader-page/app-loader-p
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { CurrencyProfilesContext } from "../contexts/currency-profiles-context";
 import { getSelectedCurrencyProfile } from "../../usecases/get-selected-currency-profile-usecase";
-import { getCurrencyProfiles } from "../../usecases/get-currency-profiles-usecase";
+import { listCurrencyProfiles } from "../../usecases/list-currency-profiles-usecase";
 import { CREATE_CURRENCY_PROFILE_ROUTE_PATH } from "../../routes";
 import { Navigate } from "react-router-dom";
 import { listenCurrencyProfileChanges } from "../../usecases/listen-currency-profile-changes-usecase";
@@ -45,7 +45,7 @@ export const CurrencyProfilesProvider = ({
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
-    getCurrencyProfiles().then((currencyProfilesEither) =>
+    listCurrencyProfiles().then((currencyProfilesEither) =>
       currencyProfilesEither.fold(
         (error: AppError) => {
           setIsError(true);

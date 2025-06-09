@@ -7,6 +7,7 @@ import AppTextInput from "../../../../common/components/app-text-input/app-text-
 import LogoutSettingsButton from "../logout-settings-button/logout-settings-button";
 import ChanngePasswordSettingsButton from "../change-password-settings-button/change-password-settings-button";
 import { deleteAllCurrencyProfiles } from "../../../currency-profile/usecases/delete-all-currency-profiles-usecase";
+import AppDeleteDialog from "../../../../common/components/app-delete-dialog/app-delete-dialog";
 
 const AccountSettingsSection: React.FC = () => {
   const { t } = useTranslation();
@@ -14,30 +15,22 @@ const AccountSettingsSection: React.FC = () => {
   const { goToAuthServer, logout, tokens } = useOidc();
   const userEmail = tokens?.decodedIdToken?.email?.toString() ?? "";
 
+  // State to manage the delete confirmation dialog
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
+  // State to manage the deletion proces
   const [isDeletingAccount, setIsDeletingAccount] = useState<boolean>(false);
 
-  // TODO Add delete confirmation dialog
-
+  // Function to handle the delete account action
   const handleDeleteAccount = useCallback(() => {
     setIsDeletingAccount(true);
 
-    deleteAllCurrencyProfiles().then((result) => {
-      result.fold(
-        (error) => {
-          // TODO Show error dialog
-          console.error("Error deleting account:", error);
-        },
-        () => {
-          logout?.({
-            redirectTo: "home",
-          });
-        }
-      );
-
-      setIsDeletingAccount(false);
+    deleteAllCurrencyProfiles().then(() => {
+      logout?.({
+        redirectTo: "home",
+      });
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [logout]);
 
   return (
     <section className="account-settings-section">
@@ -127,11 +120,18 @@ const AccountSettingsSection: React.FC = () => {
           </div>
 
           <DeleteSettingsButton
-            onClick={handleDeleteAccount}
+            onClick={() => setIsDeleteDialogOpen(true)}
             isDisabled={isDeletingAccount}
           />
         </div>
       </div>
+
+      <AppDeleteDialog
+        isOpen={isDeleteDialogOpen}
+        onClose={() => setIsDeleteDialogOpen(false)}
+        onConfirm={handleDeleteAccount}
+        message={t("settings.deleteAccountConfirmMessage")}
+      />
     </section>
   );
 };

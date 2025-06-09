@@ -86,6 +86,7 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
         }
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!selectedCurrencyProfile) return null;

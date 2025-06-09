@@ -183,12 +183,18 @@ export default {
     deleteAccount: "Eliminar cuenta",
     deleteAccountDescription:
       "Elimina permanentemente tu cuenta y todos los datos asociados",
+    deleteAccountConfirmMessage:
+      "¿Estás seguro de que quieres eliminar la cuenta? Esta acción no se puede deshacer.",
     currencyProfile: "Perfil de Moneda",
     currencyProfileDescription:
       "Administra la configuración de tu perfil de moneda",
+    deleteCurrencyProfileConfirmMessage:
+      "¿Estás seguro de que quieres eliminar el perfil de divisa? Esta acción no se puede deshacer.",
     sharedUsers: "Usuarios Compartidos",
     sharedUsersDescription:
       "Administra los usuarios que tienen acceso a este perfil",
+    userRemovalConfirmMessage:
+      "¿Estás seguro de que quieres quitar al usuario del perfil de divisa?",
     addUserPlaceholder: "Ingresa dirección de correo",
     removeUser: "Eliminar usuario",
     updateCurrencyProfileButton: "Update",

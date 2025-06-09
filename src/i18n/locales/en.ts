@@ -182,10 +182,16 @@ export default {
     deleteAccount: "Delete Account",
     deleteAccountDescription:
       "Permanently delete your account and all associated data",
+    deleteAccountConfirmMessage:
+      "Are you sure you want to delete the account? This action cannot be undone.",
     currencyProfile: "Currency Profile",
     currencyProfileDescription: "Manage your currency profile settings",
+    deleteCurrencyProfileConfirmMessage:
+      "Are you sure you want to delete the currency profile? This action cannot be undone.",
     sharedUsers: "Shared Users",
     sharedUsersDescription: "Manage users who have access to this profile",
+    userRemovalConfirmMessage:
+      "Are you sure you want to remove the user from the currency profile?",
     addUserPlaceholder: "Enter email address",
     removeUser: "Remove user",
     updateCurrencyProfileButton: "Update",

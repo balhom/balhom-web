@@ -6,7 +6,7 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  title: string;
+  title?: string;
   message: string;
 }
 
@@ -25,7 +25,7 @@ const AppDeleteDialog: React.FC<Props> = ({
     <div className="app-delete-dialog-overlay" onClick={onClose}>
       <div className="app-delete-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="app-delete-dialog-header">
-          <h2 className="app-delete-dialog-title">{title}</h2>
+          {title && <h2 className="app-delete-dialog-title">{title}</h2>}
           <p className="app-delete-dialog-message">{message}</p>
         </div>
         <div className="app-delete-dialog-actions">

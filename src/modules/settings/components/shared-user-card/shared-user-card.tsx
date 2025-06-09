@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 interface Props {
   email: string;
-  handleRemoveUser: (email: string) => void;
+  handleRemoveUser: () => void;
 }
 
 const SharedUserCard: React.FC<Props> = ({
@@ -19,7 +19,7 @@ const SharedUserCard: React.FC<Props> = ({
 
       <button
         className="shared-user-card-remove-user-button"
-        onClick={() => handleRemoveUser(email)}
+        onClick={handleRemoveUser}
         aria-label={t("settings.removeUser")}
       >
         <X size={18} />

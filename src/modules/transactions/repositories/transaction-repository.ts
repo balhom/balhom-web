@@ -7,8 +7,8 @@ import { TransactionEntity } from "../data/entities/transaction-entity";
 import { TransactionFiltersEntity } from "../data/entities/transaction-filters-entity";
 import { TransactionSortEnum } from "../data/enums/transaction-sort-enum";
 import { TransactionTypeEnum } from "../data/enums/transaction-type-enum";
-import { TransactionCreateProps } from "../data/props/transaction-create-props";
-import { TransactionUpdateProps } from "../data/props/transaction-update-props";
+import { CreateTransactionProps } from "../data/props/create-transaction-props";
+import { UpdateTransactionProps } from "../data/props/update-transaction-props";
 import { categoryToImage } from "../utils";
 
 export interface TransactionRepository {
@@ -29,9 +29,9 @@ export interface TransactionRepository {
     currencyProfile: CurrencyProfileEntity
   ) => Promise<Either<AppError, TransactionEntity>>;
 
-  create: (props: TransactionCreateProps) => Promise<Either<AppError, void>>;
+  create: (props: CreateTransactionProps) => Promise<Either<AppError, void>>;
 
-  update: (props: TransactionUpdateProps) => Promise<Either<AppError, void>>;
+  update: (props: UpdateTransactionProps) => Promise<Either<AppError, void>>;
 
   delete: (
     id: string,

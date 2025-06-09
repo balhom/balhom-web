@@ -67,8 +67,15 @@ const TransactionList: React.FC<Props> = ({
         }
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [dispatch]
+    [
+      dispatch,
+      selectedCurrencyProfile,
+      selectedMonth,
+      selectedYear,
+      transactionsPageState.filter,
+      transactionsPageState.sortValue,
+      type,
+    ]
   );
 
   useEffect(() => {
