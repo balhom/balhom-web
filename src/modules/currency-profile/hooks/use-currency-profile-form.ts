@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { CurrencyEnum } from "../data/enums/currency-enum";
 import { useCurrencyProfileCurrencyForm } from "./use-currency-profile-currency-form";
 import { useCurrencyProfileNameForm } from "./use-currency-profile-name-form";
@@ -32,7 +32,7 @@ export const useCurrencyProfileForm = (): [
   const [yearlySavingsGoal, setYearlySavingsGoal] = useState<string>("0");
   const [image, setImage] = useState<File | undefined>(undefined);
 
-  const isFormValid: () => boolean = () => {
+  const isFormValid: () => boolean = useCallback(() => {
     // Check if name is valid
     if (!isNameValid() && !nameError) {
       handleNameChange(name);
@@ -45,7 +45,16 @@ export const useCurrencyProfileForm = (): [
       return false;
     }
     return true;
-  };
+  }, [
+    currency,
+    currencyError,
+    handleCurrencyChange,
+    handleNameChange,
+    isCurrencyValid,
+    isNameValid,
+    name,
+    nameError,
+  ]);
 
   return [
     name,

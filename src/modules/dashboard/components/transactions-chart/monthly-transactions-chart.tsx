@@ -11,7 +11,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   fetchDailyTransactionStatisticsAsync,
   fetchMonthlyTransactionStatisticsAsync,
@@ -45,27 +45,36 @@ const MonthlyTransactionsChart: React.FC = () => {
     );
   }, [dispatch, selectedYearRef, selectedCurrencyProfile]);
 
-  const onYearChange = (newYear: number) => {
-    dispatch(
-      fetchMonthlyTransactionStatisticsAsync({
-        year: newYear,
-      })
-    );
-    dispatch(
-      fetchDailyTransactionStatisticsAsync({
-        month: transactionStatisticsState.selectedMonth,
-        year: newYear,
-      })
-    );
-  };
+  const onYearChange = useCallback(
+    (newYear: number) => {
+      dispatch(
+        fetchMonthlyTransactionStatisticsAsync({
+          year: newYear,
+        })
+      );
+      dispatch(
+        fetchDailyTransactionStatisticsAsync({
+          month: transactionStatisticsState.selectedMonth,
+          year: newYear,
+        })
+      );
+    },
+    [dispatch, transactionStatisticsState.selectedMonth]
+  );
 
-  let availableYears: number[] = [transactionStatisticsState.selectedYear];
-  if (selectedCurrencyProfile?.initialDate) {
-    availableYears = getYearsBetweenDates(
-      selectedCurrencyProfile?.initialDate,
-      new Date()
-    );
-  }
+  const availableYears = useMemo(() => {
+    let availableYears: number[] = [transactionStatisticsState.selectedYear];
+    if (selectedCurrencyProfile?.initialDate) {
+      availableYears = getYearsBetweenDates(
+        selectedCurrencyProfile?.initialDate,
+        new Date()
+      );
+    }
+    return availableYears;
+  }, [
+    selectedCurrencyProfile?.initialDate,
+    transactionStatisticsState.selectedYear,
+  ]);
 
   return (
     <div className="transactions-chart">

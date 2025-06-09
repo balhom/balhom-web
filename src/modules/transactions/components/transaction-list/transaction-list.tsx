@@ -106,14 +106,14 @@ const TransactionList: React.FC<Props> = ({
   const minAmount = transactionsPageState.filter.minAmount;
   const maxAmount = transactionsPageState.filter.maxAmount;
 
-  const getActiveFiltersCount = () => {
+  const getActiveFiltersCount = useCallback(() => {
     let count = 0;
 
     if (minAmount) count++;
     if (maxAmount) count++;
 
     return count;
-  };
+  }, [maxAmount, minAmount]);
 
   return (
     <div className="transaction-list">

@@ -2,6 +2,7 @@ import "./pagination.css";
 import { PageEntity } from "../../data/entities/page-entity";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TransactionTypeEnum } from "../../../modules/transactions/data/enums/transaction-type-enum";
+import { useCallback } from "react";
 
 interface Props<T> {
   type: TransactionTypeEnum;
@@ -13,7 +14,7 @@ const Pagination = <T,>({ type, page, onPageChange }: Props<T>) => {
   const currentPage = page.pageNum;
   const totalPages = page.lastPage + 1;
 
-  const getPageNumbers = () => {
+  const getPageNumbers = useCallback(() => {
     const pages = [];
     const showPages = 3;
 
@@ -44,7 +45,7 @@ const Pagination = <T,>({ type, page, onPageChange }: Props<T>) => {
     }
 
     return pages;
-  };
+  }, [currentPage, totalPages]);
 
   return (
     <div className="pagination">

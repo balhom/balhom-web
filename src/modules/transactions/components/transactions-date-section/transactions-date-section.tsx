@@ -11,6 +11,7 @@ import {
   fetchIncomesPageAsync,
 } from "../../states/redux/thunks/transactions-page-thunks";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
+import { useCallback, useMemo } from "react";
 
 interface Props {
   type: TransactionTypeEnum;
@@ -42,15 +43,18 @@ const TransactionsDateSection: React.FC<Props> = ({
     transactionCategoryStatisticsState.isStatisticsLoading ||
     transactionsPageState.isLoading;
 
-  let availableYears: number[] = [selectedYear];
-  if (selectedCurrencyProfile?.initialDate) {
-    availableYears = getYearsBetweenDates(
-      selectedCurrencyProfile?.initialDate,
-      new Date()
-    );
-  }
+  const availableYears = useMemo(() => {
+    let availableYears: number[] = [selectedYear];
+    if (selectedCurrencyProfile?.initialDate) {
+      availableYears = getYearsBetweenDates(
+        selectedCurrencyProfile?.initialDate,
+        new Date()
+      );
+    }
+    return availableYears;
+  }, [selectedCurrencyProfile?.initialDate, selectedYear]);
 
-  const handleRefresh = () => {
+  const handleRefresh = useCallback(() => {
     if (selectedCurrencyProfile) {
       if (type === TransactionTypeEnum.Income) {
         dispatch(
@@ -78,7 +82,17 @@ const TransactionsDateSection: React.FC<Props> = ({
         );
       }
     }
-  };
+  }, [
+    dispatch,
+    selectedCurrencyProfile,
+    selectedMonth,
+    selectedYear,
+    transactionsPageState.filter,
+    transactionsPageState.page.pageNum,
+    transactionsPageState.search,
+    transactionsPageState.sortValue,
+    type,
+  ]);
 
   return (
     <div className="transactions-date-section-container">

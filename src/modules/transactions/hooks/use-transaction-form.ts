@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useTransactionDescriptionForm } from "./use-transaction-description-form";
 import { useTransactionTitleForm } from "./use-transaction-title-form";
 
@@ -19,7 +20,7 @@ export const useTransactionForm = (): [
     isDescriptionValid,
   ] = useTransactionDescriptionForm();
 
-  const isFormValid: () => boolean = () => {
+  const isFormValid: () => boolean = useCallback(() => {
     // Check if title is valid
     if (!isTitleValid() && !titleError) {
       handleTitleChange(title);
@@ -33,7 +34,16 @@ export const useTransactionForm = (): [
       return false;
     }
     return true;
-  };
+  }, [
+    description,
+    descriptionError,
+    handleDescriptionChange,
+    handleTitleChange,
+    isDescriptionValid,
+    isTitleValid,
+    title,
+    titleError,
+  ]);
 
   return [
     title,

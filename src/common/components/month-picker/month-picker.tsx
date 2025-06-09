@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { formatMonth } from "../../utils/date-utils";
 import "./month-picker.css";
 import { useTranslation } from "react-i18next";
@@ -10,12 +11,15 @@ interface Props {
 export const MonthPicker: React.FC<Props> = ({ month, onChange }: Props) => {
   const { t } = useTranslation();
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newMonth = Number(e.target.value);
-    onChange(newMonth);
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const newMonth = Number(e.target.value);
+      onChange(newMonth);
+    },
+    [onChange]
+  );
 
-  const generateOptions = () => {
+  const generateOptions = useCallback(() => {
     const options: { value: string; label: string }[] = [];
 
     [...Array(12)].map((_, i) => {
@@ -26,7 +30,7 @@ export const MonthPicker: React.FC<Props> = ({ month, onChange }: Props) => {
     });
 
     return options;
-  };
+  }, [t]);
 
   return (
     <select value={`${month}`} onChange={handleChange} className="month-picker">

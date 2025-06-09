@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "../data/enums/currency-enum";
 
@@ -13,17 +13,19 @@ export const useCurrencyProfileCurrencyForm = (): [
   const [currency, setCurrency] = useState<CurrencyEnum | undefined>();
   const [currencyError, setCurrencyError] = useState<string>("");
 
-  const handleCurrencyChange: (newCurrency?: CurrencyEnum) => void = (
-    newCurrency
-  ) => {
-    setCurrency(newCurrency);
+  const handleCurrencyChange: (newCurrency?: CurrencyEnum) => void =
+    useCallback(
+      (newCurrency) => {
+        setCurrency(newCurrency);
 
-    if (!newCurrency) {
-      setCurrencyError(t("currencyProfile.currencyRequiredError"));
-      return;
-    }
-    setCurrencyError("");
-  };
+        if (!newCurrency) {
+          setCurrencyError(t("currencyProfile.currencyRequiredError"));
+          return;
+        }
+        setCurrencyError("");
+      },
+      [t]
+    );
 
   const isCurrencyValid: () => boolean = () => {
     if (!currency) {

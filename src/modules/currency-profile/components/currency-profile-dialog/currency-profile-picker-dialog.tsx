@@ -1,7 +1,7 @@
 import "./currency-profile-picker-dialog.css";
 import { X, Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import React from "react";
+import React, { useCallback } from "react";
 import { formatCurrency } from "../../utils";
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { CURRENCY_PROFILE_DEFAULT_IMAGE_CONSTANT } from "../../data/constants/currency-profile-constants";
@@ -27,9 +27,9 @@ const CurrencyProfilePickerDialog: React.FC<Props> = ({
 
   const navigate = useNavigate();
 
-  const handleCreateCurrencyProfile = () => {
+  const handleCreateCurrencyProfile = useCallback(() => {
     navigate(CREATE_CURRENCY_PROFILE_ROUTE_PATH);
-  };
+  }, [navigate]);
 
   if (!isOpen) return null;
 
@@ -81,15 +81,18 @@ const CurrencyProfilePickerDialog: React.FC<Props> = ({
             </div>
           ))}
         </div>
-        <div className="currency-profile-picker-dialog-footer">
-          <button
-            className="currency-profile-picker-dialog-button"
-            onClick={handleCreateCurrencyProfile}
-          >
-            <Plus size={18} />
-            {t("currencyProfile.create")}
-          </button>
-        </div>
+
+        {currencyProfiles.length < 15 && (
+          <div className="currency-profile-picker-dialog-footer">
+            <button
+              className="currency-profile-picker-dialog-button"
+              onClick={handleCreateCurrencyProfile}
+            >
+              <Plus size={18} />
+              {t("currencyProfile.create")}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

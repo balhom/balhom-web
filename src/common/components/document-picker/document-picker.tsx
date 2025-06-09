@@ -1,5 +1,5 @@
 import "./document-picker.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Upload, File, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import AppErrorText from "../app-error-text/app-error-text";
@@ -31,71 +31,80 @@ const DocumentPicker: React.FC<Props> = ({
   const [errorText, setErrorText] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const formatFileSize = (bytes: number) => {
+  const formatFileSize = useCallback((bytes: number) => {
     if (bytes === 0) return "0 Bytes";
     const k = 1024;
     const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-  };
+  }, []);
 
-  const handleFiles = (newFiles: FileList | null) => {
-    if (!newFiles) return;
+  const handleFiles = useCallback(
+    (newFiles: FileList | null) => {
+      if (!newFiles) return;
 
-    setErrorText("");
+      setErrorText("");
 
-    const updatedFiles = [...documents];
-    let errorMessage = null;
+      const updatedFiles = [...documents];
+      let errorMessage = null;
 
-    Array.from(newFiles).forEach((file) => {
-      if (updatedFiles.length >= maxDocuments) {
-        errorMessage = t("common.maxFilesExceededError");
-        return;
+      Array.from(newFiles).forEach((file) => {
+        if (updatedFiles.length >= maxDocuments) {
+          errorMessage = t("common.maxFilesExceededError");
+          return;
+        }
+
+        if (file.size > maxSize) {
+          errorMessage = t("common.fileTooLargeError", {
+            maxSize: formatFileSize(maxSize),
+          });
+          return;
+        }
+
+        if (
+          !updatedFiles.find(
+            (docEither) =>
+              docEither.isLeft() && docEither.getLeft()?.name === file.name
+          )
+        ) {
+          updatedFiles.push(Either.left(file));
+        }
+      });
+
+      if (errorMessage) {
+        setErrorText(errorMessage);
       }
 
-      if (file.size > maxSize) {
-        errorMessage = t("common.fileTooLargeError", {
-          maxSize: formatFileSize(maxSize),
-        });
-        return;
-      }
+      onDocumentsChange(updatedFiles);
+    },
+    [documents, formatFileSize, maxDocuments, maxSize, onDocumentsChange, t]
+  );
 
-      if (
-        !updatedFiles.find(
-          (docEither) =>
-            docEither.isLeft() && docEither.getLeft()?.name === file.name
-        )
-      ) {
-        updatedFiles.push(Either.left(file));
-      }
-    });
+  const handleDrop = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      setIsDragging(false);
+      handleFiles(e.dataTransfer.files);
+    },
+    [handleFiles]
+  );
 
-    if (errorMessage) {
-      setErrorText(errorMessage);
-    }
-
-    onDocumentsChange(updatedFiles);
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-    handleFiles(e.dataTransfer.files);
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(true);
-  };
+  }, []);
 
-  const handleDragLeave = () => {
+  const handleDragLeave = useCallback(() => {
     setIsDragging(false);
-  };
+  }, []);
 
-  const removeFile = (index: number) => {
-    const updatedFiles = documents.filter((_, i) => i !== index);
-    onDocumentsChange([...updatedFiles]);
-  };
+  const removeFile = useCallback(
+    (index: number) => {
+      const updatedFiles = documents.filter((_, i) => i !== index);
+      onDocumentsChange([...updatedFiles]);
+    },
+    [documents, onDocumentsChange]
+  );
 
   return (
     <div className="document-picker">

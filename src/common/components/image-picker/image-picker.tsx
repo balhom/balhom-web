@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { ImagePlusIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./image-picker.css";
@@ -25,36 +25,39 @@ const ImagePicker: React.FC<Props> = ({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsLoading(true);
+  const handleFileChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setIsLoading(true);
 
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-
-      imageCompression(file, {
-        maxSizeMB: 0.7,
-        useWebWorker: true,
-      }).then((compressedImage) => {
-        if (compressedImage.size / 1000 > 700) {
-          setError(t("common.imageMaxError"));
-          return;
-        }
-
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
           setImageUrl(reader.result as string);
-          setIsLoading(false);
         };
-        reader.readAsDataURL(compressedImage);
-        onImageChange?.(compressedImage);
-      });
-    }
-  };
+        reader.readAsDataURL(file);
+
+        imageCompression(file, {
+          maxSizeMB: 0.7,
+          useWebWorker: true,
+        }).then((compressedImage) => {
+          if (compressedImage.size / 1000 > 700) {
+            setError(t("common.imageMaxError"));
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImageUrl(reader.result as string);
+            setIsLoading(false);
+          };
+          reader.readAsDataURL(compressedImage);
+          onImageChange?.(compressedImage);
+        });
+      }
+    },
+    [onImageChange, t]
+  );
 
   return (
     <div className="image-picker">

@@ -8,6 +8,7 @@ interface Props {
   value?: CurrencyEnum;
   onChange: (value: CurrencyEnum) => void;
   errorText?: string;
+  isReadOnly?: boolean;
 }
 
 const CurrencyPicker: React.FC<Props> = ({
@@ -15,8 +16,19 @@ const CurrencyPicker: React.FC<Props> = ({
   value,
   onChange,
   errorText,
+  isReadOnly = false,
 }: Props) => {
   const { t } = useTranslation();
+
+  if (isReadOnly) {
+    return (
+      <div>
+        <div className="currency-picker-box">
+          <p>{t(`currencyProfile.${value}`)}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

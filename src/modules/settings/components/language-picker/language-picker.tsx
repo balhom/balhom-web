@@ -1,13 +1,17 @@
 import { useTranslation } from "react-i18next";
 import "./language-picker.css";
 import { Languages } from "lucide-react";
+import { useCallback } from "react";
 
 const LanguagePicker: React.FC = () => {
   const { t, i18n } = useTranslation();
 
-  const handleLanguageChange = (language: string) => {
-    i18n.changeLanguage(language);
-  };
+  const handleLanguageChange = useCallback(
+    (language: string) => {
+      i18n.changeLanguage(language);
+    },
+    [i18n]
+  );
 
   return (
     <div className="language-picker">

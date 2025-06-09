@@ -54,6 +54,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow: hidden;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .currency-profile-picker-dialog-item {

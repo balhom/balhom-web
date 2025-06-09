@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import "./year-picker.css";
 
 interface Props {
@@ -11,12 +12,15 @@ export const YearPicker: React.FC<Props> = ({
   availableYears,
   onChange,
 }: Props) => {
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newYear = Number(e.target.value);
-    onChange(newYear);
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const newYear = Number(e.target.value);
+      onChange(newYear);
+    },
+    [onChange]
+  );
 
-  const generateOptions = () => {
+  const generateOptions = useCallback(() => {
     const options: { value: string; label: string }[] = [];
 
     availableYears
@@ -28,7 +32,7 @@ export const YearPicker: React.FC<Props> = ({
       });
 
     return options;
-  };
+  }, [availableYears]);
 
   return (
     <select value={`${year}`} onChange={handleChange} className="year-picker">

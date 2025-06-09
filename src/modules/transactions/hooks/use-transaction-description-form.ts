@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export const useTransactionDescriptionForm = (): [
   string,
@@ -9,17 +9,18 @@ export const useTransactionDescriptionForm = (): [
   const [description, setDescription] = useState<string>("");
   const [descriptionError, setDescriptionError] = useState<string>("");
 
-  const handleDescriptionChange: (newDescription: string) => void = (
-    newDescription
-  ) => {
-    setDescription(newDescription);
+  const handleDescriptionChange: (newDescription: string) => void = useCallback(
+    (newDescription) => {
+      setDescription(newDescription);
 
-    setDescriptionError("");
-  };
+      setDescriptionError("");
+    },
+    []
+  );
 
-  const isDescriptionValid: () => boolean = () => {
+  const isDescriptionValid: () => boolean = useCallback(() => {
     return true;
-  };
+  }, []);
 
   return [
     description,

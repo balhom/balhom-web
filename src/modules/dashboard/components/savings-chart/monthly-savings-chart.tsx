@@ -11,7 +11,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { YearPicker } from "../../../../common/components/year-picker/year-picker";
 import { fetchMonthlySavingStatisticsAsync } from "../../states/redux/thunks/saving-statistics-thunks";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
@@ -42,21 +42,30 @@ const MonthlySavingsChart: React.FC = () => {
     );
   }, [dispatch, selectedYearRef, selectedCurrencyProfile]);
 
-  const onYearChange = (newYear: number) => {
-    dispatch(
-      fetchMonthlySavingStatisticsAsync({
-        year: newYear,
-      })
-    );
-  };
+  const onYearChange = useCallback(
+    (newYear: number) => {
+      dispatch(
+        fetchMonthlySavingStatisticsAsync({
+          year: newYear,
+        })
+      );
+    },
+    [dispatch]
+  );
 
-  let availableYears: number[] = [savingStatisticsState.selectedYear];
-  if (selectedCurrencyProfile?.initialDate) {
-    availableYears = getYearsBetweenDates(
-      selectedCurrencyProfile?.initialDate,
-      new Date()
-    );
-  }
+  const availableYears = useMemo(() => {
+    let availableYears: number[] = [savingStatisticsState.selectedYear];
+    if (selectedCurrencyProfile?.initialDate) {
+      availableYears = getYearsBetweenDates(
+        selectedCurrencyProfile?.initialDate,
+        new Date()
+      );
+    }
+    return availableYears;
+  }, [
+    savingStatisticsState.selectedYear,
+    selectedCurrencyProfile?.initialDate,
+  ]);
 
   return (
     <div className="savings-chart">

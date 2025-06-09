@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./create-currency-profile-page.css";
@@ -46,41 +46,58 @@ const CreateCurrencyProfilePage: React.FC = () => {
 
   const [formError, setFormError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
 
-    if (!isFormValid()) {
-      return;
-    }
+      if (!isFormValid()) {
+        return;
+      }
 
-    try {
-      const createdCurrencyProfileEither = await createCurrencyProfile({
-        name: name,
-        currency: currency!,
-        balance: Number(initialBalance),
-        initialDate: initialDate,
-        monthlySavingsGoal: Number(monthlySavingsGoal),
-        yearlySavingsGoal: Number(yearlySavingsGoal),
-        image: image,
-      });
+      try {
+        const createdCurrencyProfileEither = await createCurrencyProfile({
+          name: name,
+          currency: currency!,
+          balance: Number(initialBalance),
+          initialDate: initialDate,
+          monthlySavingsGoal: Number(monthlySavingsGoal),
+          yearlySavingsGoal: Number(yearlySavingsGoal),
+          image: image,
+        });
 
-      createdCurrencyProfileEither.fold(
-        () => {
-          setFormError(t("common.genericError"));
-        },
-        (createdCurrencyProfile: CurrencyProfileEntity) => {
-          // Update states
-          setCurrencyProfiles([...currencyProfiles, createdCurrencyProfile]);
-          setSelectedCurrencyProfile(createdCurrencyProfile);
+        createdCurrencyProfileEither.fold(
+          () => {
+            setFormError(t("common.genericError"));
+          },
+          (createdCurrencyProfile: CurrencyProfileEntity) => {
+            // Update states
+            setCurrencyProfiles([...currencyProfiles, createdCurrencyProfile]);
+            setSelectedCurrencyProfile(createdCurrencyProfile);
 
-          navigate(DASHBOARD_ROUTE_PATH);
-        }
-      );
-    } catch (err) {
-      setFormError(t("common.genericError"));
-      console.error("Error creating currency profile:", err);
-    }
-  };
+            navigate(DASHBOARD_ROUTE_PATH);
+          }
+        );
+      } catch (err) {
+        setFormError(t("common.genericError"));
+        console.error("Error creating currency profile:", err);
+      }
+    },
+    [
+      currency,
+      currencyProfiles,
+      image,
+      initialBalance,
+      initialDate,
+      isFormValid,
+      monthlySavingsGoal,
+      name,
+      navigate,
+      setCurrencyProfiles,
+      setSelectedCurrencyProfile,
+      t,
+      yearlySavingsGoal,
+    ]
+  );
 
   return (
     <FormContainer>

@@ -10,6 +10,7 @@ import {
   fetchIncomesPageAsync,
 } from "../../states/redux/thunks/transactions-page-thunks";
 import { TransactionSortEnum } from "../../data/enums/transaction-sort-enum";
+import { useCallback } from "react";
 
 interface Props {
   type: TransactionTypeEnum;
@@ -31,37 +32,47 @@ const TransactionsSortPicker: React.FC<Props> = ({
   );
   const dispatch: AppDispatch = useDispatch();
 
-  const dispatchFecthTransactionsPageAsync = (
-    sortValue: TransactionSortEnum
-  ) => {
-    if (selectedCurrencyProfile) {
-      if (type === TransactionTypeEnum.Income) {
-        dispatch(
-          fetchIncomesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
-            month: selectedMonth,
-            year: selectedYear,
-            search: transactionsPageState.search,
-            filters: transactionsPageState.filter,
-            sort: sortValue,
-            pageNum: transactionsPageState.page.pageNum,
-          })
-        );
-      } else {
-        dispatch(
-          fetchExpensesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
-            month: selectedMonth,
-            year: selectedYear,
-            search: transactionsPageState.search,
-            filters: transactionsPageState.filter,
-            sort: sortValue,
-            pageNum: transactionsPageState.page.pageNum,
-          })
-        );
+  const dispatchFecthTransactionsPageAsync = useCallback(
+    (sortValue: TransactionSortEnum) => {
+      if (selectedCurrencyProfile) {
+        if (type === TransactionTypeEnum.Income) {
+          dispatch(
+            fetchIncomesPageAsync({
+              currencyProfile: selectedCurrencyProfile,
+              month: selectedMonth,
+              year: selectedYear,
+              search: transactionsPageState.search,
+              filters: transactionsPageState.filter,
+              sort: sortValue,
+              pageNum: transactionsPageState.page.pageNum,
+            })
+          );
+        } else {
+          dispatch(
+            fetchExpensesPageAsync({
+              currencyProfile: selectedCurrencyProfile,
+              month: selectedMonth,
+              year: selectedYear,
+              search: transactionsPageState.search,
+              filters: transactionsPageState.filter,
+              sort: sortValue,
+              pageNum: transactionsPageState.page.pageNum,
+            })
+          );
+        }
       }
-    }
-  };
+    },
+    [
+      dispatch,
+      selectedCurrencyProfile,
+      selectedMonth,
+      selectedYear,
+      transactionsPageState.filter,
+      transactionsPageState.page.pageNum,
+      transactionsPageState.search,
+      type,
+    ]
+  );
 
   return (
     <div className="transactions-sort-picker">

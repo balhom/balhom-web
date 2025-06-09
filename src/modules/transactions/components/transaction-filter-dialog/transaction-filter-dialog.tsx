@@ -10,7 +10,7 @@ import {
   fetchIncomesPageAsync,
 } from "../../states/redux/thunks/transactions-page-thunks";
 import { TransactionFiltersEntity } from "../../data/entities/transaction-filters-entity";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import AppNumberInput from "../../../../common/components/app-number-input/app-number-input";
 
 interface Props {
@@ -44,37 +44,47 @@ const TransactionFilterDialog: React.FC<Props> = ({
     transactionsPageState.filter.maxAmount?.toString()
   );
 
-  const dispatchFecthTransactionsPageAsync = (
-    filters: TransactionFiltersEntity
-  ) => {
-    if (selectedCurrencyProfile) {
-      if (type === TransactionTypeEnum.Income) {
-        dispatch(
-          fetchIncomesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
-            month: selectedMonth,
-            year: selectedYear,
-            filters: filters,
-            search: transactionsPageState.search,
-            sort: transactionsPageState.sortValue,
-            pageNum: transactionsPageState.page.pageNum,
-          })
-        );
-      } else {
-        dispatch(
-          fetchExpensesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
-            month: selectedMonth,
-            year: selectedYear,
-            filters: filters,
-            search: transactionsPageState.search,
-            sort: transactionsPageState.sortValue,
-            pageNum: transactionsPageState.page.pageNum,
-          })
-        );
+  const dispatchFecthTransactionsPageAsync = useCallback(
+    (filters: TransactionFiltersEntity) => {
+      if (selectedCurrencyProfile) {
+        if (type === TransactionTypeEnum.Income) {
+          dispatch(
+            fetchIncomesPageAsync({
+              currencyProfile: selectedCurrencyProfile,
+              month: selectedMonth,
+              year: selectedYear,
+              filters: filters,
+              search: transactionsPageState.search,
+              sort: transactionsPageState.sortValue,
+              pageNum: transactionsPageState.page.pageNum,
+            })
+          );
+        } else {
+          dispatch(
+            fetchExpensesPageAsync({
+              currencyProfile: selectedCurrencyProfile,
+              month: selectedMonth,
+              year: selectedYear,
+              filters: filters,
+              search: transactionsPageState.search,
+              sort: transactionsPageState.sortValue,
+              pageNum: transactionsPageState.page.pageNum,
+            })
+          );
+        }
       }
-    }
-  };
+    },
+    [
+      dispatch,
+      selectedCurrencyProfile,
+      selectedMonth,
+      selectedYear,
+      transactionsPageState.page.pageNum,
+      transactionsPageState.search,
+      transactionsPageState.sortValue,
+      type,
+    ]
+  );
 
   if (!isOpen) return null;
 

@@ -291,6 +291,7 @@ const CurrencyProfileSettingsSection: React.FC = () => {
             value={currency}
             onChange={handleCurrencyChange}
             errorText={currencyError}
+            isReadOnly={true}
           />
         </div>
         {/* Balance Part */}

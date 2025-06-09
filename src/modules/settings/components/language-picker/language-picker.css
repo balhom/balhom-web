@@ -31,20 +31,6 @@
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
-.language-picker::after {
-  content: "";
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid var(--color-text-secondary);
-  pointer-events: none;
-}
-
 @media (max-width: 640px) {
   .language-picker {
     width: 100%;
