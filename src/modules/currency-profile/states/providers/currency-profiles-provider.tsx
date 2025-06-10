@@ -41,6 +41,21 @@ export const CurrencyProfilesProvider = ({
     []
   );
 
+  const fetchAndAddCurrencyProfile = useCallback(
+    async (currencyProfileId: string) => {
+      const currencyProfileEither = await getCurrencyProfile(currencyProfileId);
+      currencyProfileEither.fold(
+        () => {},
+        (newCurrencyProfile) => {
+          const newCurrencyProfiles = [...currencyProfiles];
+          newCurrencyProfiles.push(newCurrencyProfile);
+          setCurrencyProfiles(newCurrencyProfiles);
+        }
+      );
+    },
+    [currencyProfiles]
+  );
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -65,28 +80,30 @@ export const CurrencyProfilesProvider = ({
 
             // Create event handler
             if (event.action === StreamChangeTypeEnum.Create) {
-              getCurrencyProfile(event.id).then((currencyProfileEither) =>
-                currencyProfileEither.fold(
-                  () => {},
-                  (newCurrencyProfile) => {
-                    newCurrencyProfiles.push(newCurrencyProfile);
-                    setCurrencyProfiles(newCurrencyProfiles);
-                  }
-                )
-              );
+              fetchAndAddCurrencyProfile(event.id);
             }
             // Update event handler
             else if (event.action === StreamChangeTypeEnum.Update) {
-              setCurrencyProfiles(
-                newCurrencyProfiles.map((oldCurrencyProfile) => {
-                  if (oldCurrencyProfile.id === event.id) {
-                    oldCurrencyProfile.balance = event.balance;
-                    oldCurrencyProfile.monthlySavingsGoal = event.monthlyGoal;
-                    oldCurrencyProfile.yearlySavingsGoal = event.yearlyGoal;
-                  }
-                  return oldCurrencyProfile;
-                })
-              );
+              const existsCurrencyProfile =
+                newCurrencyProfiles.find(
+                  (oldCurrencyProfile) => oldCurrencyProfile.id === event.id
+                ) !== undefined;
+
+              if (!existsCurrencyProfile) {
+                fetchAndAddCurrencyProfile(event.id);
+              } else {
+                // Update the existing currency profile
+                setCurrencyProfiles(
+                  newCurrencyProfiles.map((oldCurrencyProfile) => {
+                    if (oldCurrencyProfile.id === event.id) {
+                      oldCurrencyProfile.balance = event.balance;
+                      oldCurrencyProfile.monthlySavingsGoal = event.monthlyGoal;
+                      oldCurrencyProfile.yearlySavingsGoal = event.yearlyGoal;
+                    }
+                    return oldCurrencyProfile;
+                  })
+                );
+              }
             }
             // Delete event handler
             else if (event.action === StreamChangeTypeEnum.Delete) {
@@ -103,6 +120,7 @@ export const CurrencyProfilesProvider = ({
         }
       )
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isError) {
