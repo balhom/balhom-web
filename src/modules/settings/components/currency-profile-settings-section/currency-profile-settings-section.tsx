@@ -25,6 +25,7 @@ import { removeSharedUserFromCurrencyProfile } from "../../../currency-profile/u
 import { addCurrencyProfileSharedUser } from "../../../currency-profile/usecases/add-currency-profile-shared-user-usecase";
 import { isEmail } from "../../../../common/utils/form-utils";
 import { CREATE_CURRENCY_PROFILE_ROUTE_PATH } from "../../../currency-profile/routes";
+import { leaveCurrencyProfile } from "../../../currency-profile/usecases/leave-currency-profile-usecase";
 
 const CurrencyProfileSettingsSection: React.FC = () => {
   const { t } = useTranslation();
@@ -40,6 +41,12 @@ const CurrencyProfileSettingsSection: React.FC = () => {
     setSelectedCurrencyProfile,
     setCurrencyProfiles,
   } = useCurrencyProfiles();
+
+  // State to manage the leave action confirmation dialog
+  const [
+    isCurrencyProfileLeaveDialogOpen,
+    setIsCurrencyProfileLeaveDialogOpen,
+  ] = useState(false);
 
   // State to manage the delete confirmation dialog
   const [
@@ -61,6 +68,9 @@ const CurrencyProfileSettingsSection: React.FC = () => {
   const [newSharedUserEmail, setNewSharedUserEmail] = useState("");
   const [newSharedUserEmailError, setNewSharedUserEmailError] =
     useState<string>("");
+
+  const [isLeavingCurrencyProfile, setIsLeavingCurrencyProfile] =
+    useState<boolean>(false);
 
   const [isDeletingCurrencyProfile, setIsDeletingCurrencyProfile] =
     useState<boolean>(false);
@@ -148,6 +158,37 @@ const CurrencyProfileSettingsSection: React.FC = () => {
     yearlySavingsGoal,
   ]);
 
+  const handleLeaveCurrencyProfile = useCallback(() => {
+    if (selectedCurrencyProfile) {
+      setIsLeavingCurrencyProfile(true);
+
+      leaveCurrencyProfile(selectedCurrencyProfile.id).then(() => {
+        // Remove selected currency profile from the currency profiles list
+        const newCurrencyProfiles = currencyProfiles.filter(
+          (profile) => profile.id !== selectedCurrencyProfile?.id
+        );
+        setCurrencyProfiles(newCurrencyProfiles);
+        setSelectedCurrencyProfile(newCurrencyProfiles[0] ?? null);
+
+        // If there are no currency profiles left, navigate to the create currency profile route
+        // Otherwise, navigate to the dashboard route
+        if (newCurrencyProfiles.length === 0) {
+          navigate(CREATE_CURRENCY_PROFILE_ROUTE_PATH);
+        } else {
+          navigate(DASHBOARD_ROUTE_PATH);
+        }
+
+        setIsLeavingCurrencyProfile(false);
+      });
+    }
+  }, [
+    currencyProfiles,
+    navigate,
+    selectedCurrencyProfile,
+    setCurrencyProfiles,
+    setSelectedCurrencyProfile,
+  ]);
+
   // Function to handle the deletion of the current currency profile
   const handleDeleteCurrencyProfile = useCallback(() => {
     if (selectedCurrencyProfile) {
@@ -187,6 +228,11 @@ const CurrencyProfileSettingsSection: React.FC = () => {
       // Check if the new shared user email is empty
       if (!newSharedUserEmail.trim() || !isEmail(newSharedUserEmail)) return;
 
+      // Check if the new shared user email is already in the shared users list
+      if (sharedUsers.some((user) => user.email === newSharedUserEmail)) {
+        return;
+      }
+
       // Avoid if the selected currency profile is null
       if (!selectedCurrencyProfile) return;
 
@@ -217,10 +263,19 @@ const CurrencyProfileSettingsSection: React.FC = () => {
           }
         );
 
+        // Reset the new shared user email input
+        setNewSharedUserEmail("");
+
         setIsAddingSharedUser(false);
       });
     },
-    [isAddingSharedUser, newSharedUserEmail, selectedCurrencyProfile, t]
+    [
+      isAddingSharedUser,
+      newSharedUserEmail,
+      selectedCurrencyProfile,
+      sharedUsers,
+      t,
+    ]
   );
 
   const handleRemoveUser = useCallback(() => {
@@ -277,6 +332,7 @@ const CurrencyProfileSettingsSection: React.FC = () => {
               onTextChange={handleNameChange}
               errorText={nameError}
               maxLength={15}
+              isReadOnly={!isCurrencyProfileOwner}
             />
           </div>
         </div>
@@ -308,6 +364,7 @@ const CurrencyProfileSettingsSection: React.FC = () => {
               value={balance}
               onChange={setBalance}
               min={-1000000000}
+              isReadOnly={!isCurrencyProfileOwner}
             />
           </div>
         </div>
@@ -324,6 +381,7 @@ const CurrencyProfileSettingsSection: React.FC = () => {
               onChange={(newDate) => setInitialDate(newDate ?? new Date())}
               maxDate={new Date()}
               showTime={false}
+              isReadOnly={!isCurrencyProfileOwner}
             />
           </div>
         </div>
@@ -340,6 +398,7 @@ const CurrencyProfileSettingsSection: React.FC = () => {
               id="currency-profile-monthly-savings"
               value={monthlySavingsGoal}
               onChange={setMonthlySavingsGoal}
+              isReadOnly={!isCurrencyProfileOwner}
             />
           </div>
         </div>
@@ -356,13 +415,32 @@ const CurrencyProfileSettingsSection: React.FC = () => {
               id="currency-profile-yearly-savings"
               value={yearlySavingsGoal}
               onChange={setYearlySavingsGoal}
+              isReadOnly={!isCurrencyProfileOwner}
             />
           </div>
         </div>
-        <AppButton
-          text={t("settings.updateCurrencyProfileButton")}
-          onClick={handleUpdateCurrencyProfile}
-        />
+
+        {isCurrencyProfileOwner && (
+          <AppButton
+            text={t("settings.updateCurrencyProfileButton")}
+            onClick={handleUpdateCurrencyProfile}
+          />
+        )}
+
+        {!isCurrencyProfileOwner && (
+          <>
+            <hr className="currency-profile-settings-section-divider" />
+
+            <div className="currency-profile-settings-section-item">
+              <DeleteSettingsButton
+                text={t("settings.leaveCurrencyProfile")}
+                onClick={() => setIsCurrencyProfileLeaveDialogOpen(true)}
+                isDisabled={isLeavingCurrencyProfile}
+              />
+            </div>
+          </>
+        )}
+
         {isCurrencyProfileOwner && (
           <>
             <hr className="currency-profile-settings-section-divider" />
@@ -376,7 +454,7 @@ const CurrencyProfileSettingsSection: React.FC = () => {
                   </div>
 
                   <div className="currency-profile-settings-section-item-description">
-                    {t("settings.sharedUsersDescription")}
+                    <p>{t("settings.sharedUsersDescription")}</p>
                   </div>
                 </div>
               </div>
@@ -439,6 +517,13 @@ const CurrencyProfileSettingsSection: React.FC = () => {
           </>
         )}
       </div>
+
+      <AppDeleteDialog
+        isOpen={isCurrencyProfileLeaveDialogOpen}
+        onClose={() => setIsCurrencyProfileLeaveDialogOpen(false)}
+        onConfirm={handleLeaveCurrencyProfile}
+        message={t("settings.leaveCurrencyProfileConfirmMessage")}
+      />
 
       <AppDeleteDialog
         isOpen={isCurrencyProfileDeleteDialogOpen}

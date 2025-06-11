@@ -20,6 +20,16 @@ const AppTextInput: React.FC<Props> = ({
   placeholder,
   isReadOnly,
 }: Props) => {
+  if (isReadOnly) {
+    return (
+      <div>
+        <div className="app-text-input-box">
+          <p>{text}</p>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div>
       <input

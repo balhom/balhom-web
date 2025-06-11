@@ -6,6 +6,7 @@ interface Props {
   onChange: (value: string) => void;
   min?: number;
   max?: number;
+  isReadOnly?: boolean;
 }
 
 const AppNumberInput: React.FC<Props> = ({
@@ -14,6 +15,7 @@ const AppNumberInput: React.FC<Props> = ({
   onChange,
   min = 0,
   max = 1000000000,
+  isReadOnly,
 }: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value;
@@ -60,6 +62,16 @@ const AppNumberInput: React.FC<Props> = ({
 
   // Format display value to use comma instead of dot
   const displayValue = value.toString().replace(".", ",");
+
+  if (isReadOnly) {
+    return (
+      <div>
+        <div className="app-text-input-box">
+          <p>{displayValue}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <input

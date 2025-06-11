@@ -11,6 +11,7 @@ interface Props {
   minDate?: Date;
   maxDate?: Date;
   showTime?: boolean;
+  isReadOnly?: boolean;
 }
 
 const DateTimePicker: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const DateTimePicker: React.FC<Props> = ({
   minDate,
   maxDate,
   showTime = true,
+  isReadOnly,
 }: Props) => {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
@@ -28,6 +30,21 @@ const DateTimePicker: React.FC<Props> = ({
     initialDate?.setUTCSeconds(0);
     initialDate?.setUTCMilliseconds(0);
   }
+
+  if (isReadOnly) {
+    return (
+      <div>
+        <div className="date-time-picker-input-box">
+          <Calendar size={20} color="var(--color-text-secondary)" />
+
+          <span className="date-time-picker-value">
+            {initialDate ? formatDate(initialDate, showTime) : "-"}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div
@@ -37,7 +54,7 @@ const DateTimePicker: React.FC<Props> = ({
         tabIndex={0}
       >
         <Calendar size={20} color="var(--color-text-secondary)" />
-        
+
         <span className="date-time-picker-value">
           {initialDate ? formatDate(initialDate, showTime) : "-"}
         </span>

@@ -3,11 +3,13 @@ import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
+  text?: string;
   onClick?: () => void;
   isDisabled?: boolean;
 }
 
 const DeleteSettingsButton: React.FC<Props> = ({
+  text,
   onClick,
   isDisabled,
 }: Props) => {
@@ -20,7 +22,7 @@ const DeleteSettingsButton: React.FC<Props> = ({
       disabled={isDisabled}
     >
       <Trash2 size={18} />
-      {t("settings.deleteButton")}
+      {text ?? t("settings.deleteButton")}
     </button>
   );
 };

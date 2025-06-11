@@ -186,16 +186,19 @@ export default {
       "Are you sure you want to delete the account? This action cannot be undone.",
     currencyProfile: "Currency Profile",
     currencyProfileDescription: "Manage your currency profile settings",
+    leaveCurrencyProfileConfirmMessage:
+      "Are you sure you want to leave the currency profile?",
     deleteCurrencyProfileConfirmMessage:
       "Are you sure you want to delete the currency profile? This action cannot be undone.",
     sharedUsers: "Shared Users",
-    sharedUsersDescription: "Manage users who have access to this profile",
+    sharedUsersDescription: "Manage the users who have access to this profile through their email addresses. Giving them access will allow them to add, update and delete transactions, and view the currency profile data. They will not be able to update or delete the currency profile, view or delete shared users.",
     userRemovalConfirmMessage:
       "Are you sure you want to remove the user from the currency profile?",
     addUserPlaceholder: "Enter email address",
     removeUser: "Remove user",
     updateCurrencyProfileButton: "Update",
     deleteCurrencyProfile: "Delete Profile",
+    leaveCurrencyProfile: "Leave",
     deleteCurrencyProfileDescription:
       "Permanently delete this currency profile",
     deleteButton: "Delete",

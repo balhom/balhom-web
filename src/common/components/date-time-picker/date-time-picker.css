@@ -21,6 +21,19 @@
   transform: scale(0.99);
 }
 
+.date-time-picker-input-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
 .date-time-picker-value {
   flex: 1;
   font-size: 0.875rem;

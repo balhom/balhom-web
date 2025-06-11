@@ -78,9 +78,9 @@ export default {
     weakPasswordError: "Contraseña débil",
   },
   currencyProfile: {
-    createCurrencyProfileTitle: "Crear perfil de moneda",
+    createCurrencyProfileTitle: "Crear perfil de divisa",
     createDescription:
-      "Crea un nuevo perfil de moneda para gestionar tus ahorros",
+      "Crea un nuevo perfil de divisa para gestionar tus ahorros",
     name: "Nombre",
     balance: "Balance",
     initialBalance: "Balance inicial",
@@ -185,22 +185,25 @@ export default {
       "Elimina permanentemente tu cuenta y todos los datos asociados",
     deleteAccountConfirmMessage:
       "¿Estás seguro de que quieres eliminar la cuenta? Esta acción no se puede deshacer.",
-    currencyProfile: "Perfil de Moneda",
+    currencyProfile: "Perfil de Divisa",
     currencyProfileDescription:
-      "Administra la configuración de tu perfil de moneda",
+      "Administra la configuración de tu perfil de divisa",
+    leaveCurrencyProfileConfirmMessage:
+      "¿Estás seguro de que quieres salir del perfil de divisa?",
     deleteCurrencyProfileConfirmMessage:
       "¿Estás seguro de que quieres eliminar el perfil de divisa? Esta acción no se puede deshacer.",
     sharedUsers: "Usuarios Compartidos",
     sharedUsersDescription:
-      "Administra los usuarios que tienen acceso a este perfil",
+      "Administra los usuarios que tienen acceso a este perfil a través de sus direcciones de correo electrónico. Al darles acceso podrán añadir, actualizar y eliminar transacciones, y ver los datos del perfil de divisas. No podrán actualizar ni eliminar el perfil de divisas, ni ver ni eliminar usuarios compartidos.",
     userRemovalConfirmMessage:
       "¿Estás seguro de que quieres quitar al usuario del perfil de divisa?",
     addUserPlaceholder: "Ingresa dirección de correo",
     removeUser: "Eliminar usuario",
-    updateCurrencyProfileButton: "Update",
+    updateCurrencyProfileButton: "Actualizar",
     deleteCurrencyProfile: "Eliminar Perfil",
+    leaveCurrencyProfile: "Dejar",
     deleteCurrencyProfileDescription:
-      "Eliminar permanentemente este perfil de moneda",
+      "Eliminar permanentemente este perfil de divisa",
     deleteButton: "Eliminar",
     appPreferences: "Preferencias de la Aplicación",
     appPreferencesDescription: "Personaliza tu experiencia en la aplicación",
