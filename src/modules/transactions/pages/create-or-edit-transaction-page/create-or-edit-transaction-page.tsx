@@ -19,7 +19,6 @@ import DocumentPicker from "../../../../common/components/document-picker/docume
 import { TransactionEntity } from "../../data/entities/transaction-entity";
 import { getTransaction } from "../../usecases/get-transaction-usecase";
 import AppLoaderPage from "../../../../common/pages/app-loader-page/app-loader-page";
-import { Either } from "../../../../common/data/either";
 import { DocumentEntity } from "../../../../common/data/entities/document-entity";
 import { updateTransaction } from "../../usecases/update-transaction-usecase";
 import { createTransaction } from "../../usecases/create-transaction-usecase";
@@ -59,9 +58,7 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
       : TransactionCategoryEnum.ExpenseBills
   );
   const [date, setDate] = useState<Date>(new Date());
-  const [documents, setDocuments] = useState<Either<File, DocumentEntity>[]>(
-    []
-  );
+  const [documents, setDocuments] = useState<(File | DocumentEntity)[]>([]);
 
   useEffect(() => {
     if (id && selectedCurrencyProfile) {
@@ -78,9 +75,7 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
               setAmount(transaction.amount.toString());
               setCategory(transaction.category.code);
               setDate(transaction.date);
-              setDocuments(
-                transaction.documents.map((doc) => Either.right(doc))
-              );
+              setDocuments(transaction.documents);
             }
           );
         }
@@ -113,17 +108,18 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
       // then it should be removed
       if (
         !newDocuments.find(
-          (newDoc) => newDoc.isRight() && newDoc.getRight()?.id === oldDoc.id
+          (newFileOrDoc) =>
+            !(newFileOrDoc instanceof File) && newFileOrDoc.id === oldDoc.id
         )
       ) {
         documentsToRemove.push(oldDoc);
       }
     });
 
-    newDocuments.forEach((newDoc) => {
+    newDocuments.forEach((newFileOrDoc) => {
       // If new document is a file then it should be uploaded
-      if (newDoc.isLeft()) {
-        documentsToUpload.push(newDoc.getLeft()!);
+      if (newFileOrDoc instanceof File) {
+        documentsToUpload.push(newFileOrDoc);
       }
     });
 

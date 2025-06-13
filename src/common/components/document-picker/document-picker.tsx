@@ -5,13 +5,12 @@ import { useTranslation } from "react-i18next";
 import AppErrorText from "../app-error-text/app-error-text";
 import IconButton from "../icon-button/icon-button";
 import { DocumentEntity } from "../../data/entities/document-entity";
-import { Either } from "../../data/either";
 
 const maxDocumentSize = 5 * 1024 * 1024; // 5MB default
 
 interface Props {
-  documents: Either<File, DocumentEntity>[];
-  onDocumentsChange: (files: Either<File, DocumentEntity>[]) => void;
+  documents: (File | DocumentEntity)[];
+  onDocumentsChange: (files: (File | DocumentEntity)[]) => void;
   maxSize?: number; // in bytes
   maxDocuments?: number;
   accept?: string;
@@ -63,11 +62,11 @@ const DocumentPicker: React.FC<Props> = ({
 
         if (
           !updatedFiles.find(
-            (docEither) =>
-              docEither.isLeft() && docEither.getLeft()?.name === file.name
+            (fileOrDoc) =>
+              fileOrDoc instanceof File && fileOrDoc.name === file.name
           )
         ) {
-          updatedFiles.push(Either.left(file));
+          updatedFiles.push(file);
         }
       });
 
@@ -135,19 +134,17 @@ const DocumentPicker: React.FC<Props> = ({
 
       {documents.length > 0 && (
         <div className="document-picker-file-list">
-          {documents.map((documentEither, index) => {
+          {documents.map((fileOrDoc, index) => {
             let docName = "";
             let docSize: number | undefined;
 
-            documentEither.fold(
-              (file) => {
-                docName = file.name;
-                docSize = file.size;
-              },
-              (documentEntity) => {
-                docName = documentEntity.name;
-              }
-            );
+            if (fileOrDoc instanceof File) {
+              docName = fileOrDoc.name;
+              docSize = (fileOrDoc as File).size;
+            } else {
+              docName = fileOrDoc.name;
+            }
+
             return (
               <div
                 key={`${docName}-${index}`}

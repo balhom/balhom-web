@@ -1,15 +1,20 @@
 import { Either } from "../../../common/data/either";
 import { AppError } from "../../../common/data/errors/app-error";
-import { mockCurrencyProfiles } from "../../../mocks/mock-currency-profiles";
+import HttpService from "../../../common/services/http-service";
+import { CURRENCY_PROFILE_API_PATH } from "../data/constants/currency-profile-api-constants";
+import {
+  CurrencyProfileResponseRestDto,
+  currencyProfileResponseRestDtoToEntity,
+} from "../data/dtos/currency-profile-response-rest-dto";
 import { CurrencyProfileChangeEventEntity } from "../data/entities/currency-profile-change-event-entity";
 import { CurrencyProfileEntity } from "../data/entities/currency-profile-entity";
 import { CreateCurrencyProfileProps } from "../data/props/create-currency-profile-props";
 import { UpdateCurrencyProfileProps } from "../data/props/update-currency-profile-props";
 
 export interface CurrencyProfileRepository {
-  get: (id: string) => Promise<Either<AppError, CurrencyProfileEntity>>;
+  get: (id: string) => Promise<CurrencyProfileEntity>;
 
-  list: () => Promise<Either<AppError, CurrencyProfileEntity[]>>;
+  list: () => Promise<CurrencyProfileEntity[]>;
 
   create: (
     props: CreateCurrencyProfileProps
@@ -28,24 +33,34 @@ export interface CurrencyProfileRepository {
   deleteAll: () => Promise<Either<AppError, void>>;
 }
 
-export const currencyProfileRepository = (): CurrencyProfileRepository => ({
-  get: async (id: string): Promise<Either<AppError, CurrencyProfileEntity>> => {
-    // TODO remove and do api call
-    console.log(id);
-    const currencyProfile = mockCurrencyProfiles.find(
-      (profile) => profile.id === id
-    );
+export const currencyProfileRepository = (
+  httpService: HttpService
+): CurrencyProfileRepository => ({
+  get: async (id: string): Promise<CurrencyProfileEntity> => {
+    try {
+      const response =
+        await httpService.getRequest<CurrencyProfileResponseRestDto>(
+          `${CURRENCY_PROFILE_API_PATH}/${id}`
+        );
 
-    if (!currencyProfile) {
-      return Either.left(new AppError(""));
+      return currencyProfileResponseRestDtoToEntity(response);
+    } catch (error) {
+      console.log("Error fetching currency profiles: ", error);
+      throw new AppError("");
     }
-
-    return Either.right(currencyProfile);
   },
 
-  list: async (): Promise<Either<AppError, CurrencyProfileEntity[]>> => {
-    // TODO remove and do api call
-    return Either.right(mockCurrencyProfiles);
+  list: async (): Promise<CurrencyProfileEntity[]> => {
+    try {
+      const response = await httpService.getRequest<
+        CurrencyProfileResponseRestDto[]
+      >(CURRENCY_PROFILE_API_PATH);
+
+      return response.map(currencyProfileResponseRestDtoToEntity);
+    } catch (error) {
+      console.log("Error fetching currency profiles: ", error);
+      throw new AppError("");
+    }
   },
 
   create: async (

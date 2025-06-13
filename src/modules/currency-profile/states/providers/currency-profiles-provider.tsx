@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { AppError } from "../../../../common/data/errors/app-error";
 import { useTranslation } from "react-i18next";
-import { Either } from "../../../../common/data/either";
 import AppErrorPage from "../../../../common/pages/app-error-page/app-error-page";
 import AppLoaderPage from "../../../../common/pages/app-loader-page/app-loader-page";
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
@@ -43,15 +41,10 @@ export const CurrencyProfilesProvider = ({
 
   const fetchAndAddCurrencyProfile = useCallback(
     async (currencyProfileId: string) => {
-      const currencyProfileEither = await getCurrencyProfile(currencyProfileId);
-      currencyProfileEither.fold(
-        () => {},
-        (newCurrencyProfile) => {
-          const newCurrencyProfiles = [...currencyProfiles];
-          newCurrencyProfiles.push(newCurrencyProfile);
-          setCurrencyProfiles(newCurrencyProfiles);
-        }
-      );
+      const newCurrencyProfile = await getCurrencyProfile(currencyProfileId);
+      const newCurrencyProfiles = [...currencyProfiles];
+      newCurrencyProfiles.push(newCurrencyProfile);
+      setCurrencyProfiles(newCurrencyProfiles);
     },
     [currencyProfiles]
   );
@@ -60,77 +53,67 @@ export const CurrencyProfilesProvider = ({
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
-    listCurrencyProfiles().then((currencyProfilesEither) =>
-      currencyProfilesEither.fold(
-        (error: AppError) => {
-          setIsError(true);
-          setIsLoading(false);
-          return Either.left(error);
-        },
-        (currencyProfiles) => {
-          setSelectedCurrencyProfile(
-            getSelectedCurrencyProfile(currencyProfiles)
-          );
+    listCurrencyProfiles()
+      .then((currencyProfiles) => {
+        setSelectedCurrencyProfile(
+          getSelectedCurrencyProfile(currencyProfiles)
+        );
 
-          setCurrencyProfiles(currencyProfiles);
+        setCurrencyProfiles(currencyProfiles);
 
-          // Currency profile changes event listener
-          listenCurrencyProfileChanges((event) => {
-            const newCurrencyProfiles = [...currencyProfiles];
+        // Currency profile changes event listener
+        listenCurrencyProfileChanges((event) => {
+          const newCurrencyProfiles = [...currencyProfiles];
 
-            // Create event handler
-            if (event.action === StreamChangeTypeEnum.Create) {
+          // Create event handler
+          if (event.action === StreamChangeTypeEnum.Create) {
+            fetchAndAddCurrencyProfile(event.id);
+          }
+          // Update event handler
+          else if (event.action === StreamChangeTypeEnum.Update) {
+            const existsCurrencyProfile =
+              newCurrencyProfiles.find(
+                (oldCurrencyProfile) => oldCurrencyProfile.id === event.id
+              ) !== undefined;
+
+            if (!existsCurrencyProfile) {
               fetchAndAddCurrencyProfile(event.id);
-            }
-            // Update event handler
-            else if (event.action === StreamChangeTypeEnum.Update) {
-              const existsCurrencyProfile =
-                newCurrencyProfiles.find(
-                  (oldCurrencyProfile) => oldCurrencyProfile.id === event.id
-                ) !== undefined;
-
-              if (!existsCurrencyProfile) {
-                fetchAndAddCurrencyProfile(event.id);
-              } else {
-                // Update the existing currency profile
-                setCurrencyProfiles(
-                  newCurrencyProfiles.map((oldCurrencyProfile) => {
-                    if (oldCurrencyProfile.id === event.id) {
-                      oldCurrencyProfile.balance = event.balance;
-                      oldCurrencyProfile.monthlySavingsGoal = event.monthlyGoal;
-                      oldCurrencyProfile.yearlySavingsGoal = event.yearlyGoal;
-                    }
-                    return oldCurrencyProfile;
-                  })
-                );
-              }
-            }
-            // Delete event handler
-            else if (event.action === StreamChangeTypeEnum.Delete) {
+            } else {
+              // Update the existing currency profile
               setCurrencyProfiles(
-                newCurrencyProfiles.filter(
-                  (oldCurrencyProfile) => oldCurrencyProfile.id !== event.id
-                )
+                newCurrencyProfiles.map((oldCurrencyProfile) => {
+                  if (oldCurrencyProfile.id === event.id) {
+                    oldCurrencyProfile.balance = event.balance;
+                    oldCurrencyProfile.monthlySavingsGoal = event.monthlyGoal;
+                    oldCurrencyProfile.yearlySavingsGoal = event.yearlyGoal;
+                  }
+                  return oldCurrencyProfile;
+                })
               );
             }
-          });
+          }
+          // Delete event handler
+          else if (event.action === StreamChangeTypeEnum.Delete) {
+            setCurrencyProfiles(
+              newCurrencyProfiles.filter(
+                (oldCurrencyProfile) => oldCurrencyProfile.id !== event.id
+              )
+            );
+          }
+        });
 
-          setIsLoading(false);
-          return Either.right(null);
-        }
-      )
-    );
+        setIsError(false);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isError) {
-    return (
-      <AppErrorPage
-        title={t("account.loadingErrorTitle")}
-        message={t("account.loadingErrorMessage")}
-        showHomeBtn={true}
-      />
-    );
+    return <AppErrorPage title={t("common.genericError")} showHomeBtn={true} />;
   }
   if (isLoading) {
     return <AppLoaderPage />;
