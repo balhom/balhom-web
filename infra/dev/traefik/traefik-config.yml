@@ -1,0 +1,35 @@
+http:
+  routers:
+    currency-profiles:
+      rule: "PathPrefix(`/api/v1/currency-profile`)"
+      service: currency-profiles-service
+      entryPoints:
+        - web
+
+    transactions:
+      rule: "PathPrefix(`/api/v1/transaction`)"
+      service: transactions-service
+      entryPoints:
+        - web
+
+    statistics:
+      rule: "PathPrefix(`/api/v1/statistics`)"
+      service: statistics-service
+      entryPoints:
+        - web
+
+  services:
+    currency-profiles-service:
+      loadBalancer:
+        servers:
+          - url: "http://balhom-currency-profiles-api:8081"
+
+    transactions-service:
+      loadBalancer:
+        servers:
+          - url: "http://balhom-transactions-api:8082"
+
+    statistics-service:
+      loadBalancer:
+        servers:
+          - url: "http://balhom-statistics-api:8083"
