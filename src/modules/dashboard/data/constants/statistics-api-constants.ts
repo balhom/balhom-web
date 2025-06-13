@@ -1,0 +1,5 @@
+export const STATISTICS_API_PATH = "/api/v1/statistics";
+
+const TRANSACTIONS_STATISTICS_API_SUBPATH = "/transactions";
+
+export const DAILY_TRANSACTIONS_STATISTICS_API_SUBPATH = `${TRANSACTIONS_STATISTICS_API_SUBPATH}/daily`;

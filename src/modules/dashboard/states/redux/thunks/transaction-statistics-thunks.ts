@@ -7,10 +7,13 @@ import { getMonthlyTransactionStatistics } from "../../../usecases/get-monthly-t
 // Fetch daily transaction statistics action
 export const fetchDailyTransactionStatisticsAsync = createAsyncThunk<
   DailyTransactionStatisticsEntity,
-  { month: number; year: number }
->("statistics/fetchDailyTransactionStatistics", async ({ month, year }) => {
-  return await getDailyTransactionStatistics(month, year);
-});
+  { currencyProfileId: string; month: number; year: number }
+>(
+  "statistics/fetchDailyTransactionStatistics",
+  async ({ currencyProfileId, month, year }) => {
+    return await getDailyTransactionStatistics(currencyProfileId, month, year);
+  }
+);
 
 // Fetch monthly transaction statistics action
 export const fetchMonthlyTransactionStatisticsAsync = createAsyncThunk<

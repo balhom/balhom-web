@@ -1,4 +1,5 @@
 export interface UpdateCurrencyProfileProps {
+  id: string;
   name: string;
   balance: number;
   initialDate: Date;

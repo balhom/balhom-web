@@ -34,6 +34,7 @@ const DailyTransactionsChart: React.FC = () => {
   useEffect(() => {
     dispatch(
       fetchDailyTransactionStatisticsAsync({
+        currencyProfileId: selectedCurrencyProfile!.id,
         month: selectedMonthRef.current,
         year: selectedYearRef.current,
       })
@@ -44,12 +45,13 @@ const DailyTransactionsChart: React.FC = () => {
     (newMonth: number) => {
       dispatch(
         fetchDailyTransactionStatisticsAsync({
+          currencyProfileId: selectedCurrencyProfile!.id,
           month: newMonth,
           year: transactionStatisticsState.selectedYear,
         })
       );
     },
-    [dispatch, transactionStatisticsState.selectedYear]
+    [dispatch, selectedCurrencyProfile, transactionStatisticsState.selectedYear]
   );
 
   return (

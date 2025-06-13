@@ -54,12 +54,17 @@ const MonthlyTransactionsChart: React.FC = () => {
       );
       dispatch(
         fetchDailyTransactionStatisticsAsync({
+          currencyProfileId: selectedCurrencyProfile!.id,
           month: transactionStatisticsState.selectedMonth,
           year: newYear,
         })
       );
     },
-    [dispatch, transactionStatisticsState.selectedMonth]
+    [
+      dispatch,
+      selectedCurrencyProfile,
+      transactionStatisticsState.selectedMonth,
+    ]
   );
 
   const availableYears = useMemo(() => {

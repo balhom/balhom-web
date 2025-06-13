@@ -7,4 +7,4 @@ export const currencyProfileRepositoryInstance = currencyProfileRepository(
 );
 
 export const currencyProfileSharedUserRepositoryInstance =
-  currencyProfileSharedUserRepository();
+  currencyProfileSharedUserRepository(balhomApiServiceInstance);

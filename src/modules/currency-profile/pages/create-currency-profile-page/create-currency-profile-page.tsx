@@ -11,7 +11,6 @@ import { useCurrencyProfileForm } from "../../hooks/use-currency-profile-form";
 import AppNumberInput from "../../../../common/components/app-number-input/app-number-input";
 import ImagePicker from "../../../../common/components/image-picker/image-picker";
 import { useCurrencyProfiles } from "../../states/contexts/currency-profiles-context";
-import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { DASHBOARD_ROUTE_PATH } from "../../../dashboard/routes";
 import DateTimePicker from "../../../../common/components/date-time-picker/date-time-picker";
 import { createCurrencyProfile } from "../../usecases/create-currency-profile-usecase";
@@ -55,7 +54,7 @@ const CreateCurrencyProfilePage: React.FC = () => {
       }
 
       try {
-        const createdCurrencyProfileEither = await createCurrencyProfile({
+        const createdCurrencyProfile = await createCurrencyProfile({
           name: name,
           currency: currency!,
           balance: Number(initialBalance),
@@ -65,21 +64,14 @@ const CreateCurrencyProfilePage: React.FC = () => {
           image: image,
         });
 
-        createdCurrencyProfileEither.fold(
-          () => {
-            setFormError(t("common.genericError"));
-          },
-          (createdCurrencyProfile: CurrencyProfileEntity) => {
-            // Update states
-            setCurrencyProfiles([...currencyProfiles, createdCurrencyProfile]);
-            setSelectedCurrencyProfile(createdCurrencyProfile);
+        // Update states
+        setCurrencyProfiles([...currencyProfiles, createdCurrencyProfile]);
+        setSelectedCurrencyProfile(createdCurrencyProfile);
 
-            navigate(DASHBOARD_ROUTE_PATH);
-          }
-        );
+        navigate(DASHBOARD_ROUTE_PATH);
       } catch (err) {
-        setFormError(t("common.genericError"));
         console.error("Error creating currency profile:", err);
+        setFormError(t("common.genericError"));
       }
     },
     [

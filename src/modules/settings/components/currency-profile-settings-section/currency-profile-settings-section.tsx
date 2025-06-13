@@ -138,8 +138,9 @@ const CurrencyProfileSettingsSection: React.FC = () => {
   // Function to handle the update of the currency profile
   // It checks if the form is valid before proceeding with the update
   const handleUpdateCurrencyProfile = useCallback(() => {
-    if (!isFormValid()) {
+    if (isFormValid()) {
       updateCurrencyProfile({
+        id: selectedCurrencyProfile?.id ?? "",
         name: name,
         balance: Number(balance),
         initialDate: initialDate,
@@ -155,6 +156,7 @@ const CurrencyProfileSettingsSection: React.FC = () => {
     isFormValid,
     monthlySavingsGoal,
     name,
+    selectedCurrencyProfile?.id,
     yearlySavingsGoal,
   ]);
 

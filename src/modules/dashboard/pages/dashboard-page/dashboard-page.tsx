@@ -12,8 +12,11 @@ import {
   fetchYearlySavingStatisticsAsync,
 } from "../../states/redux/thunks/saving-statistics-thunks";
 import SavingsChartsSection from "../../components/savings-charts-section/savings-charts-section";
+import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 
 const DashboardPage: React.FC = () => {
+  const { selectedCurrencyProfile } = useCurrencyProfiles();
+
   const transactionStatisticsState = useSelector(
     (state: AppState) => state.transactionStatistics
   );
@@ -39,6 +42,7 @@ const DashboardPage: React.FC = () => {
               : () => {
                   dispatch(
                     fetchDailyTransactionStatisticsAsync({
+                      currencyProfileId: selectedCurrencyProfile!.id,
                       month: transactionStatisticsState.selectedMonth,
                       year: transactionStatisticsState.selectedYear,
                     })

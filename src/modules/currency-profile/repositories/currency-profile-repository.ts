@@ -1,11 +1,22 @@
 import { Either } from "../../../common/data/either";
 import { AppError } from "../../../common/data/errors/app-error";
 import HttpService from "../../../common/services/http-service";
-import { CURRENCY_PROFILE_API_PATH } from "../data/constants/currency-profile-api-constants";
+import {
+  CURRENCY_PROFILE_API_PATH,
+  CURRENCY_PROFILE_IMAGE_API_SUBPATH,
+} from "../data/constants/currency-profile-api-constants";
+import {
+  currencyProfileCreatePropsToPostRequestRestDto,
+  CurrencyProfilePostRequestRestDto,
+} from "../data/dtos/currency-profile-post-request-rest.dto";
+import {
+  CurrencyProfilePutRequestRestDto,
+  currencyProfileUpdatePropsToPutRequestRestDto,
+} from "../data/dtos/currency-profile-put-request-rest.dto";
 import {
   CurrencyProfileResponseRestDto,
   currencyProfileResponseRestDtoToEntity,
-} from "../data/dtos/currency-profile-response-rest-dto";
+} from "../data/dtos/currency-profile-response-rest.dto";
 import { CurrencyProfileChangeEventEntity } from "../data/entities/currency-profile-change-event-entity";
 import { CurrencyProfileEntity } from "../data/entities/currency-profile-entity";
 import { CreateCurrencyProfileProps } from "../data/props/create-currency-profile-props";
@@ -16,21 +27,43 @@ export interface CurrencyProfileRepository {
 
   list: () => Promise<CurrencyProfileEntity[]>;
 
-  create: (
-    props: CreateCurrencyProfileProps
-  ) => Promise<Either<AppError, CurrencyProfileEntity>>;
+  create: (props: CreateCurrencyProfileProps) => Promise<CurrencyProfileEntity>;
 
-  update: (
-    props: UpdateCurrencyProfileProps
-  ) => Promise<Either<AppError, void>>;
+  update: (props: UpdateCurrencyProfileProps) => Promise<void>;
 
   listen: (
     onChange: (event: CurrencyProfileChangeEventEntity) => void
   ) => Promise<Either<AppError, void>>;
 
-  delete: (id: string) => Promise<Either<AppError, void>>;
+  delete: (id: string) => Promise<void>;
 
-  deleteAll: () => Promise<Either<AppError, void>>;
+  deleteAll: () => Promise<void>;
+}
+
+async function uploadCurrencyProfileImage(
+  id: string,
+  image: File,
+  httpService: HttpService
+): Promise<void> {
+  try {
+    const imageFormData = new FormData();
+    imageFormData.append("file", image);
+    imageFormData.append("mimetype", image.type);
+
+    await httpService.postRequest<FormData, void>(
+      `${CURRENCY_PROFILE_API_PATH}/${id}` +
+        `${CURRENCY_PROFILE_IMAGE_API_SUBPATH}`,
+      imageFormData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+  } catch (error) {
+    console.log("Error uploading currency profile image: ", error);
+    throw new AppError("");
+  }
 }
 
 export const currencyProfileRepository = (
@@ -65,29 +98,51 @@ export const currencyProfileRepository = (
 
   create: async (
     props: CreateCurrencyProfileProps
-  ): Promise<Either<AppError, CurrencyProfileEntity>> => {
-    // TODO remove and do api call
-    const createdCurrencyProfile: CurrencyProfileEntity = {
-      id: "12345678",
-      name: props.name,
-      currency: props.currency,
-      balance: props.balance,
-      initialDate: props.initialDate,
-      monthlySavingsGoal: props.monthlySavingsGoal,
-      yearlySavingsGoal: props.yearlySavingsGoal,
-      ownerId: "",
-    };
+  ): Promise<CurrencyProfileEntity> => {
+    try {
+      const request = currencyProfileCreatePropsToPostRequestRestDto(props);
 
-    return Either.right(createdCurrencyProfile);
+      const response = await httpService.postRequest<
+        CurrencyProfilePostRequestRestDto,
+        CurrencyProfileResponseRestDto
+      >(CURRENCY_PROFILE_API_PATH, request);
+
+      const currencyProfileResponse =
+        currencyProfileResponseRestDtoToEntity(response);
+
+      if (props.image) {
+        // If image is provided, upload it in a separate non blocking request
+        uploadCurrencyProfileImage(
+          currencyProfileResponse.id,
+          props.image,
+          httpService
+        );
+      }
+
+      return currencyProfileResponse;
+    } catch (error) {
+      console.log("Error fetching currency profiles: ", error);
+      throw new AppError("");
+    }
   },
 
-  update: async (
-    props: UpdateCurrencyProfileProps
-  ): Promise<Either<AppError, void>> => {
-    // TODO remove and do api call
-    console.log(props);
+  update: async (props: UpdateCurrencyProfileProps): Promise<void> => {
+    try {
+      const request = currencyProfileUpdatePropsToPutRequestRestDto(props);
 
-    return Either.right(undefined);
+      await httpService.putRequest<
+        CurrencyProfilePutRequestRestDto,
+        CurrencyProfileResponseRestDto
+      >(`${CURRENCY_PROFILE_API_PATH}/${props.id}`, request);
+
+      if (props.image) {
+        // If image is provided, upload it in a separate non blocking request
+        uploadCurrencyProfileImage(props.id, props.image, httpService);
+      }
+    } catch (error) {
+      console.log("Error fetching currency profiles: ", error);
+      throw new AppError("");
+    }
   },
 
   listen: async (
@@ -103,18 +158,25 @@ export const currencyProfileRepository = (
     return Either.right(undefined);
   },
 
-  delete: async (id: string): Promise<Either<AppError, void>> => {
-    // TODO remove and do api call
-    console.log(id);
-
-    return Either.right(undefined);
+  delete: async (id: string): Promise<void> => {
+    try {
+      await httpService.deleteRequest<void>(
+        `${CURRENCY_PROFILE_API_PATH}/${id}`
+      );
+    } catch (error) {
+      console.log("Error fetching currency profiles: ", error);
+      throw new AppError("");
+    }
   },
 
-  deleteAll: async (): Promise<Either<AppError, void>> => {
-    // TODO remove and do api call
-
+  deleteAll: async (): Promise<void> => {
     // TODO if call went well then close listen stream
 
-    return Either.right(undefined);
+    try {
+      await httpService.deleteRequest<void>(CURRENCY_PROFILE_API_PATH);
+    } catch (error) {
+      console.log("Error fetching currency profiles: ", error);
+      throw new AppError("");
+    }
   },
 });
