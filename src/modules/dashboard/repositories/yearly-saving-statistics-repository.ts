@@ -1,19 +1,40 @@
-import { Either } from "../../../common/data/either";
 import { AppError } from "../../../common/data/errors/app-error";
-import { mockYearlySavingStatisticsPoints } from "../../../mocks/mock-saving-statistics";
+import HttpService from "../../../common/services/http-service";
+import {
+  STATISTICS_API_PATH,
+  YEARLY_SAVINGS_STATISTICS_API_SUBPATH,
+} from "../data/constants/statistics-api-constants";
+import {
+  YearlySavingStatisticResponseRestDto,
+  yearlySavingStatisticResponseRestDtoToEntity,
+} from "../data/dtos/yearly-saving-statistic-response-rest.dto";
 import { YearlySavingStatisticsEntity } from "../data/entities/yearly-saving-statistics-entity";
 
 export interface YearlySavingStatisticsRepository {
-  get: () => Promise<Either<AppError, YearlySavingStatisticsEntity>>;
+  get: (currencyProfileId: string) => Promise<YearlySavingStatisticsEntity>;
 }
 
-export const yearlySavingStatisticsRepository =
-  (): YearlySavingStatisticsRepository => ({
-    get: async (): Promise<Either<AppError, YearlySavingStatisticsEntity>> => {
-      // TODO remove and do api call
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      return Either.right({
-        points: mockYearlySavingStatisticsPoints,
+export const yearlySavingStatisticsRepository = (
+  httpService: HttpService
+): YearlySavingStatisticsRepository => ({
+  get: async (
+    currencyProfileId: string
+  ): Promise<YearlySavingStatisticsEntity> => {
+    try {
+      const response = await httpService.getRequest<
+        YearlySavingStatisticResponseRestDto[]
+      >(`${STATISTICS_API_PATH}${YEARLY_SAVINGS_STATISTICS_API_SUBPATH}`, {
+        params: {
+          currencyProfileId: currencyProfileId,
+        },
       });
-    },
-  });
+
+      return {
+        points: response.map(yearlySavingStatisticResponseRestDtoToEntity),
+      };
+    } catch (error) {
+      console.log("Error fetching currency profiles: ", error);
+      throw new AppError("");
+    }
+  },
+});

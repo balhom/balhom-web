@@ -49,15 +49,21 @@ const DashboardPage: React.FC = () => {
                   );
                   dispatch(
                     fetchMonthlyTransactionStatisticsAsync({
+                      currencyProfileId: selectedCurrencyProfile!.id,
                       year: transactionStatisticsState.selectedYear,
                     })
                   );
                   dispatch(
                     fetchMonthlySavingStatisticsAsync({
+                      currencyProfileId: selectedCurrencyProfile!.id,
                       year: savingStatisticsState.selectedYear,
                     })
                   );
-                  dispatch(fetchYearlySavingStatisticsAsync());
+                  dispatch(
+                    fetchYearlySavingStatisticsAsync({
+                      currencyProfileId: selectedCurrencyProfile!.id,
+                    })
+                  );
                 }
           }
         />

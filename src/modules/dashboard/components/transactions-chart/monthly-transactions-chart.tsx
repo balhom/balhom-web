@@ -40,6 +40,7 @@ const MonthlyTransactionsChart: React.FC = () => {
   useEffect(() => {
     dispatch(
       fetchMonthlyTransactionStatisticsAsync({
+        currencyProfileId: selectedCurrencyProfile!.id,
         year: selectedYearRef.current,
       })
     );
@@ -49,6 +50,7 @@ const MonthlyTransactionsChart: React.FC = () => {
     (newYear: number) => {
       dispatch(
         fetchMonthlyTransactionStatisticsAsync({
+          currencyProfileId: selectedCurrencyProfile!.id,
           year: newYear,
         })
       );

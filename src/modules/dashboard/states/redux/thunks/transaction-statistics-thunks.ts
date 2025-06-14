@@ -18,7 +18,10 @@ export const fetchDailyTransactionStatisticsAsync = createAsyncThunk<
 // Fetch monthly transaction statistics action
 export const fetchMonthlyTransactionStatisticsAsync = createAsyncThunk<
   MonthlyTransactionStatisticsEntity,
-  { year: number }
->("statistics/fetchMonthlyTransactionStatistics", async ({ year }) => {
-  return await getMonthlyTransactionStatistics(year);
-});
+  { currencyProfileId: string; year: number }
+>(
+  "statistics/fetchMonthlyTransactionStatistics",
+  async ({ currencyProfileId, year }) => {
+    return await getMonthlyTransactionStatistics(currencyProfileId, year);
+  }
+);

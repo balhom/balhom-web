@@ -3,21 +3,24 @@ import { monthlySavingStatisticsRepositoryInstance } from "../repositories/repos
 import { fillMonthlySavingStatisticsPoints } from "../utils";
 
 export const getMonthlySavingStatistics = async (
+  currencyProfileId: string,
   year: number
 ): Promise<MonthlySavingStatisticsEntity> => {
-  return (await monthlySavingStatisticsRepositoryInstance.get(year)).fold(
-    () =>
-      <MonthlySavingStatisticsEntity>{
-        points: fillMonthlySavingStatisticsPoints([]),
-        year: year,
-      },
-    (monthlySavingStatistics: MonthlySavingStatisticsEntity) => {
-      return {
-        points: fillMonthlySavingStatisticsPoints(
-          monthlySavingStatistics.points
-        ),
-        year: monthlySavingStatistics.year,
-      };
-    }
-  );
+  try {
+    const monthlySavingStatistics =
+      await monthlySavingStatisticsRepositoryInstance.get(
+        currencyProfileId,
+        year
+      );
+
+    return {
+      points: fillMonthlySavingStatisticsPoints(monthlySavingStatistics.points),
+      year: monthlySavingStatistics.year,
+    };
+  } catch {
+    return {
+      points: fillMonthlySavingStatisticsPoints([]),
+      year: year,
+    };
+  }
 };

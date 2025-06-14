@@ -28,7 +28,11 @@ const YearlySavingsChart: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchYearlySavingStatisticsAsync());
+    dispatch(
+      fetchYearlySavingStatisticsAsync({
+        currencyProfileId: selectedCurrencyProfile!.id,
+      })
+    );
   }, [dispatch, selectedCurrencyProfile]);
 
   return (

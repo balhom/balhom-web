@@ -7,16 +7,18 @@ import { getMonthlySavingStatistics } from "../../../usecases/get-monthly-saving
 // Fetch monthly saving statistics action
 export const fetchMonthlySavingStatisticsAsync = createAsyncThunk<
   MonthlySavingStatisticsEntity,
-  { year: number }
->("statistics/fetchMonthlySavingStatistics", async ({ year }) => {
-  return await getMonthlySavingStatistics(year);
-});
+  { currencyProfileId: string; year: number }
+>(
+  "statistics/fetchMonthlySavingStatistics",
+  async ({ currencyProfileId, year }) => {
+    return await getMonthlySavingStatistics(currencyProfileId, year);
+  }
+);
 
 // Fetch yearly saving statistics action
-export const fetchYearlySavingStatisticsAsync =
-  createAsyncThunk<YearlySavingStatisticsEntity>(
-    "statistics/fetchYearlySavingStatistics",
-    async () => {
-      return await getYearlySavingStatistics();
-    }
-  );
+export const fetchYearlySavingStatisticsAsync = createAsyncThunk<
+  YearlySavingStatisticsEntity,
+  { currencyProfileId: string }
+>("statistics/fetchYearlySavingStatistics", async ({ currencyProfileId }) => {
+  return await getYearlySavingStatistics(currencyProfileId);
+});

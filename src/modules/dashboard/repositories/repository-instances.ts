@@ -8,10 +8,10 @@ export const dailyTransactionStatisticsRepositoryInstance =
   dailyTransactionStatisticsRepository(balhomApiServiceInstance);
 
 export const monthlyTransactionStatisticsRepositoryInstance =
-  monthlyTransactionStatisticsRepository();
+  monthlyTransactionStatisticsRepository(balhomApiServiceInstance);
 
 export const monthlySavingStatisticsRepositoryInstance =
-  monthlySavingStatisticsRepository();
+  monthlySavingStatisticsRepository(balhomApiServiceInstance);
 
 export const yearlySavingStatisticsRepositoryInstance =
-  yearlySavingStatisticsRepository();
+  yearlySavingStatisticsRepository(balhomApiServiceInstance);

@@ -3,21 +3,25 @@ import { monthlyTransactionStatisticsRepositoryInstance } from "../repositories/
 import { fillMonthlyTransactionStatisticsPoints } from "../utils";
 
 export const getMonthlyTransactionStatistics = async (
+  currencyProfileId: string,
   year: number
 ): Promise<MonthlyTransactionStatisticsEntity> => {
-  return (await monthlyTransactionStatisticsRepositoryInstance.get(year)).fold(
-    () =>
-      <MonthlyTransactionStatisticsEntity>{
-        points: fillMonthlyTransactionStatisticsPoints([]),
-        year: year,
-      },
-    (monthlyTransactionStatistics: MonthlyTransactionStatisticsEntity) => {
-      return {
-        points: fillMonthlyTransactionStatisticsPoints(
-          monthlyTransactionStatistics.points
-        ),
-        year: monthlyTransactionStatistics.year,
-      };
-    }
-  );
+  try {
+    const monthlyTransactionStatistics =
+      await monthlyTransactionStatisticsRepositoryInstance.get(
+        currencyProfileId,
+        year
+      );
+    return {
+      points: fillMonthlyTransactionStatisticsPoints(
+        monthlyTransactionStatistics.points
+      ),
+      year: monthlyTransactionStatistics.year,
+    };
+  } catch {
+    return {
+      points: fillMonthlyTransactionStatisticsPoints([]),
+      year: year,
+    };
+  }
 };

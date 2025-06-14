@@ -37,6 +37,7 @@ const MonthlySavingsChart: React.FC = () => {
   useEffect(() => {
     dispatch(
       fetchMonthlySavingStatisticsAsync({
+        currencyProfileId: selectedCurrencyProfile!.id,
         year: selectedYearRef.current,
       })
     );
@@ -46,11 +47,12 @@ const MonthlySavingsChart: React.FC = () => {
     (newYear: number) => {
       dispatch(
         fetchMonthlySavingStatisticsAsync({
+          currencyProfileId: selectedCurrencyProfile!.id,
           year: newYear,
         })
       );
     },
-    [dispatch]
+    [dispatch, selectedCurrencyProfile]
   );
 
   const availableYears = useMemo(() => {
