@@ -121,16 +121,18 @@ const CurrencyProfileSettingsSection: React.FC = () => {
         );
       }
 
-      // Set shared users for the selected currency profile
-      // It fetches the shared users
-      listCurrencyProfileSharedUsers(selectedCurrencyProfile.id).then(
-        (result) => {
-          if (result.isRight()) {
-            // Set the shared users from the result
-            setSharedUsers(result.getRight() ?? []);
+      // Only fetch shared users if the user is the owner of the currency profile
+      // This is to avoid unnecessary API calls for non-owners
+      if (isCurrencyProfileOwner) {
+        listCurrencyProfileSharedUsers(selectedCurrencyProfile.id).then(
+          (result) => {
+            if (result.isRight()) {
+              // Set the shared users from the result
+              setSharedUsers(result.getRight() ?? []);
+            }
           }
-        }
-      );
+        );
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCurrencyProfile]);
