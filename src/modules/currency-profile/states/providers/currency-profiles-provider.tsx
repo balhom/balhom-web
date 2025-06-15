@@ -90,6 +90,16 @@ export const CurrencyProfilesProvider = ({
                   return oldCurrencyProfile;
                 })
               );
+              if (selectedCurrencyProfile?.id === event.id) {
+                // Update the selected currency profile
+                setSelectedCurrencyProfile({
+                  ...selectedCurrencyProfile,
+                  balance: event.balance,
+                  monthlySavingsGoal: event.monthlyGoal,
+                  yearlySavingsGoal: event.yearlyGoal,
+                  imageUrl: event.imageUrl,
+                });
+              }
             }
           }
           // Delete event handler
@@ -105,7 +115,8 @@ export const CurrencyProfilesProvider = ({
         setIsError(false);
         setIsLoading(false);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         setIsError(true);
         setIsLoading(false);
       });
@@ -118,7 +129,10 @@ export const CurrencyProfilesProvider = ({
   if (isLoading) {
     return <AppLoaderPage />;
   }
-  if (!currencyProfiles) {
+  if (
+    currencyProfiles.length === 0 &&
+    window.location.pathname !== CREATE_CURRENCY_PROFILE_ROUTE_PATH
+  ) {
     return <Navigate to={CREATE_CURRENCY_PROFILE_ROUTE_PATH} replace />;
   }
   return (

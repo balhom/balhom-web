@@ -8,33 +8,37 @@ export const getSelectedCurrencyProfile = (
     return null;
   }
 
-  const selectedCurrencyProfileId = localStorage.getItem(
-    SELECTED_CURRENCY_PROFILE_KEY
-  );
-
-  // If no currency profile has been selected, the first available one is used
-  if (!selectedCurrencyProfileId) {
-    localStorage.setItem(
-      SELECTED_CURRENCY_PROFILE_KEY,
-      availableCurrencyProfiles[0].id
+  try {
+    const selectedCurrencyProfileId = localStorage.getItem(
+      SELECTED_CURRENCY_PROFILE_KEY
     );
-    return availableCurrencyProfiles[0];
-  }
 
-  const selectedCurrencyProfile = availableCurrencyProfiles.find(
-    (currencyProfile) => {
-      return currencyProfile.id == selectedCurrencyProfileId;
+    // If no currency profile has been selected, the first available one is used
+    if (!selectedCurrencyProfileId) {
+      localStorage.setItem(
+        SELECTED_CURRENCY_PROFILE_KEY,
+        availableCurrencyProfiles[0].id
+      );
+      return availableCurrencyProfiles[0];
     }
-  );
 
-  // If the selected currency profile does not exist, the first available one is used
-  if (!selectedCurrencyProfile) {
-    localStorage.setItem(
-      SELECTED_CURRENCY_PROFILE_KEY,
-      availableCurrencyProfiles[0].id
+    const selectedCurrencyProfile = availableCurrencyProfiles.find(
+      (currencyProfile) => {
+        return currencyProfile.id == selectedCurrencyProfileId;
+      }
     );
-    return availableCurrencyProfiles[0];
-  }
 
-  return selectedCurrencyProfile;
+    // If the selected currency profile does not exist, the first available one is used
+    if (!selectedCurrencyProfile) {
+      localStorage.setItem(
+        SELECTED_CURRENCY_PROFILE_KEY,
+        availableCurrencyProfiles[0].id
+      );
+      return availableCurrencyProfiles[0];
+    }
+
+    return selectedCurrencyProfile;
+  } catch {
+    return null;
+  }
 };
