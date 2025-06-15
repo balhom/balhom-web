@@ -1,22 +1,25 @@
-import { Either } from "../../../common/data/either";
 import { AppError } from "../../../common/data/errors/app-error";
 import HttpService from "../../../common/services/http-service";
+import {
+  CURRENCY_PROFILE_API_PATH,
+  CURRENCY_PROFILE_SHARED_USERS_API_SUBPATH,
+} from "../data/constants/currency-profile-api-constants";
+import { CurrencyProfileSharedUserPutRequestRestDto } from "../data/dtos/currency-profile-shared-user-put-request-rest.dto";
+import {
+  CurrencyProfileSharedUserResponseRestDto,
+  currencyProfileSharedUserResponseRestDtoToEntity,
+} from "../data/dtos/currency-profile-shared-user-response-rest.dto";
 import { CurrencyProfileSharedUserEntity } from "../data/entities/currency-profile-shared-user-entity";
 import { CreateCurrencyProfileSharedUserProps } from "../data/props/create-currency-profile-shared-user-props";
 
 export interface CurrencyProfileSharedUserRepository {
   list: (
     currencyProfileId: string
-  ) => Promise<Either<AppError, CurrencyProfileSharedUserEntity[]>>;
+  ) => Promise<CurrencyProfileSharedUserEntity[]>;
 
-  create: (
-    props: CreateCurrencyProfileSharedUserProps
-  ) => Promise<Either<AppError, CurrencyProfileSharedUserEntity>>;
+  create: (props: CreateCurrencyProfileSharedUserProps) => Promise<void>;
 
-  delete: (
-    currencyProfileId: string,
-    id: string
-  ) => Promise<Either<AppError, void>>;
+  delete: (currencyProfileId: string, id: string) => Promise<void>;
 }
 
 export const currencyProfileSharedUserRepository = (
@@ -24,37 +27,57 @@ export const currencyProfileSharedUserRepository = (
 ): CurrencyProfileSharedUserRepository => ({
   list: async (
     currencyProfileId: string
-  ): Promise<Either<AppError, CurrencyProfileSharedUserEntity[]>> => {
-    // TODO remove and do api call
-    console.log(currencyProfileId);
+  ): Promise<CurrencyProfileSharedUserEntity[]> => {
+    try {
+      const response = await httpService.getRequest<
+        CurrencyProfileSharedUserResponseRestDto[]
+      >(
+        `${CURRENCY_PROFILE_API_PATH}/${currencyProfileId}` +
+          `${CURRENCY_PROFILE_SHARED_USERS_API_SUBPATH}`
+      );
 
-    return Either.right([
-      {
-        id: "12345678",
-        email: "test@email.com",
-      },
-    ]);
+      return response.map(currencyProfileSharedUserResponseRestDtoToEntity);
+    } catch (error) {
+      console.log("Error fetching currency profile shared users: ", error);
+      throw new AppError("");
+    }
   },
 
   create: async (
     props: CreateCurrencyProfileSharedUserProps
-  ): Promise<Either<AppError, CurrencyProfileSharedUserEntity>> => {
-    // TODO remove and do api call
-    console.log(props);
-
-    return Either.right({
-      id: "12345678",
-      email: props.email,
-    });
+  ): Promise<void> => {
+    try {
+      await httpService.putRequest<
+        CurrencyProfileSharedUserPutRequestRestDto,
+        void
+      >(
+        `${CURRENCY_PROFILE_API_PATH}/${props.currencyProfileId}` +
+          `${CURRENCY_PROFILE_SHARED_USERS_API_SUBPATH}`,
+        {
+          userEmailToAdd: props.email,
+        }
+      );
+    } catch (error) {
+      console.log("Error creating currency profile shared user: ", error);
+      throw new AppError("");
+    }
   },
 
-  delete: async (
-    currencyProfileId: string,
-    id: string
-  ): Promise<Either<AppError, void>> => {
-    // TODO remove and do api call
-    console.log(currencyProfileId, id);
-
-    return Either.right(undefined);
+  delete: async (currencyProfileId: string, id: string): Promise<void> => {
+    try {
+      await httpService.putRequest<
+        CurrencyProfileSharedUserPutRequestRestDto,
+        void
+      >(
+        `${CURRENCY_PROFILE_API_PATH}/${currencyProfileId}` +
+          `${CURRENCY_PROFILE_SHARED_USERS_API_SUBPATH}`,
+        {
+          userIdToRemove: id,
+        }
+      );
+    } catch (error) {
+      console.log("Error deleting currency profile shared user: ", error);
+      throw new AppError("");
+    }
   },
 });

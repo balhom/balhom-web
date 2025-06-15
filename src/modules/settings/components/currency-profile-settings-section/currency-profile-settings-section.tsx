@@ -126,10 +126,8 @@ const CurrencyProfileSettingsSection: React.FC = () => {
       if (isCurrencyProfileOwner) {
         listCurrencyProfileSharedUsers(selectedCurrencyProfile.id).then(
           (result) => {
-            if (result.isRight()) {
-              // Set the shared users from the result
-              setSharedUsers(result.getRight() ?? []);
-            }
+            // Set the shared users from the result
+            setSharedUsers(result);
           }
         );
       }
@@ -250,28 +248,25 @@ const CurrencyProfileSettingsSection: React.FC = () => {
       addCurrencyProfileSharedUser(
         selectedCurrencyProfile.id,
         newSharedUserEmail
-      ).then((result) => {
-        result.fold(
-          () => {
-            setNewSharedUserEmailError(t("common.genericError"));
-          },
-          (newSharedUser) => {
-            // Add the new shared user to the shared users list
-            setSharedUsers((prevUsers) => [
-              ...prevUsers,
-              {
-                id: newSharedUser.id,
-                email: newSharedUser.email,
-              },
-            ]);
-          }
-        );
+      )
+        .then(async () => {
+          setSharedUsers(
+            await listCurrencyProfileSharedUsers(selectedCurrencyProfile.id)
+          );
 
-        // Reset the new shared user email input
-        setNewSharedUserEmail("");
+          // Reset the new shared user email input
+          setNewSharedUserEmail("");
 
-        setIsAddingSharedUser(false);
-      });
+          setIsAddingSharedUser(false);
+        })
+        .catch(() => {
+          setNewSharedUserEmailError(t("common.genericError"));
+
+          // Reset the new shared user email input
+          setNewSharedUserEmail("");
+
+          setIsAddingSharedUser(false);
+        });
     },
     [
       isAddingSharedUser,

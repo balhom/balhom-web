@@ -4,6 +4,7 @@ import SseService from "../../../common/services/sse-service";
 import {
   CURRENCY_PROFILE_API_PATH,
   CURRENCY_PROFILE_IMAGE_API_SUBPATH,
+  CURRENCY_PROFILE_SSE_EVENT_NAME,
   CURRENCY_PROFILE_SUBSCRIBE_API_SUBPATH,
 } from "../data/constants/currency-profile-api-constants";
 import {
@@ -80,7 +81,7 @@ export const currencyProfileRepository = (
 
       return currencyProfileResponseRestDtoToEntity(response);
     } catch (error) {
-      console.log("Error fetching currency profiles: ", error);
+      console.log("Error fetching currency profile: ", error);
       throw new AppError("");
     }
   },
@@ -123,7 +124,7 @@ export const currencyProfileRepository = (
 
       return currencyProfileResponse;
     } catch (error) {
-      console.log("Error fetching currency profiles: ", error);
+      console.log("Error creating currency profile: ", error);
       throw new AppError("");
     }
   },
@@ -142,7 +143,7 @@ export const currencyProfileRepository = (
         uploadCurrencyProfileImage(props.id, props.image, httpService);
       }
     } catch (error) {
-      console.log("Error fetching currency profiles: ", error);
+      console.log("Error updating currency profile: ", error);
       throw new AppError("");
     }
   },
@@ -152,7 +153,7 @@ export const currencyProfileRepository = (
   ): Promise<void> => {
     await sseService.listen(
       `${CURRENCY_PROFILE_API_PATH}/${CURRENCY_PROFILE_SUBSCRIBE_API_SUBPATH}`,
-      "currency-profile-event",
+      CURRENCY_PROFILE_SSE_EVENT_NAME,
       onChange
     );
   },
@@ -163,7 +164,7 @@ export const currencyProfileRepository = (
         `${CURRENCY_PROFILE_API_PATH}/${id}`
       );
     } catch (error) {
-      console.log("Error fetching currency profiles: ", error);
+      console.log("Error deleting currency profile: ", error);
       throw new AppError("");
     }
   },
@@ -174,7 +175,7 @@ export const currencyProfileRepository = (
 
       sseService.disconnect();
     } catch (error) {
-      console.log("Error fetching currency profiles: ", error);
+      console.log("Error deleting currency profiles: ", error);
       throw new AppError("");
     }
   },
