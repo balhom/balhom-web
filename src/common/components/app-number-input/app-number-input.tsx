@@ -55,7 +55,12 @@ const AppNumberInput: React.FC<Props> = ({
       return;
     }
 
-    if (!isNaN(parseValue) && parseValue >= min && parseValue <= max) {
+    if (
+      parseValue &&
+      !isNaN(parseValue) &&
+      parseValue >= min &&
+      parseValue <= max
+    ) {
       onChange(newValue);
     }
   };

@@ -57,10 +57,10 @@ const CreateCurrencyProfilePage: React.FC = () => {
         const createdCurrencyProfile = await createCurrencyProfile({
           name: name,
           currency: currency!,
-          balance: Number(initialBalance),
+          balance: Number(initialBalance.replace(",", ".")),
           initialDate: initialDate,
-          monthlySavingsGoal: Number(monthlySavingsGoal),
-          yearlySavingsGoal: Number(yearlySavingsGoal),
+          monthlySavingsGoal: Number(monthlySavingsGoal.replace(",", ".")),
+          yearlySavingsGoal: Number(yearlySavingsGoal.replace(",", ".")),
           image: image,
         });
 

@@ -144,10 +144,10 @@ const CurrencyProfileSettingsSection: React.FC = () => {
       updateCurrencyProfile({
         id: selectedCurrencyProfile?.id ?? "",
         name: name,
-        balance: Number(balance),
+        balance: Number(balance.replace(",", ".")),
         initialDate: initialDate,
-        monthlySavingsGoal: parseFloat(monthlySavingsGoal),
-        yearlySavingsGoal: parseFloat(yearlySavingsGoal),
+        monthlySavingsGoal: Number(monthlySavingsGoal.replace(",", ".")),
+        yearlySavingsGoal: Number(yearlySavingsGoal.replace(",", ".")),
         image: image,
       });
     }

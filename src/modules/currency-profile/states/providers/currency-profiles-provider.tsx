@@ -42,9 +42,8 @@ export const CurrencyProfilesProvider = ({
   const fetchAndAddCurrencyProfile = useCallback(
     async (currencyProfileId: string) => {
       const newCurrencyProfile = await getCurrencyProfile(currencyProfileId);
-      const newCurrencyProfiles = [...currencyProfiles];
-      newCurrencyProfiles.push(newCurrencyProfile);
-      setCurrencyProfiles(newCurrencyProfiles);
+
+      setCurrencyProfiles([...currencyProfiles, newCurrencyProfile]);
     },
     [currencyProfiles]
   );
@@ -86,6 +85,7 @@ export const CurrencyProfilesProvider = ({
                     oldCurrencyProfile.balance = event.balance;
                     oldCurrencyProfile.monthlySavingsGoal = event.monthlyGoal;
                     oldCurrencyProfile.yearlySavingsGoal = event.yearlyGoal;
+                    oldCurrencyProfile.imageUrl = event.imageUrl;
                   }
                   return oldCurrencyProfile;
                 })

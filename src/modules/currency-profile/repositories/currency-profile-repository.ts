@@ -1,9 +1,10 @@
-import { Either } from "../../../common/data/either";
 import { AppError } from "../../../common/data/errors/app-error";
 import HttpService from "../../../common/services/http-service";
+import SseService from "../../../common/services/sse-service";
 import {
   CURRENCY_PROFILE_API_PATH,
   CURRENCY_PROFILE_IMAGE_API_SUBPATH,
+  CURRENCY_PROFILE_SUBSCRIBE_API_SUBPATH,
 } from "../data/constants/currency-profile-api-constants";
 import {
   currencyProfileCreatePropsToPostRequestRestDto,
@@ -33,7 +34,7 @@ export interface CurrencyProfileRepository {
 
   listen: (
     onChange: (event: CurrencyProfileChangeEventEntity) => void
-  ) => Promise<Either<AppError, void>>;
+  ) => Promise<void>;
 
   delete: (id: string) => Promise<void>;
 
@@ -67,7 +68,8 @@ async function uploadCurrencyProfileImage(
 }
 
 export const currencyProfileRepository = (
-  httpService: HttpService
+  httpService: HttpService,
+  sseService: SseService
 ): CurrencyProfileRepository => ({
   get: async (id: string): Promise<CurrencyProfileEntity> => {
     try {
@@ -147,15 +149,12 @@ export const currencyProfileRepository = (
 
   listen: async (
     onChange: (event: CurrencyProfileChangeEventEntity) => void
-  ): Promise<Either<AppError, void>> => {
-    // TODO remove and do api call
-    console.log(onChange);
-
-    // TODO Only one stream available, close old one if new is created
-
-    // TODO if stream is closed from sever then retry connection
-
-    return Either.right(undefined);
+  ): Promise<void> => {
+    await sseService.listen(
+      `${CURRENCY_PROFILE_API_PATH}/${CURRENCY_PROFILE_SUBSCRIBE_API_SUBPATH}`,
+      "currency-profile-event",
+      onChange
+    );
   },
 
   delete: async (id: string): Promise<void> => {
@@ -170,10 +169,10 @@ export const currencyProfileRepository = (
   },
 
   deleteAll: async (): Promise<void> => {
-    // TODO if call went well then close listen stream
-
     try {
       await httpService.deleteRequest<void>(CURRENCY_PROFILE_API_PATH);
+
+      sseService.disconnect();
     } catch (error) {
       console.log("Error fetching currency profiles: ", error);
       throw new AppError("");

@@ -1,17 +1,17 @@
-import { balhomApiServiceInstance } from "../../../common/services/intances";
+import { balhomApiHttpServiceInstance } from "../../../common/services/intances";
 import { dailyTransactionStatisticsRepository } from "./daily-transaction-statistics-repository";
 import { monthlySavingStatisticsRepository } from "./monthly-saving-statistics-repository";
 import { monthlyTransactionStatisticsRepository } from "./monthly-transaction-statistics-repository";
 import { yearlySavingStatisticsRepository } from "./yearly-saving-statistics-repository";
 
 export const dailyTransactionStatisticsRepositoryInstance =
-  dailyTransactionStatisticsRepository(balhomApiServiceInstance);
+  dailyTransactionStatisticsRepository(balhomApiHttpServiceInstance);
 
 export const monthlyTransactionStatisticsRepositoryInstance =
-  monthlyTransactionStatisticsRepository(balhomApiServiceInstance);
+  monthlyTransactionStatisticsRepository(balhomApiHttpServiceInstance);
 
 export const monthlySavingStatisticsRepositoryInstance =
-  monthlySavingStatisticsRepository(balhomApiServiceInstance);
+  monthlySavingStatisticsRepository(balhomApiHttpServiceInstance);
 
 export const yearlySavingStatisticsRepositoryInstance =
-  yearlySavingStatisticsRepository(balhomApiServiceInstance);
+  yearlySavingStatisticsRepository(balhomApiHttpServiceInstance);

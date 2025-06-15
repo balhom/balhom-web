@@ -6,5 +6,6 @@ export interface CurrencyProfileChangeEventEntity {
   balance: number;
   monthlyGoal: number;
   yearlyGoal: number;
+  imageUrl?: string;
   ownerId: string;
 }

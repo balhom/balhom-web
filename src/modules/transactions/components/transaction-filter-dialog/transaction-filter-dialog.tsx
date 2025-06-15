@@ -132,8 +132,8 @@ const TransactionFilterDialog: React.FC<Props> = ({
             className="transaction-filter-dialog-apply-button"
             onClick={() => {
               dispatchFecthTransactionsPageAsync({
-                minAmount: Number(minAmount),
-                maxAmount: Number(maxAmount),
+                minAmount: Number(minAmount?.replace(",", ".")),
+                maxAmount: Number(maxAmount?.replace(",", ".")),
               });
 
               onClose();

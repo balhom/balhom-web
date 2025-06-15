@@ -1,10 +1,14 @@
-import { balhomApiServiceInstance } from "../../../common/services/intances";
+import {
+  balhomApiHttpServiceInstance,
+  balhomApiSseServiceInstance,
+} from "../../../common/services/intances";
 import { currencyProfileRepository } from "./currency-profile-repository";
 import { currencyProfileSharedUserRepository } from "./currency-profile-shared-user-repository";
 
 export const currencyProfileRepositoryInstance = currencyProfileRepository(
-  balhomApiServiceInstance
+  balhomApiHttpServiceInstance,
+  balhomApiSseServiceInstance
 );
 
 export const currencyProfileSharedUserRepositoryInstance =
-  currencyProfileSharedUserRepository(balhomApiServiceInstance);
+  currencyProfileSharedUserRepository(balhomApiHttpServiceInstance);
