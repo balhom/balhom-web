@@ -1,52 +1,57 @@
-import { Either } from "../../../common/data/either";
 import { AppError } from "../../../common/data/errors/app-error";
+import HttpService from "../../../common/services/http-service";
 import {
-  mockExpenseCategoryStatisticsPoints,
-  mockIncomeCategoryStatisticsPoints,
-} from "../../../mocks/mock-transaction-category-statistics";
+  CATEGORY_TRANSACTION_STATISTICS_API_SUBPATH,
+  STATISTICS_API_PATH,
+} from "../../dashboard/data/constants/statistics-api-constants";
 import {
-  TransactionCategoryPointEntity,
-  TransactionCategoryStatisticsEntity,
-} from "../data/entities/transaction-category-statistics-entity";
+  CategoryTransactionStatisticResponseRestDto,
+  categoryTransactionStatisticResponseRestDtoToEntity,
+} from "../../dashboard/data/dtos/category-transaction-statistic-response-rest.dto";
+import { TransactionCategoryStatisticsEntity } from "../data/entities/transaction-category-statistics-entity";
 import { TransactionTypeEnum } from "../data/enums/transaction-type-enum";
-import { categoryToImage } from "../utils";
 
 export interface TransactionCategoryStatisticsRepository {
   get: (
+    currencyProfileId: string,
     type: TransactionTypeEnum,
     month: number,
     year: number
-  ) => Promise<Either<AppError, TransactionCategoryStatisticsEntity>>;
+  ) => Promise<TransactionCategoryStatisticsEntity>;
 }
 
-export const transactionCategoryStatisticsRepository =
-  (): TransactionCategoryStatisticsRepository => ({
-    get: async (
-      type,
-      month,
-      year
-    ): Promise<Either<AppError, TransactionCategoryStatisticsEntity>> => {
-      let points: TransactionCategoryPointEntity[] = [];
+export const transactionCategoryStatisticsRepository = (
+  httpService: HttpService
+): TransactionCategoryStatisticsRepository => ({
+  get: async (
+    currencyProfileId,
+    type,
+    month,
+    year
+  ): Promise<TransactionCategoryStatisticsEntity> => {
+    try {
+      const response = await httpService.getRequest<
+        CategoryTransactionStatisticResponseRestDto[]
+      >(
+        `${STATISTICS_API_PATH}${CATEGORY_TRANSACTION_STATISTICS_API_SUBPATH}`,
+        {
+          params: {
+            currencyProfileId: currencyProfileId,
+            type: type,
+            month: month,
+            year: year,
+          },
+        }
+      );
 
-      // TODO remove and do api call
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      console.log(month, year);
-      if (type === TransactionTypeEnum.Income) {
-        points = mockIncomeCategoryStatisticsPoints;
-      } else {
-        points = mockExpenseCategoryStatisticsPoints;
-      }
-
-      return Either.right({
-        points: points.map((point) => {
-          return {
-            category: {
-              code: point.category.code,
-              image: categoryToImage(point.category.code),
-            },
-            value: point.value,
-          };
-        }),
-      });
-    },
-  });
+      return {
+        points: response.map(
+          categoryTransactionStatisticResponseRestDtoToEntity
+        ),
+      };
+    } catch (error) {
+      console.log("Error fetching transaction category statistics: ", error);
+      throw new AppError("");
+    }
+  },
+});

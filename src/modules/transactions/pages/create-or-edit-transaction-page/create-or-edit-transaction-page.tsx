@@ -116,34 +116,39 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
       }
     });
 
-    if (isEditPage) {
-      updateTransaction({
-        id: id,
-        type: transactionType,
-        title: title,
-        description: description,
-        amount: Number(amount.replace(",", ".")),
-        date: date,
-        category: category,
-        documentsToRemove: documentsToRemove,
-        documentsToUpload: documentsToUpload,
-      });
-    } else {
-      createTransaction({
-        type: transactionType,
-        title: title,
-        description: description,
-        amount: Number(amount.replace(",", ".")),
-        date: date,
-        category: category,
-        documents: documentsToUpload,
-      });
-    }
+    const handleCreateOrEdit = async () => {
+      if (isEditPage) {
+        await updateTransaction({
+          id: id,
+          type: transactionType,
+          title: title,
+          description: description,
+          amount: Number(amount.replace(",", ".")),
+          date: date,
+          category: category,
+          documentsToRemove: documentsToRemove,
+          documentsToUpload: documentsToUpload,
+        });
+      } else {
+        await createTransaction({
+          currencyProfileId: selectedCurrencyProfile.id,
+          type: transactionType,
+          title: title,
+          description: description,
+          amount: Number(amount.replace(",", ".")),
+          date: date,
+          category: category,
+          documents: documentsToUpload,
+        });
+      }
+    };
 
-    navigate(
-      transactionType === TransactionTypeEnum.Income
-        ? INCOME_ROUTE_PATH
-        : EXPENSE_ROUTE_PATH
+    handleCreateOrEdit().then(() =>
+      navigate(
+        transactionType === TransactionTypeEnum.Income
+          ? INCOME_ROUTE_PATH
+          : EXPENSE_ROUTE_PATH
+      )
     );
   };
 

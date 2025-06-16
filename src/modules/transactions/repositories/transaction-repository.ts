@@ -2,11 +2,21 @@ import {
   PageResponseRestDto,
   pageResponseRestDtoToEntity,
 } from "../../../common/data/dtos/page-response-rest-dto";
-import { Either } from "../../../common/data/either";
 import { PageEntity } from "../../../common/data/entities/page-entity";
 import { AppError } from "../../../common/data/errors/app-error";
 import HttpService from "../../../common/services/http-service";
-import { TRANSACTION_API_PATH } from "../data/constants/transaction-api-constants";
+import {
+  TRANSACTION_API_PATH,
+  TRANSACTION_DOC_API_SUBPATH,
+} from "../data/constants/transaction-api-constants";
+import {
+  TransactionPatchRequestRestDto,
+  transactionUpdatePropsToPatchRequestRestDto,
+} from "../data/dtos/transaction-patch-request-rest.dto";
+import {
+  transactionCreatePropsToPostRequestRestDto,
+  TransactionPostRequestRestDto,
+} from "../data/dtos/transaction-post-request-rest.dto";
 import {
   TransactionResponseRestDto,
   transactionResponseRestDtoToEntity,
@@ -32,11 +42,54 @@ export interface TransactionRepository {
 
   get: (id: string) => Promise<TransactionEntity>;
 
-  create: (props: CreateTransactionProps) => Promise<Either<AppError, void>>;
+  create: (props: CreateTransactionProps) => Promise<TransactionEntity>;
 
-  update: (props: UpdateTransactionProps) => Promise<Either<AppError, void>>;
+  update: (props: UpdateTransactionProps) => Promise<void>;
 
   delete: (id: string) => Promise<void>;
+}
+
+async function uploadTransactionFile(
+  transactionId: string,
+  file: File,
+  httpService: HttpService
+): Promise<void> {
+  try {
+    const imageFormData = new FormData();
+    imageFormData.append("file", file);
+    imageFormData.append("name", file.name);
+    imageFormData.append("mimetype", file.type);
+
+    await httpService.postRequest<FormData, void>(
+      `${TRANSACTION_API_PATH}/${transactionId}` +
+        `${TRANSACTION_DOC_API_SUBPATH}`,
+      imageFormData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+  } catch (error) {
+    console.log("Error uploading transaction file: ", error);
+    throw new AppError("");
+  }
+}
+
+async function deleteTransactionFile(
+  transactionId: string,
+  docId: string,
+  httpService: HttpService
+): Promise<void> {
+  try {
+    await httpService.deleteRequest<void>(
+      `${TRANSACTION_API_PATH}/${transactionId}` +
+        `${TRANSACTION_DOC_API_SUBPATH}/${docId}`
+    );
+  } catch (error) {
+    console.log("Error deleting transaction file: ", error);
+    throw new AppError("");
+  }
 }
 
 export const transactionRepository = (
@@ -94,22 +147,48 @@ export const transactionRepository = (
     }
   },
 
-  create: async (props): Promise<Either<AppError, void>> => {
-    // TODO Implement
-    console.log(props);
+  create: async (props: CreateTransactionProps): Promise<TransactionEntity> => {
+    try {
+      const request = transactionCreatePropsToPostRequestRestDto(props);
 
-    // TODO take in mind to upload documents
+      const response = await httpService.postRequest<
+        TransactionPostRequestRestDto,
+        TransactionResponseRestDto
+      >(TRANSACTION_API_PATH, request);
 
-    return Either.right(undefined);
+      const transactionResponse = transactionResponseRestDtoToEntity(response);
+
+      props.documents.forEach((file) => {
+        uploadTransactionFile(transactionResponse.id, file, httpService);
+      });
+
+      return transactionResponse;
+    } catch (error) {
+      console.log("Error creating transaction: ", error);
+      throw new AppError("");
+    }
   },
 
-  update: async (props): Promise<Either<AppError, void>> => {
-    // TODO Implement
-    console.log(props);
+  update: async (props: UpdateTransactionProps): Promise<void> => {
+    try {
+      const request = transactionUpdatePropsToPatchRequestRestDto(props);
 
-    // TODO take in mind to upload documents
+      await httpService.patchRequest<TransactionPatchRequestRestDto, void>(
+        `${TRANSACTION_API_PATH}/${props.id}`,
+        request
+      );
 
-    return Either.right(undefined);
+      props.documentsToUpload.forEach((file) => {
+        uploadTransactionFile(props.id, file, httpService);
+      });
+
+      props.documentsToRemove.forEach((doc) => {
+        deleteTransactionFile(props.id, doc.id, httpService);
+      });
+    } catch (error) {
+      console.log("Error updating transaction: ", error);
+      throw new AppError("");
+    }
   },
 
   delete: async (id): Promise<void> => {

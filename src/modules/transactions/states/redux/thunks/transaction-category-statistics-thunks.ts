@@ -6,10 +6,20 @@ import { TransactionCategoryStatisticsEntity } from "../../../data/entities/tran
 // Fetch daily transaction statistics action
 export const fetchTransactionCategoryStatisticsAsync = createAsyncThunk<
   TransactionCategoryStatisticsEntity,
-  { type: TransactionTypeEnum; month: number; year: number }
+  {
+    currencyProfileId: string;
+    type: TransactionTypeEnum;
+    month: number;
+    year: number;
+  }
 >(
   "transaction/fetchTransactionCategoryStatistics",
-  async ({ type, month, year }) => {
-    return await getTransactionCategoryStatistics(type, month, year);
+  async ({ currencyProfileId, type, month, year }) => {
+    return await getTransactionCategoryStatistics(
+      currencyProfileId,
+      type,
+      month,
+      year
+    );
   }
 );

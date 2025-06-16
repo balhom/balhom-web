@@ -43,7 +43,7 @@ export const dailyTransactionStatisticsRepository = (
         points: response.map(dailyTransactionStatisticResponseRestDtoToEntity),
       };
     } catch (error) {
-      console.log("Error fetching currency profiles: ", error);
+      console.log("Error fetching daily transaction statistics: ", error);
       throw new AppError("");
     }
   },

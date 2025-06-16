@@ -33,7 +33,7 @@ export const yearlySavingStatisticsRepository = (
         points: response.map(yearlySavingStatisticResponseRestDtoToEntity),
       };
     } catch (error) {
-      console.log("Error fetching currency profiles: ", error);
+      console.log("Error fetching yearly saving statistics: ", error);
       throw new AppError("");
     }
   },

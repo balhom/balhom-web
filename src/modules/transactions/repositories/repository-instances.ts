@@ -4,11 +4,15 @@ import { transactionDocumentUrlRepository } from "./transaction-document-url-rep
 import { transactionRepository } from "./transaction-repository";
 
 export const transactionCategoryStatisticsRepositoryInstance =
-  transactionCategoryStatisticsRepository();
+  transactionCategoryStatisticsRepository(
+    balhomApiHttpServiceInstance
+  );
 
 export const transactionRepositoryInstance = transactionRepository(
   balhomApiHttpServiceInstance
 );
 
 export const transactionDocumentUrlRepositoryInstance =
-  transactionDocumentUrlRepository();
+  transactionDocumentUrlRepository(
+    balhomApiHttpServiceInstance
+  );

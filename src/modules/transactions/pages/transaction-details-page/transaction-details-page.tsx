@@ -148,11 +148,8 @@ const TransactionDetailsPage: React.FC<Props> = ({
                   className="transaction-details-page-attachment-item"
                   onClick={() => {
                     getTransactionDocumentUrl(transactionState.id, doc.id).then(
-                      (res) => {
-                        res.fold(
-                          () => undefined,
-                          (url) => window.open(url)
-                        );
+                      (url) => {
+                        window.open(url);
                       }
                     );
                   }}

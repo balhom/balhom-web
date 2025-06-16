@@ -10,5 +10,5 @@ export interface TransactionEntity {
   amount: number;
   date: Date;
   category: TransactionCategoryEntity;
-  documents: Array<DocumentEntity>;
+  documents: DocumentEntity[];
 }

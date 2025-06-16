@@ -21,7 +21,7 @@ const TransactionsPage: React.FC<Props> = ({ transactionType }: Props) => {
 
   const { selectedCurrencyProfile } = useCurrencyProfiles();
 
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   if (!selectedCurrencyProfile) return null;

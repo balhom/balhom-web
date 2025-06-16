@@ -10,6 +10,6 @@ export interface UpdateTransactionProps {
   amount: number;
   date: Date;
   category: TransactionCategoryEnum;
-  documentsToUpload: Array<File>;
-  documentsToRemove: Array<DocumentEntity>;
+  documentsToUpload: File[];
+  documentsToRemove: DocumentEntity[];
 }

@@ -41,6 +41,7 @@ const TransactionsCategoryChart: React.FC<Props> = ({
   useEffect(() => {
     dispatch(
       fetchTransactionCategoryStatisticsAsync({
+        currencyProfileId: selectedCurrencyProfile?.id ?? "",
         type: type,
         month: month,
         year: year,
@@ -67,7 +68,10 @@ const TransactionsCategoryChart: React.FC<Props> = ({
           <div
             className={`transactions-category-chart-tooltip-amount ${type.toLowerCase()}`}
           >
-            {formatAmountAndCurrency(data.value, selectedCurrencyProfile!.currency)}
+            {formatAmountAndCurrency(
+              data.value,
+              selectedCurrencyProfile!.currency
+            )}
           </div>
         </div>
       );
@@ -99,7 +103,10 @@ const TransactionsCategoryChart: React.FC<Props> = ({
               dataKey="value"
               stroke="var(--color-text-secondary)"
               tickFormatter={(value) =>
-                formatAmountAndCurrency(value, selectedCurrencyProfile!.currency)
+                formatAmountAndCurrency(
+                  value,
+                  selectedCurrencyProfile!.currency
+                )
               }
             />
             <YAxis

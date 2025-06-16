@@ -30,7 +30,7 @@ export function transactionResponseRestDtoToEntity(
       code: response.category,
       image: categoryToImage(response.category),
     },
-    documents: response.documents.flatMap((doc) => {
+    documents: response.documents.map((doc) => {
       return {
         id: doc.id,
         name: doc.name,

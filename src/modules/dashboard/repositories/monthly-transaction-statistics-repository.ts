@@ -44,7 +44,7 @@ export const monthlyTransactionStatisticsRepository = (
         ),
       };
     } catch (error) {
-      console.log("Error fetching currency profiles: ", error);
+      console.log("Error fetching monthly transaction statistics: ", error);
       throw new AppError("");
     }
   },
