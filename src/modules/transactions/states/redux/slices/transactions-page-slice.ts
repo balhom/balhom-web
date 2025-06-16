@@ -9,7 +9,6 @@ import { PageEntity } from "../../../../../common/data/entities/page-entity";
 import { AppError } from "../../../../../common/data/errors/app-error";
 import { TransactionFiltersEntity } from "../../../data/entities/transaction-filters-entity";
 import { TransactionSortEnum } from "../../../data/enums/transaction-sort-enum";
-import { Either } from "../../../../../common/data/either";
 
 export interface TransactionPageState<T> {
   search: string;
@@ -80,19 +79,12 @@ const pendingFetchTransactionsPage = (
 
 const fulfilledFetchTransactionsPage = (
   state: TransactionPageState<TransactionEntity>,
-  action: PayloadAction<Either<AppError, PageEntity<TransactionEntity>>>
+  action: PayloadAction<PageEntity<TransactionEntity>>
 ) => {
   state.isLoading = false;
 
-  action.payload.fold(
-    (error) => {
-      state.error = error;
-    },
-    (payload) => {
-      state.error = undefined;
-      state.page = payload;
-    }
-  );
+  state.error = undefined;
+  state.page = action.payload;
 };
 
 export const incomesPageSlice = createSlice({

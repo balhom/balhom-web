@@ -1,6 +1,6 @@
 export enum TransactionSortEnum {
-  DateDesc = "date-desc",
-  DateAsc = "date-asc",
-  AmountDesc = "amount-desc",
-  AmountAsc = "amount-asc",
+  DateDesc = "DATE_DESC",
+  DateAsc = "DATE_ASC",
+  AmountDesc = "AMOUNT_DESC",
+  AmountAsc = "AMOUNT_ASC",
 }

@@ -41,19 +41,9 @@ const TransactionDetailsPage: React.FC<Props> = ({
   const selectedCurrencyProfileRef = useRef(selectedCurrencyProfile);
 
   useEffect(() => {
-    console.log("hola");
     if (id && selectedCurrencyProfileRef.current) {
-      getTransaction(
-        id,
-        transactionType,
-        selectedCurrencyProfileRef.current
-      ).then((transactionEither) => {
-        transactionEither.fold(
-          () => {},
-          (transaction) => {
-            setTransactionState(transaction);
-          }
-        );
+      getTransaction(id).then((transaction) => {
+        setTransactionState(transaction);
       });
     }
   }, [id, transactionType, selectedCurrencyProfileRef]);

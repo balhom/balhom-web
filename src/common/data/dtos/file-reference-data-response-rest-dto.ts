@@ -1,4 +1,5 @@
 export interface FileReferenceDataResponseRestDto {
-  filePath: string;
-  url?: string;
+  id: string;
+  name: string;
+  createdAt?: string;
 }

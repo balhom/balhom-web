@@ -1,4 +1,4 @@
-import { FileReferenceDataResponseRestDto } from "../../../../common/data/dtos/file-reference-data-response-rest-dto";
+import { ImageReferenceDataResponseRestDto } from "../../../../common/data/dtos/image-reference-data-response-rest-dto";
 import { CurrencyProfileEntity } from "../entities/currency-profile-entity";
 import { CurrencyEnum } from "../enums/currency-enum";
 
@@ -10,7 +10,7 @@ export interface CurrencyProfileResponseRestDto {
   initDate: string;
   goalMonthlySaving: number;
   goalYearlySaving: number;
-  imageData?: FileReferenceDataResponseRestDto;
+  imageData?: ImageReferenceDataResponseRestDto;
   ownerId: string;
 }
 

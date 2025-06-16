@@ -59,7 +59,7 @@ const TransactionsDateSection: React.FC<Props> = ({
       if (type === TransactionTypeEnum.Income) {
         dispatch(
           fetchIncomesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
+            currencyProfileId: selectedCurrencyProfile.id,
             month: selectedMonth,
             year: selectedYear,
             search: transactionsPageState.search,
@@ -71,7 +71,7 @@ const TransactionsDateSection: React.FC<Props> = ({
       } else {
         dispatch(
           fetchExpensesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
+            currencyProfileId: selectedCurrencyProfile.id,
             month: selectedMonth,
             year: selectedYear,
             search: transactionsPageState.search,

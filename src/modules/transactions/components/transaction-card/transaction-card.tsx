@@ -59,7 +59,7 @@ const TransactionCard: React.FC<Props> = ({
         dispatch(deleteTransactionIncomeInPage(transaction.id));
         dispatch(
           fetchIncomesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
+            currencyProfileId: selectedCurrencyProfile.id,
             month: selectedMonth,
             year: selectedYear,
             search: transactionsPageState.search,
@@ -72,7 +72,7 @@ const TransactionCard: React.FC<Props> = ({
         dispatch(deleteTransactionExpenseInPage(transaction.id));
         dispatch(
           fetchExpensesPageAsync({
-            currencyProfile: selectedCurrencyProfile,
+            currencyProfileId: selectedCurrencyProfile.id,
             month: selectedMonth,
             year: selectedYear,
             search: transactionsPageState.search,
@@ -99,11 +99,7 @@ const TransactionCard: React.FC<Props> = ({
   const handleDelete = useCallback(() => {
     if (selectedCurrencyProfile) {
       // Call usecase
-      deleteTransaction(
-        transaction.id,
-        transaction.type,
-        selectedCurrencyProfile
-      );
+      deleteTransaction(transaction.id);
 
       // Remove transaction from UI
       dispatchDeleteAndFecthTransactionsPageAsync();
@@ -130,7 +126,10 @@ const TransactionCard: React.FC<Props> = ({
         <div
           className={`transaction-card-amount ${transaction.type.toLowerCase()}-color`}
         >
-          {formatAmountAndCurrency(transaction.amount, transaction.currency)}
+          {formatAmountAndCurrency(
+            transaction.amount,
+            selectedCurrencyProfile.currency
+          )}
         </div>
         <div className="transaction-card-date">{formattedDate}</div>
       </div>

@@ -62,24 +62,17 @@ const CreateOrEditTransactionPage: React.FC<Props> = ({ transactionType }) => {
 
   useEffect(() => {
     if (id && selectedCurrencyProfile) {
-      getTransaction(id, transactionType, selectedCurrencyProfile).then(
-        (transactionEither) => {
-          transactionEither.fold(
-            () => {},
-            (transaction) => {
-              setTransactionState(transaction);
+      getTransaction(id).then((transaction) => {
+        setTransactionState(transaction);
 
-              // Set form
-              handleTitleChange(transaction.title);
-              handleDescriptionChange(transaction.description);
-              setAmount(transaction.amount.toString());
-              setCategory(transaction.category.code);
-              setDate(transaction.date);
-              setDocuments(transaction.documents);
-            }
-          );
-        }
-      );
+        // Set form
+        handleTitleChange(transaction.title);
+        handleDescriptionChange(transaction.description);
+        setAmount(transaction.amount.toString());
+        setCategory(transaction.category.code);
+        setDate(transaction.date);
+        setDocuments(transaction.documents);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
