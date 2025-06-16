@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { TransactionEntity } from "../../data/entities/transaction-entity";
 import AppDeleteDialog from "../../../../common/components/app-delete-dialog/app-delete-dialog";
 import { formatTransactionCategory } from "../../utils";
-import { formatCurrency } from "../../../currency-profile/utils";
+import { formatAmountAndCurrency } from "../../../currency-profile/utils";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
 import {
   EXPENSE_DETAILS_ROUTE_PATH,
@@ -130,7 +130,7 @@ const TransactionCard: React.FC<Props> = ({
         <div
           className={`transaction-card-amount ${transaction.type.toLowerCase()}-color`}
         >
-          {formatCurrency(transaction.amount, transaction.currency)}
+          {formatAmountAndCurrency(transaction.amount, transaction.currency)}
         </div>
         <div className="transaction-card-date">{formattedDate}</div>
       </div>

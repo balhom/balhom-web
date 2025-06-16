@@ -16,7 +16,7 @@ import {
   fetchDailyTransactionStatisticsAsync,
   fetchMonthlyTransactionStatisticsAsync,
 } from "../../states/redux/thunks/transaction-statistics-thunks";
-import { formatCurrency } from "../../../currency-profile/utils";
+import { formatAmountAndCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import { YearPicker } from "../../../../common/components/year-picker/year-picker";
 import {
@@ -114,7 +114,7 @@ const MonthlyTransactionsChart: React.FC = () => {
             <Tooltip
               content={dashboardChartTooltip({
                 formatter: (value: number) =>
-                  formatCurrency(value, selectedCurrencyProfile!.currency),
+                  formatAmountAndCurrency(value, selectedCurrencyProfile!.currency),
                 labelFormatter: (label) => formatMonth(label, t),
               })}
             />

@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { useTranslation } from "react-i18next";
 import { TransactionTypeEnum } from "../../data/enums/transaction-type-enum";
-import { formatCurrency } from "../../../currency-profile/utils";
+import { formatAmountAndCurrency } from "../../../currency-profile/utils";
 import { useEffect } from "react";
 import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,7 +67,7 @@ const TransactionsCategoryChart: React.FC<Props> = ({
           <div
             className={`transactions-category-chart-tooltip-amount ${type.toLowerCase()}`}
           >
-            {formatCurrency(data.value, selectedCurrencyProfile!.currency)}
+            {formatAmountAndCurrency(data.value, selectedCurrencyProfile!.currency)}
           </div>
         </div>
       );
@@ -99,7 +99,7 @@ const TransactionsCategoryChart: React.FC<Props> = ({
               dataKey="value"
               stroke="var(--color-text-secondary)"
               tickFormatter={(value) =>
-                formatCurrency(value, selectedCurrencyProfile!.currency)
+                formatAmountAndCurrency(value, selectedCurrencyProfile!.currency)
               }
             />
             <YAxis

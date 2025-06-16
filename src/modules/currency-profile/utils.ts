@@ -1,3 +1,6 @@
-export function formatCurrency(amount: number, currency: string): string {
-  return amount.toString() + " " + currency.toString();
+export function formatAmountAndCurrency(
+  amount: number,
+  currency: string
+): string {
+  return amount.toFixed(2).replace(".", ",") + " " + currency.toString();
 }

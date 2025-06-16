@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useRef } from "react";
 import { fetchDailyTransactionStatisticsAsync } from "../../states/redux/thunks/transaction-statistics-thunks";
 import { MonthPicker } from "../../../../common/components/month-picker/month-picker";
-import { formatCurrency } from "../../../currency-profile/utils";
+import { formatAmountAndCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import { dashboardChartTooltip } from "../dashboard-chart-tooltip/dashboard-chart-tooltip";
 
@@ -84,7 +84,7 @@ const DailyTransactionsChart: React.FC = () => {
             <Tooltip
               content={dashboardChartTooltip({
                 formatter: (value: number) =>
-                  formatCurrency(value, selectedCurrencyProfile!.currency),
+                  formatAmountAndCurrency(value, selectedCurrencyProfile!.currency),
                 labelFormatter: (label) => label,
               })}
             />

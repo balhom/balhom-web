@@ -2,7 +2,7 @@ import "./transaction-details-page.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, FileText, Download, Pencil } from "lucide-react";
-import { formatCurrency } from "../../../currency-profile/utils";
+import { formatAmountAndCurrency } from "../../../currency-profile/utils";
 import { useCurrencyProfiles } from "../../../currency-profile/states/contexts/currency-profiles-context";
 import { useEffect, useRef, useState } from "react";
 import { TransactionEntity } from "../../data/entities/transaction-entity";
@@ -98,7 +98,7 @@ const TransactionDetailsPage: React.FC<Props> = ({
           <div
             className={`transaction-details-page-amount ${transactionType.toLowerCase()}-color`}
           >
-            {formatCurrency(
+            {formatAmountAndCurrency(
               transactionState.amount,
               selectedCurrencyProfile.currency
             )}

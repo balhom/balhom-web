@@ -1,7 +1,7 @@
 import "./currency-profile-picker.css";
 import { useState } from "react";
 import { CURRENCY_PROFILE_DEFAULT_IMAGE_CONSTANT } from "../../data/constants/currency-profile-constants";
-import { formatCurrency } from "../../utils";
+import { formatAmountAndCurrency } from "../../utils";
 import CurrencyProfilePickerDialog from "../currency-profile-dialog/currency-profile-picker-dialog";
 import { useCurrencyProfiles } from "../../states/contexts/currency-profiles-context";
 
@@ -37,7 +37,7 @@ const CurrencyProfilePicker: React.FC = () => {
             {selectedCurrencyProfile.name}
           </span>
           <span className="currency-profile-picker-amount">
-            {formatCurrency(
+            {formatAmountAndCurrency(
               selectedCurrencyProfile.balance ?? 0,
               selectedCurrencyProfile.currency
             )}

@@ -19,7 +19,7 @@ import {
   formatMonth,
   getYearsBetweenDates,
 } from "../../../../common/utils/date-utils";
-import { formatCurrency } from "../../../currency-profile/utils";
+import { formatAmountAndCurrency } from "../../../currency-profile/utils";
 import { dashboardChartTooltip } from "../dashboard-chart-tooltip/dashboard-chart-tooltip";
 
 const MonthlySavingsChart: React.FC = () => {
@@ -100,7 +100,7 @@ const MonthlySavingsChart: React.FC = () => {
             <Tooltip
               content={dashboardChartTooltip({
                 formatter: (value: number) =>
-                  formatCurrency(value, selectedCurrencyProfile!.currency),
+                  formatAmountAndCurrency(value, selectedCurrencyProfile!.currency),
                 labelFormatter: (label) => formatMonth(label, t),
               })}
             />

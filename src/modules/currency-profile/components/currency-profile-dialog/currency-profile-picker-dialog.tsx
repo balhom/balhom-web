@@ -2,7 +2,7 @@ import "./currency-profile-picker-dialog.css";
 import { X, Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import React, { useCallback } from "react";
-import { formatCurrency } from "../../utils";
+import { formatAmountAndCurrency } from "../../utils";
 import { CurrencyProfileEntity } from "../../data/entities/currency-profile-entity";
 import { CURRENCY_PROFILE_DEFAULT_IMAGE_CONSTANT } from "../../data/constants/currency-profile-constants";
 import { useNavigate } from "react-router-dom";
@@ -75,7 +75,7 @@ const CurrencyProfilePickerDialog: React.FC<Props> = ({
                   {profile.name}
                 </div>
                 <div className="currency-profile-picker-dialog-item-amount">
-                  {formatCurrency(profile.balance || 0, profile.currency)}
+                  {formatAmountAndCurrency(profile.balance || 0, profile.currency)}
                 </div>
               </div>
             </div>

@@ -14,7 +14,7 @@ import { AppDispatch, AppState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchYearlySavingStatisticsAsync } from "../../states/redux/thunks/saving-statistics-thunks";
-import { formatCurrency } from "../../../currency-profile/utils";
+import { formatAmountAndCurrency } from "../../../currency-profile/utils";
 import { dashboardChartTooltip } from "../dashboard-chart-tooltip/dashboard-chart-tooltip";
 
 const YearlySavingsChart: React.FC = () => {
@@ -57,7 +57,7 @@ const YearlySavingsChart: React.FC = () => {
             <Tooltip
               content={dashboardChartTooltip({
                 formatter: (value) =>
-                  formatCurrency(value, selectedCurrencyProfile!.currency),
+                  formatAmountAndCurrency(value, selectedCurrencyProfile!.currency),
                 labelFormatter: (label) => label,
               })}
             />
