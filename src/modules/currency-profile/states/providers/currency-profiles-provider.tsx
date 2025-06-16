@@ -82,6 +82,7 @@ export const CurrencyProfilesProvider = ({
               setCurrencyProfiles(
                 newCurrencyProfiles.map((oldCurrencyProfile) => {
                   if (oldCurrencyProfile.id === event.id) {
+                    oldCurrencyProfile.name = event.name;
                     oldCurrencyProfile.balance = event.balance;
                     oldCurrencyProfile.monthlySavingsGoal = event.monthlyGoal;
                     oldCurrencyProfile.yearlySavingsGoal = event.yearlyGoal;
@@ -94,6 +95,7 @@ export const CurrencyProfilesProvider = ({
                 // Update the selected currency profile
                 setSelectedCurrencyProfile({
                   ...selectedCurrencyProfile,
+                  name: event.name,
                   balance: event.balance,
                   monthlySavingsGoal: event.monthlyGoal,
                   yearlySavingsGoal: event.yearlyGoal,

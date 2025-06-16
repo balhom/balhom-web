@@ -3,6 +3,7 @@ import { StreamChangeTypeEnum } from "../../../../common/data/enums/stream-chang
 export interface CurrencyProfileChangeEventEntity {
   action: StreamChangeTypeEnum;
   id: string;
+  name: string;
   balance: number;
   monthlyGoal: number;
   yearlyGoal: number;
