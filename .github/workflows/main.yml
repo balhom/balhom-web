@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
-      - '.github/**'
+      - "src/**"
+      - ".github/**"
 
 jobs:
   build-test-upload:
@@ -40,13 +40,13 @@ jobs:
         run: |
           export APP_VERSION=$(node -p "require('./package.json').version")
           echo "Using version ${APP_VERSION}"
-          
-          IMAGE_TAG="${DOCKER_REPO_NAME}:${APP_VERSION}-react"
+
+          IMAGE_TAG="${DOCKER_REPO_NAME}:${APP_VERSION}"
           LATEST_TAG="${DOCKER_REPO_NAME}:latest"
-          
+
           docker build . -t ${IMAGE_TAG}
           docker tag ${IMAGE_TAG} ${LATEST_TAG}
-          
+
           docker push ${IMAGE_TAG}
           docker push ${LATEST_TAG}
         env:
