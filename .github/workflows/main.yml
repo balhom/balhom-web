@@ -51,3 +51,4 @@ jobs:
           docker push ${LATEST_TAG}
         env:
           DOCKER_REPO_NAME: ${{ secrets.DOCKER_REPO_NAME }}
+
